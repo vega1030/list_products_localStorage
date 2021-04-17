@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!--Datos-->
+    <meta name="description" content="App listado" />
+    <meta name="keywords" content="reto semanal, html, css, javascript, appweb" />
+    <meta name="autor" content="Fernando Vega" />
+    <!--Favcon-->
+    <link rel="icon" href="img/favicon2.svg">
+
+    <!--Robots Google-->
+    <meta name="robots" content="index,follow" />
+    <meta name=”robots” content=”max-snippet:50, max-image-preview:standard />
+    <!--Meta datos Facebook-->
+    <meta property="og:title" content="Lista de compras" />
+    <meta property="og:description" content="App para realizar tu lista de compras" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image"
+        content="https://thumbs.dreamstime.com/b/ejemplo-del-vector-icono-de-la-lista-compras-im%C3%A1genes-libres-los-derechos-108099049.jpg" />
+    <meta property="og:url" content="https://retonum3.web.app" />
+
+
+    <!--Meta Twitter-->
+    <meta property="twitter:title" content="Lista de compras" />
+    <meta property="twitter:description" content="App para realizar tu lista de compras" />
+    <meta property="twitter:image"
+        content="https://thumbs.dreamstime.com/b/ejemplo-del-vector-icono-de-la-lista-compras-im%C3%A1genes-libres-los-derechos-108099049.jpg" />
+    <meta property="twitter:image:alt" content="Canasta de compras" />
+
+    <title>Lista de compras</title>
+
+</head>
+
+<body>
+    <!--Header-->
+    <header class="header">
+        <div class="boxtitle">
+            <h1 id="title1"><strong> Tu listita de Compras</strong></h1>
+        </div>
+    </header>
+    <section class="mobile">
+        <!--Interfaz 1-->
+
+        <div class="contenido1" id="interfaz1">
+            <div class="img">
+                <img src="img/sleep.svg" alt="dormido" class=dormido>
+            </div>
+            <div class="subtitulo">
+                <p> <i>No tenes compras</i> </p>
+            </div>
+
+            <!-- Modal -->
+            <div class="contenedor">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                id="btncarga1">
+                <strong>ADD</strong>
+            </button>
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Agrega los productos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!--Inputs del modal-->
+                            <div class="mb-3">
+                                <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
+                                <input type="text" class="form-control" id="inputalimento"
+                                    placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
+                            </div>
+                            <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
+                            <select class="form-select" aria-label="Default select example" id="seleccionicono">
+                                <option selected>Elegi la categoria</option>
+                                <option value="img/comidita.svg">Comidita</option>
+                                <option value="img/electronica.svg">Electronica</option>
+                                <option value="img/ferreteria2.svg">Ferreteria</option>
+                                <option value="img/limpieza.svg">Limpieza</option>
+                                <option value="img/mascota.svg">Mascotas</option>
+                                <option value="img/perfumeria.svg">Perfumeria</option>
+                                <option value="img/varios.svg">Varios</option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="detalle" class="form-label">Detalles que quieras recordar</label>
+                                <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn2 btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
+                            <button type="button" class="btn1 btn-primary" id="btnguardar">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal-->
+
+        <!-- Button trigger modal -->
+
+
+        <!--Interfaz 2-->
+        <div class="contenido3" id="interfazlistado">
+            <ul class="list-group" id="padre">
+
+            </ul>
+        </div>
+        <!--Interfaz final-->
+        <div class="contenido4" id="pantallafinal">
+            <h2 id="subtitulofinal"></h2>
+            <img src="img/ferreteria.svg" alt="ferrerteria" class="contenido4__icono" id="iconocontenido4">
+            <p id="detallefinal"></p>
+            <button type="button" class="btn btn-primary" id="enviardetalle">Enviar</button>
+            <button type="button" class="btn btn-primary" id="cerrardetalle">Cerrar</button>
+        </div>
+    </section>
+    <!--Desktop pantalla-->
+    <section id="desktop">
+        <menu class="inputs">
+                        <div class="modal-body">
+                            <!--Inputs del modal-->
+                            <div class="mb-3">
+                                <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
+                                <input type="text" class="form-control" id="inputalimento"
+                                    placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
+                            </div>
+                            <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
+                            <select class="form-select" aria-label="Default select example" id="seleccionicono">
+                                <option selected>Elegi la categoria</option>
+                                <option value="img/comidita.svg">Comidita</option>
+                                <option value="img/electronica.svg">Electronica</option>
+                                <option value="img/ferreteria2.svg">Ferreteria</option>
+                                <option value="img/limpieza.svg">Limpieza</option>
+                                <option value="img/mascota.svg">Mascotas</option>
+                                <option value="img/perfumeria.svg">Perfumeria</option>
+                                <option value="img/varios.svg">Varios</option>
+                            </select>
+                            <div class="mb-3">
+                                <label for="detalle" class="form-label">Detalles que quieras recordar</label>
+                                <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn2 btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
+                            <button type="button" class="btn1 btn-primary" id="btnguardar">Agregar</button>
+                        </div>
+        </menu>
+
+            <div class="contenido3" id="interfazlistado">
+                <ul class="list-group" id="padre">
+    
+                </ul>
+            </div>
+    
+
+        </section>
+        <footer>
+        </footer>
+    </section>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <!--JavaScript Main-->
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

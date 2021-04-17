@@ -1,0 +1,391 @@
+
+
+:root{
+    --color-main:#0a043c;
+    --color-2: #a3ddcb;
+    --color-3: #03506f;
+    --color-font: #ffe3de;
+    --font-type:'Fira Sans', sans-serif;
+}
+
+/*Media Query*/
+
+    .contenido1, .contenido3{
+        display:none
+    }
+
+    /*Problema aca */
+    #desktop{
+        display: flex;
+        flex-wrap: wrap;
+        height:100%;
+        width: 100%vh;
+        font-family: var(--font-type);
+        background: var(--color-3)
+        }
+    .header{
+        background: var(--color-main);
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        font-size: 30px;
+        color: var(--color-font)
+    }
+
+    .inputs{
+        width:40%;
+        margin:5px;
+        padding:0;
+        display:flex;
+        flex-direction:column;
+        align-content: flex-start;
+        height: 500px;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+        
+    
+    }
+    
+    #mb-3__desktop{
+        order: 1;
+        flex: 0 1 auto;
+        align-self: flex-start;
+        padding: 10px;
+    }
+    
+    footer{
+        display: flex;
+        justify-content:flex-start;
+        align-items: center;
+        width: 100%;
+        background: var(--color-main);
+        color:var(--color-font);
+        margin: 0;
+        padding: 0;
+        margin-top: 10px;
+        }
+    
+    
+    
+    #detalle{
+        margin: 0;
+        padding: 0;
+    }
+    .modal-footer{
+        background-color: var(--color-3)
+    }
+    
+    .contenido3{
+        display: none;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+        height: 300px;
+        padding: 10px;
+        
+    }
+    
+    li{
+    color: var(--color-3);
+    font-size: 25px;
+    text-align: left;
+    }
+    
+    .contenido3__icono{
+        width: 70px;
+        margin-right: 20px;
+        
+    
+    }
+    .listado{
+        width:624px
+    }
+    .contenido3{
+        width:40%;
+    }
+    
+    
+
+    
+    
+
+
+    @media only screen and (max-width:1024px){
+
+        #desktop{
+            display: none;
+        }
+        footer{
+            display:none;
+        }
+
+
+    body{
+    margin: 0px;
+    background: var(--color-2);
+    letter-spacing: 1px;
+    color: var(--color-main);
+    font-family: var(--font-type);
+    box-sizing: border-box;
+    color: var(--color-font);
+    font-size: 20px;
+    
+
+
+
+
+        }
+
+
+    .header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: rgb(10,4,60);
+    background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);    
+    color: var(--color-2);
+    
+    }   
+
+    .boxtitle{
+    width: 900px;
+    text-align: center;
+    padding: 5px;
+    order: 0;
+    flex: 0 1 auto;
+    align-self: center;
+
+    }
+
+        /*SECTION*/
+
+    section{
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+
+    }
+
+        /* Interfaz 1 */
+
+    p{
+    color: var(--color-main);
+    font-size: 30px;
+
+    }
+
+    .contenido1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: flex-start;
+    width: 100%vh;
+    height: 100%vh;
+    margin-top: 50px;
+    
+    }
+.subtitulo{
+    order: 1;
+    flex: 0 1 auto;
+    align-self: center;
+    padding: 10px;
+    
+    }
+.img{
+    order: 2;
+    flex: 0 1 auto;
+    align-self:center;
+
+    }      
+.contenedor{
+    width: 200px;
+    height:200px;
+    position: absolute;
+    order: 3;
+    flex: 0 1 auto;
+    align-self:flex-end;
+    right:0;
+    bottom:0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    }
+    #btncarga1{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 35px;
+    position: absolute;
+    border: none;
+    right:0;
+    bottom:0;
+    box-shadow:     12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
+    -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;}
+            }
+
+
+
+    
+    .btn-primary{
+        background: rgb(10,4,60);
+        background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);        
+        box-shadow: 0 8px 6px -6px black;
+
+
+        color: var(--color-font);
+    }
+
+
+
+.dormido{
+    width: 90px;
+    margin-top: 40px;
+}
+
+
+
+
+
+
+    .modal-body, .modal-header{
+        background: var(--color-2);
+        color: var(--color-main);
+    }
+    .modal-footer{
+        background: var(--color-main);
+    }
+    .form-control2{
+        width:100%;
+    }
+
+    #detalle{
+        border-radius: 5px;
+            padding: 0;
+
+    }
+
+
+
+
+
+
+
+/*interfaz 3*/
+
+
+
+    .contenido3{
+        display: none;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        width: 100%;
+        height: 300px;
+        padding: 10px;
+    
+    }
+
+    li{
+    color: var(--color-3);
+    font-size: 25px;
+    text-align: left;
+    }
+
+    .contenido3__icono{
+    width: 70px;
+    margin-right: 20px;
+    
+    }
+
+    /*Contenido 4 */
+
+    .contenido4{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    margin-top: 40px;
+    font-size: 25px;
+    
+    }
+    #subtitulofinal{
+        color: var(--color-main)
+    }
+
+
+    .contenido4__icono{
+    width: 150px;
+    }
+
+    .desktop, .contenido4{
+    display: none;
+    
+    }
+    
+
+/*
+@media only screen and (max-width:320px){
+
+    .contenido1 {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+        align-items: flex-start;
+        height: ;
+        width: 320;
+    }
+
+.subtitulo{
+    order: 1;
+    flex: 0 1 auto;
+    align-self: flex-start;
+    padding: 0;
+}
+
+.contenedor{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    order: 3;
+    flex: 0 1 auto;
+    align-self: flex-end;
+    right: 0;
+    bottom: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+}
+.img{
+
+    order: 2;
+    flex: 0 1 auto;
+    align-self: center;
+    padding: 0;
+}
+
+}
+*/
