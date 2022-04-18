@@ -49,23 +49,32 @@
         <div class="boxtitle" id="headerTitle">
             <h1 id="title1"><strong> Your list <span id="defaultHeader">shop</span> <span id="nameUserInHeader"></span> </strong></h1>
         </div>
+        <div class="btn-exit">
+            <button typer="button" id="clearNameStorage" class="out-user">X</button>
+        </div>
     </header>
     <section class="mobile">
         <!--Interfaz 1-->
-        <input class="form-control" type="text" placeholder="Default input" aria-label="default input example" id="nameUserInput">
-        <button type="button" class="btn2 btn-secondary" id="sendNameUser">Cerrar</button>
+        <input name = 'resetform'class="form-control" type="text" placeholder="Default input" aria-label="default input example" id="nameUserInput">
+        <button type="button" class="btn1 btn-primary" id="sendNameUser">ingresar</button>
+    
     </br>
 
         <section class="contenido1" id="interfaz1">
             <div id="contentEmptyList" class="contenido1">
+                <section class="sectionNoNameUser" id="sectionWelcome">
+
+                    <div class="img" id="img">
+                        <img src="img/sleep.svg" alt="dormido" class=dormido>
+                    </div>
+                    <div class="subtitulo" id="message">
+                        <p> <i>Empty :/</i> </p>
+                    </div>
                 
-                <div class="img" id="img">
-                    <img src="img/sleep.svg" alt="dormido" class=dormido>
-                </div>
-                <div class="subtitulo" id="message">
-                    <p> <i>Empty :/</i> </p>
-                </div>
-                
+                </section> 
+                <section class="sectionNoNameUser" id="sectionNameUser">
+
+                </section>
 
             </div>
 

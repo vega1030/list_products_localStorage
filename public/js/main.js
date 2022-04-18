@@ -14,42 +14,57 @@ let padre = document.getElementById('padre');
 
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
-const viewNameInDom = (nameDom)=>{
+const viewNameInDom = (nameDom='')=>{
     
-    const contentEmptyList = document.getElementById('contentEmptyList')
-    const modelHeader = 
-    `            
-    <main class="welcomeUser"><h1>Welcome</h1><h2>${nameDom}</h2>
-    `
-    contentEmptyList.innerHTML=modelHeader    
+    const contentModelWelcomeNoName = document.getElementById('sectionWelcome');
+    const contentModelNameUser = document.getElementById('sectionNameUser');
 
+    console.log(nameDom)
+  
+    //html with user name
+    const modelUserName = 
+
+    `            
+    <main class="welcomeUser" id="welcomeUser">
+        <h1>Welcome</h1>
+        <h2>${nameDom}</h2>
+        <a href='#interfazlistado' id='viewList'>Tu lista</a>
+    </main>
+    `
+
+    if (nameDom!==null){
+        contentModelNameUser.innerHTML=modelUserName;
+        contentModelWelcomeNoName.style.display='none';
+    }
 }
 
-const saveNameUser = (nameUser) =>{
-    localStorage.setItem('name', nameUser) 
+//delete user at localStorage
+const cleanStorageNameUser = document.querySelector('#clearNameStorage').addEventListener('click',()=>{
+    localStorage.removeItem('name');
+    window.location.reload();
+})
+const userName = document.getElementById('nameUserInput');
+
+window.addEventListener('DOMContentLoaded',()=>{
     viewNameInDom(localStorage.getItem('name'))   
-        }
 
-
-    //******************************* */
-
-    window.addEventListener('DOMContentLoaded',()=>{
-        viewNameInDom(localStorage.getItem('name'))   
-    
-    })
-
-
+})
 const btnName = document.getElementById('sendNameUser').addEventListener('click', ()=>{
+    const userName = document.getElementById('nameUserInput').value;
     const contentEmptyList = document.querySelector('#contentEmptyList')
     // contentEmptyList.style.display='none'
-    const userName = document.getElementById('nameUserInput').value;
-        saveNameUser(userName)
+    localStorage.setItem('name', userName) 
+    viewNameInDom(localStorage.getItem('name'))   
     })
-   
+//******************************* */
+
+
+
+//**************************** Save list in localStorage and view in html *******/
+
 
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
     
-    //Validate form information
 
     //input
     const inputProducto = document.getElementById('inputalimento').value;
@@ -59,13 +74,8 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     //text area
     const textArea = document.getElementById('detalle').value;
 
-
-    //Lista
-    const modeloLista = `<li class="list-group-item" data-producto="${inputProducto}" data-icono="${seleccion}" data-detalle="${textArea}"><img src="${seleccion}" alt="${inputProducto}" class="contenido3__icono">${inputProducto}</li>`
-
     //View list in HTML
-    padre.innerHTML += modeloLista
-
+    
     //localStorage
     const listProducts= {
         product:inputProducto,
@@ -73,27 +83,22 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
         textArea:textArea
     }
     const saveDataLocalStorage = (data) => {
+        let modeloLista = ''
         let dataLocalStorage = [];
         dataLocalStorage = JSON.parse(localStorage.getItem('lists')) || [];
         dataLocalStorage.push(data)
         localStorage.setItem('lists', JSON.stringify(dataLocalStorage))
         const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
         console.log(dataStorageParce)
+        dataStorageParce.forEach((element, index)=>{
+            modeloLista = `<li class="list-group-item" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}"><img src="${element.select}" alt="${inputProducto}" class="contenido3__icono">${element.product}</li>`
+            padre.innerHTML += modeloLista
+            console.log(index)
+        })
         return dataStorageParce
     }
     
-    saveDataLocalStorage(listProducts)
-
-    // localStorage.setItem('list',JSON.stringify(listProducts));
-    
-    // const listProductsLocalStorage = JSON.parse(localStorage.getItem('list'));
-
-
-
-    // Object.values(listProductsLocalStorage).forEach(val=>{console.log('in forEach: ',val.product)})
-
-
-    
+    saveDataLocalStorage(listProducts)    
     const ui1 = document.querySelector('#interfaz1')
     
     
@@ -114,7 +119,7 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
 //*****/
 
 
-const llamadaFinal = document.getElementById('padre').addEventListener('click',  (e)=> {
+const llamadaFinal = document.getElementById('padre').addEventListener('click', (e)=> {
     const buttons = document.getElementById('buttons')
     document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto')
     document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono')
@@ -141,4 +146,3 @@ const enviarDetalle = document.getElementById('enviardetalle').addEventListener(
 
 })
 
-//validacion de formulario con ifå
