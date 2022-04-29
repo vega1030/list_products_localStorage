@@ -57,12 +57,22 @@
         <!--Interfaz 1-->
     
     </br>
-    <section class="form_login">
+            <!-- *******LOGIN FORM************ -->
+
+
+    <section class="form_login" id="formLogin">
         <div class="content_input" id="content_input">
             <input name = 'resetform'class="form-control" type="text" placeholder="Your name" aria-label="default input example" id="nameUserInput">
             <button type="button" class="btn1 btn-primary" id="sendNameUser">ingresar</button>
         </div>
     </section>
+
+            <!-- ******************* -->
+
+
+            <!-- *********UI EMPTY LIST********** -->
+
+
         <section class="contenido1" id="interfaz1">
             <div id="contentEmptyList" class="contenido1">
                 <section class="sectionNoNameUser" id="sectionWelcome">
@@ -74,12 +84,22 @@
                         <p> <i>Empty :/</i> </p>
                     </div>
                     
-                </section> 
-                <section class="sectionNoNameUser" id="sectionNameUser">   
                 </section>
-                <a href="#" id="linkViewList" class="link_list">Your list</a>
+                
+            <!-- ******************* -->
+
+                <!-- *********UI LIST AND USER NAME********** -->
+
+                <section class="sectionNameUser" id="sectionNameUser">   
+                </section>
+                <!-- <a href="#" id="linkViewList" class="link_list">Your list</a> -->
+                <a id="linkViewList" class="link_list">Your list</a>
 
             </div>
+
+
+                            <!-- *********UI MODAL AND FORM LIST********** -->
+
 
             <!-- Modal -->
             <div class="contenedor">
@@ -128,34 +148,51 @@
             </div>
         </section>
 
-        <!--Modal-->
+            <!-- *********************** -->
 
         <!-- Button trigger modal -->
 
 
         <!--Interfaz 2-->
+
+            <!-- *********LIST********** -->
+
+
         <div class="contenido3" id="interfazlistado">
             <ul class="list-group" id="padre">
 
             </ul>
-        </div>
-        <!--Interfaz final-->
-        <div class="contenido4" id="pantallafinal">
-            <h2 id="subtitulofinal"></h2>
-            <img class="contenido4__icono" id="iconocontenido4">
-            <p id="detallefinal"></p>
-            <div class="buttons" id="buttons">
-                <button type="button" class="btn btn-primary" id="enviardetalle">Enviar</button>
-                <button type="button" class="btn btn-primary" id="cerrardetalle">Cerrar</button>
+            <div class="content_btn_foward">
+                <button type="button" class="btn1 btn-primary" id="forwardButton"> <a href="#" id="">Forward</a></button>
             </div>
         </div>
+
+            <!-- *********************** -->
+
+
+            <!-- *********UI Details of products********** -->
+
+        <section class="contenido4" id="pantallafinal">
+            <div class="card_product" id="cardProduct">
+                <h2 id="subtitulofinal"></h2>
+                <img class="contenido4__icono" id="iconocontenido4">
+                <p id="detallefinal"></p>
+                <div class="buttons" id="buttons">
+                    <button type="button" class="btn1 btn-primary" id="btn_edit">Edit</button>
+                    <button type="button" class="btn1 btn-primary" id="btn_delete">Delete</button>
+                </div>
+            </div>
+        </section>
     </section>
-    <!--Desktop pantalla-->
-    <section id="desktop">
+
+        <!-- *********************** -->
+
+    <!--************Desktop UI*****************-->
+    <!-- <section id="desktop" class="desktop_style">
         <menu class="inputs">
-                        <div class="modal-body">
+                        <div class="modal-body"> -->
                             <!--Inputs del modal-->
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
                                 <input type="text" class="form-control" id="inputalimento"
                                     placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
@@ -189,7 +226,10 @@
             </div>
     
 
-        </section>
+        </section> -->
+                
+        <!-- *********************** -->
+
         <footer>
         </footer>
     </section>
