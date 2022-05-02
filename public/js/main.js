@@ -74,6 +74,8 @@ const btnclearUser = document.querySelector('#clearNameStorage').addEventListene
     clearNameUser.value = '';
     window.location.reload();
 })
+//******************************* */
+
 
 //************ Load user name when refresh page*/
 
@@ -90,7 +92,7 @@ window.addEventListener('DOMContentLoaded',()=>{
     //View list in HTML
 
 
-//**************************** Save list in localStorage and view in html *******/
+//******************* Save list in localStorage and view in html *******/
 const saveDataLocalStorage = (data='') => {
     if(data==='' || null){
     interfazListado.style.display = 'none'
@@ -112,30 +114,25 @@ let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
 
 
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
-
+    
     //input
     const inputProducto = document.getElementById('inputalimento').value;
     //seleccion icono
     const seleccion = document.getElementById('seleccionicono').value;
     //text area
     const textArea = document.getElementById('detalle').value;
-
+    const id =  crypto.randomUUID().slice(4,13)
     const listProducts= {
         product:inputProducto,
         select:seleccion,
-        textArea:textArea
+        textArea:textArea,
+        id:id
     }
+
+    console.log(listProducts)
     listProducts.product && listProducts.select && listProducts.textArea !=='' 
     ? saveDataLocalStorage(listProducts): console.log('list error')
     
-        
-    // window.addEventListener('DOMContentLoaded',()=>{
-    //     viewNameInDom(localStorage.getItem('name'))
-    //     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
-    //     viewListHTML(dataStorageParce)
-    //     flagUiValidate === false? interfazComienzo.style.display = 'none':interfazComienzo.style.display = 'display'
-    
-    // });
     
     //reinicio modal
     document.getElementById('inputalimento').value = "";
@@ -151,36 +148,40 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     pantallaFinal.style.display = 'none'   
 })
 
-//Fuction view list in HTML
+//******************************* */
+
+
+
+//********** Fuction view list in HTML *******
 const viewListHTML = (data='') =>{
 
     if(data!==null){
 
         let modeloLista = ''
-     
             
         data.forEach((element, index)=>{
             modeloLista += `
-            <li class="list-group-item" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${index}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
+            <li class="list-group-item" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
             </li>`
             padre.innerHTML = modeloLista
             })
 
-    }
+        }
     }
 
 //******************************* */
 
 
 //****************** view list with </a> tag ******/ 
+/* This is a function that is called when the user clicks on the link to view the list. */
 linkListUi.addEventListener('click',()=>{
- 
 
     interfazListado.style.display = 'block'
     interfazComienzo.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
+
     })
 
 //******************************* */
@@ -191,28 +192,26 @@ localStorage.getItem('lists')!==null? linkListUi.style.display = 'flex' :
 linkListUi.style.display = 'none'
 //********************************/
 
+
 //**************** Delete Fuction */
 
 const btnDelete = document.querySelector('#btn_delete')
-.addEventListener('click', ()=>{
+btnDelete.addEventListener('click', ()=>{
+const data_Id_Btn = btnDelete.getAttribute('data-id')
 
-    const btnDelete = document.querySelector('#btn_delete')
-    
+
 const deleted = (productId='')=>{
-    // dataStorageParce = dataStorageParce.filter(list=>list.product!=product)
+    dataStorageParce = dataStorageParce.filter(data=>{
+        return data.id != productId;
 
-    dataStorageParce = dataStorageParce.filter((el,index)=>{
-        productId.indexOf(index) == -1
+        // productIdParse.indexOf(index) == -1
+        
     })
-    console.log(padre)
-    for(let i=0; i<padre.childNodes.length; i++){
-        console.log(padre.children[i].tagName)
-    }
 
-    deleted(productCardId)
 }
-
- console.log(dataStorageParce)
+deleted(data_Id_Btn)
+const filterDataParse = dataStorageParce
+console.log('data filtrada',filterDataParse)
 
 })
 
@@ -228,7 +227,8 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     pantallaFinal.style.display = 'block'
     interfazListado.style.display = 'none'
     buttons.style.display = 'block'
-    document.getElementById('btn_delete').id = e.target.getAttribute('data-id')
+
+    document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
 
 })
 
