@@ -3,9 +3,9 @@
 var modalcarga = new bootstrap.Modal(document.getElementById('staticBackdrop'), {}) //no me acepto el cambio de id en el modal
 
 //Captura pantallas
-let interfazComienzo = document.getElementById('interfaz1');
-let interfazListado = document.getElementById('interfazlistado');
-let pantallaFinal = document.getElementById('pantallafinal');
+let uiStart = document.getElementById('interfaz1');
+let uiList = document.getElementById('interfazlistado');
+let uiFinish = document.getElementById('pantallafinal');
 let uiFormLogin = document.querySelector('#formLogin')
 let uiWelcome = document.querySelector ('#contentEmptyList')
 let contentModelNameUser = document.getElementById('sectionNameUser');
@@ -50,7 +50,7 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
     if (userName === '' &&localStorage.getItem('name') === null) {
         alert('Complete with your Name');
         uiFormLogin.style.display='flex';
-        interfazComienzo.style.display = 'none'
+        uiStart.style.display = 'none'
         localStorage.getItem('name');
         
     }
@@ -60,7 +60,7 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
         viewNameInDom(localStorage.getItem('name'));
         uiFormLogin.style.display='none';
         uiWelcome.style.display = 'flex';
-        interfazComienzo.style.display = 'flex';
+        uiStart.style.display = 'flex';
         contentModelNameUser.style.display = 'flex';
     }
         
@@ -81,7 +81,7 @@ const btnclearUser = document.querySelector('#clearNameStorage').addEventListene
 
 window.addEventListener('DOMContentLoaded',()=>{
     viewNameInDom(localStorage.getItem('name'))
-    flagUiValidate === false? interfazComienzo.style.display = 'none':interfazComienzo.style.display = 'display'
+    flagUiValidate === false? uiStart.style.display = 'none':uiStart.style.display = 'display'
     
     
 });
@@ -93,9 +93,12 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 
 //******************* Save list in localStorage and view in html *******/
-const saveDataLocalStorage = (data='') => {
-    if(data==='' || null){
-    interfazListado.style.display = 'none'
+const saveDataLocalStorage = (data='', flag) => {
+
+
+
+    if(data==='' || null ){
+    uiList.style.display = 'none'
     return console.log('error')
 
     }
@@ -143,9 +146,9 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     modalcarga.hide()
 
     //displays
-    interfazComienzo.style.display = 'none'
-    interfazListado.style.display = 'block'
-    pantallaFinal.style.display = 'none'   
+    uiStart.style.display = 'none'
+    uiList.style.display = 'block'
+    uiFinish.style.display = 'none'   
 })
 
 //******************************* */
@@ -177,8 +180,8 @@ const viewListHTML = (data='') =>{
 /* This is a function that is called when the user clicks on the link to view the list. */
 linkListUi.addEventListener('click',()=>{
 
-    interfazListado.style.display = 'block'
-    interfazComienzo.style.display = 'none'
+    uiList.style.display = 'block'
+    uiStart.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
 
@@ -188,14 +191,18 @@ linkListUi.addEventListener('click',()=>{
 
 
 
-localStorage.getItem('lists')!==null? linkListUi.style.display = 'flex' :
+localStorage.getItem('lists')!==null || []? linkListUi.style.display = 'flex' :
 linkListUi.style.display = 'none'
 //********************************/
 
 
-//**************** Delete Fuction */
+//**************** Delete Element in LocalStorage */
 
+/* This is a function that is called when the user clicks on the button to delete the list.
+And remove individual item at LocalStorage
+*/
 const btnDelete = document.querySelector('#btn_delete')
+
 btnDelete.addEventListener('click', ()=>{
 const data_Id_Btn = btnDelete.getAttribute('data-id')
 
@@ -203,16 +210,17 @@ const data_Id_Btn = btnDelete.getAttribute('data-id')
 const deleted = (productId='')=>{
     dataStorageParce = dataStorageParce.filter(data=>{
         return data.id != productId;
-
-        // productIdParse.indexOf(index) == -1
         
     })
 
 }
 deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
-console.log('data filtrada',filterDataParse)
+localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
+uiFinish.style.display ='none'
+uiList.style.display='block'
+location.reload()
 })
 
 
@@ -224,8 +232,8 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto')
     document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono')
     document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle')
-    pantallaFinal.style.display = 'block'
-    interfazListado.style.display = 'none'
+    uiFinish.style.display = 'block'
+    uiList.style.display = 'none'
     buttons.style.display = 'block'
 
     document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
@@ -236,7 +244,7 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
 
 
 const forwardButton = document.querySelector('#forwardButton').addEventListener('click', ()=>{
-    interfazComienzo.style.display = 'flex'
-    interfazListado.style.display = 'none'
+    uiStart.style.display = 'flex'
+    uiList.style.display = 'none'
     location.reload()
 })
