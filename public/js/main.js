@@ -1,6 +1,10 @@
 
 //Clase modal
-var modalcarga = new bootstrap.Modal(document.getElementById('staticBackdrop'), {}) //no me acepto el cambio de id en el modal
+var myModal = new bootstrap.Modal(
+    document.getElementById('exampleModal'),{
+        backdrop:'static'
+    })
+
 
 //Captura pantallas
 let uiStart = document.getElementById('interfaz1');
@@ -17,6 +21,10 @@ let padre = document.getElementById('padre');
 
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
+/**
+ * It takes a string as an argument and returns a string
+ * @param [nameDom] - The name of the user that is passed to the function.
+ */
 const viewNameInDom = (nameDom='')=>{
 
     const contentModelWelcomeNoName = document.getElementById('sectionWelcome');
@@ -42,9 +50,9 @@ const viewNameInDom = (nameDom='')=>{
     }
 }
 
+/* This is a function that is called when the user clicks on the button to save the name. */
 const btnName = document.getElementById('sendNameUser').addEventListener('click', ()=>{
     const userName = document.getElementById('nameUserInput').value;
-    console.log(localStorage.getItem('name'))
     //validation of name and view in HTML5
 
     if (userName === '' &&localStorage.getItem('name') === null) {
@@ -68,8 +76,9 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
 //************************ */
 
 //************* Delete user at localStorage */
-const btnclearUser = document.querySelector('#clearNameStorage').addEventListener('click',()=>{
+const btnclearStorage = document.querySelector('#clearStorage').addEventListener('click',()=>{
     localStorage.removeItem('name');
+    localStorage.removeItem('lists');
     const clearNameUser = document.getElementById('nameUserInput');
     clearNameUser.value = '';
     window.location.reload();
@@ -93,9 +102,11 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 
 //******************* Save list in localStorage and view in html *******/
-const saveDataLocalStorage = (data='', flag) => {
-
-
+/**
+ * 
+ * @param [data] - The data to be saved in localStorage.
+ */
+const saveDataLocalStorage = (data='') => {
 
     if(data==='' || null ){
     uiList.style.display = 'none'
@@ -132,18 +143,15 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
         id:id
     }
 
-    console.log(listProducts)
     listProducts.product && listProducts.select && listProducts.textArea !=='' 
     ? saveDataLocalStorage(listProducts): console.log('list error')
     
     
-    //reinicio modal
+    //reset modal
     document.getElementById('inputalimento').value = "";
     document.getElementById('seleccionicono').value = "";
     document.getElementById('detalle').value = "";
     
-    //Instancia de la clase Modal
-    modalcarga.hide()
 
     //displays
     uiStart.style.display = 'none'
@@ -156,13 +164,17 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
 
 
 //********** Fuction view list in HTML *******
+/**
+ * It takes an array of objects as an argument, and returns a string of HTML
+ * @param [data] - The data that will be used to create the list.
+ */
 const viewListHTML = (data='') =>{
 
     if(data!==null){
 
         let modeloLista = ''
             
-        data.forEach((element, index)=>{
+        data.forEach((element)=>{
             modeloLista += `
             <li class="list-group-item" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
@@ -175,24 +187,21 @@ const viewListHTML = (data='') =>{
 
 //******************************* */
 
-
 //****************** view list with </a> tag ******/ 
 /* This is a function that is called when the user clicks on the link to view the list. */
-linkListUi.addEventListener('click',()=>{
 
+
+JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
+linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
+
+linkListUi.addEventListener('click',()=>{
     uiList.style.display = 'block'
     uiStart.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
-
     })
 
-//******************************* */
 
-
-
-localStorage.getItem('lists')!==null || []? linkListUi.style.display = 'flex' :
-linkListUi.style.display = 'none'
 //********************************/
 
 
@@ -218,13 +227,39 @@ deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
+
 uiFinish.style.display ='none'
-uiList.style.display='block'
+uiStart.style.display='block'
 location.reload()
 })
 
 
 //********************************/
+
+
+// Edit element
+
+const editElement = (element)=>{
+    const editInput = document.querySelector('#inputalimento');
+    const editIcon = document.querySelector('#seleccionicono');
+    const editComment  = document.querySelector('#detalle')
+    console.log(editComment.value)
+    console.log(editIcon.value)
+    element.forEach(data =>{
+        editInput.value = data.product
+        editIcon.options = data.select
+        editComment.value = data.textArea 
+    })
+}
+
+const btnEdit = document.querySelector('#btn_edit');
+btnEdit.addEventListener('click', ()=>{
+    editElement(JSON.parse(localStorage.getItem('lists')))})
+
+const editBtn = document.querySelector('#saveChanges')
+
+
+/* This is a function that is called when the user clicks on the list item. */
 
 const llamadaFinal = document.getElementById('padre').addEventListener('click', (e)=> {
     const buttons = document.getElementById('buttons')
@@ -241,8 +276,7 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
 })
 
 
-
-
+/* This is a function that is called when the user clicks on the button to return to the main screen. */
 const forwardButton = document.querySelector('#forwardButton').addEventListener('click', ()=>{
     uiStart.style.display = 'flex'
     uiList.style.display = 'none'

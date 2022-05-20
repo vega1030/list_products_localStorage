@@ -124,9 +124,13 @@
         margin: 0 0 3% 0;
     }
 
-    .sectionNameUser, .link_list{
+    .sectionNameUser, .link_list{        
         width:30%;
         text-align: center;
+    }
+
+    .link_list{
+        display:none;
     }
 
     .form_login {
@@ -274,7 +278,9 @@
 
 
 
-
+.modal-backdrop.show{
+    display:none;
+}
 
 
     .modal-body, .modal-header{

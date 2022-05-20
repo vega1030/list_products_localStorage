@@ -50,7 +50,7 @@
             <h1 id="title1"><strong> Your list <span id="defaultHeader">shop</span> <span id="nameUserInHeader"></span> </strong></h1>
         </div>
         <div class="btn-exit">
-            <button typer="button" id="clearNameStorage" class="out-user">X</button>
+            <button typer="button" id="clearStorage" class="out-user">New list</button>
         </div>
     </header>
     <section class="mobile">
@@ -62,7 +62,7 @@
 
     <section class="form_login" id="formLogin">
         <div class="content_input" id="content_input">
-            <input name = 'resetform'class="form-control" type="text" placeholder="Your name" aria-label="default input example" id="nameUserInput">
+            <input name = 'resetform'class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput">
             <button type="button" class="btn1 btn-primary" id="sendNameUser">ingresar</button>
         </div>
     </section>
@@ -92,7 +92,6 @@
 
                 <section class="sectionNameUser" id="sectionNameUser">   
                 </section>
-                <!-- <a href="#" id="linkViewList" class="link_list">Your list</a> -->
                 <a id="linkViewList" class="link_list">Your list</a>
 
             </div>
@@ -108,13 +107,13 @@
                 <strong>ADD</strong>
             </button>
             </div>
+
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Agrega los productos</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!--Inputs del modal-->
@@ -178,7 +177,7 @@
                 <img class="contenido4__icono" id="iconocontenido4">
                 <p id="detallefinal"></p>
                 <div class="buttons" id="buttons">
-                    <button type="button" class="btn1 btn-primary" id="btn_edit">Edit</button>
+                    <button type="button" class="btn1 btn-primary" id="btn_edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
                     <button type="button" class="btn1 btn-primary" id="btn_delete">Delete</button>
                 </div>
             </div>
@@ -187,19 +186,24 @@
 
         <!-- *********************** -->
 
-    <!--************Desktop UI*****************-->
-    <!-- <section id="desktop" class="desktop_style">
-        <menu class="inputs">
-                        <div class="modal-body"> -->
+    <!--************Modal Edit*****************-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                             <!--Inputs del modal-->
-                            <!-- <div class="mb-3">
+                            <div class="mb-3">
                                 <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
                                 <input type="text" class="form-control" id="inputalimento"
                                     placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
                             </div>
                             <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
                             <select class="form-select" aria-label="Default select example" id="seleccionicono">
-                                <option selected value = null >Elegi la categoria</option>
+                                <option selected>Elegi la categoria</option>
                                 <option value="img/comidita.svg">Comidita</option>
                                 <option value="img/electronica.svg">Electronica</option>
                                 <option value="img/ferreteria2.svg">Ferreteria</option>
@@ -212,21 +216,14 @@
                                 <label for="detalle" class="form-label">Detalles que quieras recordar</label>
                                 <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn2 btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
-                            <button type="button" class="btn1 btn-primary" id="btnguardar">Agregar</button>
-                        </div>
-        </menu>
-
-            <div class="contenido3" id="interfazlistado">
-                <ul class="list-group" id="padre">
-    
-                </ul>
             </div>
-    
-
-        </section> -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
                 
         <!-- *********************** -->
 
