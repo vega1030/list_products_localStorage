@@ -98,7 +98,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 //******************************* */
 
 
-    //View list in HTML
+    //View list at HTML
 
 
 //******************* Save list in localStorage and view in html *******/
@@ -218,15 +218,14 @@ const data_Id_Btn = btnDelete.getAttribute('data-id')
 
 const deleted = (productId='')=>{
     dataStorageParce = dataStorageParce.filter(data=>{
-        return data.id != productId;
-        
+        return data.id != productId;       
     })
 
 }
+
 deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
-
 
 uiFinish.style.display ='none'
 uiStart.style.display='block'
@@ -234,30 +233,55 @@ location.reload()
 })
 
 
-//********************************/
+//************----------------------------------*************/
 
 
 // Edit element
 
 const editElement = (element)=>{
-    const editInput = document.querySelector('#inputalimento');
-    const editIcon = document.querySelector('#seleccionicono');
-    const editComment  = document.querySelector('#detalle')
-    console.log(editComment.value)
-    console.log(editIcon.value)
-    element.forEach(data =>{
-        editInput.value = data.product
-        editIcon.options = data.select
-        editComment.value = data.textArea 
+    const modalEdit = document.querySelector('#modalEdit')
+    let modelModalEdit = 
+    console.log(element.product)
+    element.forEach(item=>{
+        modelModalEdit=
+        `
+        <div class="mb-3" id="inputContent">
+        <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
+        <input type="text" class="form-control" id="inputalimento"
+            placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product}>
+    </div>
+    <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
+    <select class="form-select" aria-label="Default select example" id="seleccionicono">
+        <option selected>Elegi la categoria</option>
+        <option value="img/comidita.svg">Comidita</option>
+        <option value="img/electronica.svg">Electronica</option>
+        <option value="img/ferreteria2.svg">Ferreteria</option>
+        <option value="img/limpieza.svg">Limpieza</option>
+        <option value="img/mascota.svg">Mascotas</option>
+        <option value="img/perfumeria.svg">Perfumeria</option>
+        <option value="img/varios.svg">Varios</option>
+    </select>
+    <div class="mb-3">
+        <label for="detalle" class="form-label">Detalles que quieras recordar</label>
+        <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required">${item.textArea}</textarea>
+    </div>
+        `
     })
-}
+        modalEdit.innerHTML=modelModalEdit
 
-const btnEdit = document.querySelector('#btn_edit');
-btnEdit.addEventListener('click', ()=>{
-    editElement(JSON.parse(localStorage.getItem('lists')))})
+    }
 
-const editBtn = document.querySelector('#saveChanges')
 
+const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', ()=>{
+    editElement(JSON.parse(localStorage.getItem('lists')))
+})
+
+const saveEditBtn = document.querySelector('#saveChanges')
+saveEditBtn.addEventListener('click', ()=>{
+    buttonGuardar()
+})
+
+//************---------------------------------------------------------------- */
 
 /* This is a function that is called when the user clicks on the list item. */
 
