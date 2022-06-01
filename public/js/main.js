@@ -126,32 +126,39 @@ const saveDataLocalStorage = (data='') => {
 
 let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
 
+// remember me = create function to save and edit info
+
+const saveInfo = ()=>{
+   //input
+
+        const inputProducto = document.getElementById('inputalimento').value;
+        //seleccion icono
+        const seleccion = document.getElementById('seleccionicono').value;
+        //text area
+        const textArea = document.getElementById('detalle').value;
+        const id =  crypto.randomUUID().slice(4,13)
+        const listProducts= {
+            product:inputProducto,
+            select:seleccion,
+            textArea:textArea,
+            id:id
+        }
+    
+        listProducts.product && listProducts.select && listProducts.textArea !=='' 
+        ? saveDataLocalStorage(listProducts): console.log('list error')
+
+       //reset modal
+        document.getElementById('inputalimento').value = "";
+        document.getElementById('seleccionicono').value = "";
+        document.getElementById('detalle').value = "";
+    }
+
+
+
 
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
     
-    //input
-    const inputProducto = document.getElementById('inputalimento').value;
-    //seleccion icono
-    const seleccion = document.getElementById('seleccionicono').value;
-    //text area
-    const textArea = document.getElementById('detalle').value;
-    const id =  crypto.randomUUID().slice(4,13)
-    const listProducts= {
-        product:inputProducto,
-        select:seleccion,
-        textArea:textArea,
-        id:id
-    }
-
-    listProducts.product && listProducts.select && listProducts.textArea !=='' 
-    ? saveDataLocalStorage(listProducts): console.log('list error')
-    
-    
-    //reset modal
-    document.getElementById('inputalimento').value = "";
-    document.getElementById('seleccionicono').value = "";
-    document.getElementById('detalle').value = "";
-    
+    saveInfo();    
 
     //displays
     uiStart.style.display = 'none'
@@ -159,11 +166,6 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     uiFinish.style.display = 'none'   
 })
 
-//******************************* */
-
-
-
-//********** Fuction view list in HTML *******
 /**
  * It takes an array of objects as an argument, and returns a string of HTML
  * @param [data] - The data that will be used to create the list.
@@ -187,7 +189,7 @@ const viewListHTML = (data='') =>{
 
 //******************************* */
 
-//****************** view list with </a> tag ******/ 
+//****************** review list with </a> tag ******/ 
 /* This is a function that is called when the user clicks on the link to view the list. */
 
 
@@ -240,18 +242,17 @@ location.reload()
 
 const editElement = (element)=>{
     const modalEdit = document.querySelector('#modalEdit')
-    let modelModalEdit = 
-    console.log(element.product)
+    let modelModalEdit = ''
     element.forEach(item=>{
         modelModalEdit=
         `
         <div class="mb-3" id="inputContent">
         <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
-        <input type="text" class="form-control" id="inputalimento"
+        <input type="text" class="form-control" id="editInputProduct"
             placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product}>
     </div>
     <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
-    <select class="form-select" aria-label="Default select example" id="seleccionicono">
+    <select class="form-select" aria-label="Default select example" id="editSeletIcon">
         <option selected>Elegi la categoria</option>
         <option value="img/comidita.svg">Comidita</option>
         <option value="img/electronica.svg">Electronica</option>
@@ -263,14 +264,16 @@ const editElement = (element)=>{
     </select>
     <div class="mb-3">
         <label for="detalle" class="form-label">Detalles que quieras recordar</label>
-        <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required">${item.textArea}</textarea>
+        <textarea class="form-control2" id="editDetail" rows="3" maxlength="20" required="required">${item.textArea}</textarea>
     </div>
+    
         `
     })
-        modalEdit.innerHTML=modelModalEdit
+    modalEdit.innerHTML=modelModalEdit
 
     }
 
+    //listener of btn Edit
 
 const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', ()=>{
     editElement(JSON.parse(localStorage.getItem('lists')))
@@ -278,8 +281,36 @@ const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', (
 
 const saveEditBtn = document.querySelector('#saveChanges')
 saveEditBtn.addEventListener('click', ()=>{
-    buttonGuardar()
-})
+    
+    const inputProduct = document.getElementById('editInputProduct').value;
+    //seleccion icono
+    const selectIcon = document.getElementById('editSeletIcon').value;
+    //text area
+    const textAreaEdited = document.getElementById('editDetail').value;
+    const data_Id_Btn = btnDelete.getAttribute('data-id')
+    const editListProducts= {
+        product:inputProduct,
+        select:selectIcon,
+        textArea:textAreaEdited,
+        id:data_Id_Btn
+    }
+    const dataStorage = JSON.parse(localStorage.getItem('lists'))
+
+    const updateData = dataStorage.forEach(x=>(x.id === data_Id_Btn?{...x,update:3}:x))
+    console.log(dataStorage)
+
+    const newUpdate = dataStorage.findIndex(element=>element.id ===editListProducts.id)
+    //update at localStorage and parse JSON to String
+    dataStorage.splice(newUpdate,1,editListProducts)
+
+    localStorage.setItem('lists', JSON.stringify(dataStorage))
+
+    location.reload()
+
+
+    })
+
+
 
 //************---------------------------------------------------------------- */
 
@@ -291,12 +322,12 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto')
     document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono')
     document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle')
-    uiFinish.style.display = 'block'
+    uiFinish.style.display = 'flex'
     uiList.style.display = 'none'
-    buttons.style.display = 'block'
+    buttons.style.display = 'flex'
 
     document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
-
+    document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
 })
 
 

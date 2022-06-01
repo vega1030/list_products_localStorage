@@ -2,9 +2,10 @@
 
 :root{
     --color-main:#0a043c;
-    --color-2: #a3ddcb;
+    --color-2: rgb(162, 221, 202,0.4);
     --color-3: #03506f;
-    --color-font: #ffe3de;
+    --color-font: rgb(255, 227, 222);
+    --color-link:#5b63b7;
     --font-type:'Fira Sans', sans-serif;
 }
 
@@ -116,21 +117,44 @@
         height: 50vh;
     }
 
-    footer{
-        display:none;
+    .buttons-size{
+        width:40%;
+        height:90%;
     }
 
     li{
         margin: 0 0 3% 0;
     }
 
+    a{
+        text-decoration: none;
+        color: var(--color-link);
+    }
+    
+    .link_list{
+        margin: 10% 0 0 0;
+        font-size: 140%;
+    }
+
     .sectionNameUser, .link_list{        
-        width:30%;
+        width:23%;
         text-align: center;
+    }
+
+    .content_btn_foward .btn1 {
+        width:20%;
+        height:20%
+    }
+    .arrow{
+       color: var(--color-font);
     }
 
     .link_list{
         display:none;
+    }
+
+    .welcomeUser{
+        color: var(--color-main)
     }
 
     .form_login {
@@ -157,9 +181,11 @@
         }
 
         .buttons{
-            width: 50%;
-            height: 20vh;
+            width: 43%;
+            height: 6vh;
             flex-direction: row;
+            justify-content: space-between;
+            gap: 30%;
 
             
         }
@@ -188,7 +214,7 @@
         align-content: center;
         background: rgb(10,4,60);
         background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);    
-        color: var(--color-2);
+        color: var(--color-font);
         width: 100%;
         height: 15vh;
     }   
@@ -300,9 +326,32 @@
 
     }
 
+    .contenido4{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        height: 40vh;
+        padding: 10px;
+        margin-top: 40px;
+        font-size: 25px;
+        
+        }
 
+    .card_product{
+        width: 100%;
+        height:83%
+    }
 
+ 
 
+   
+
+/* *********************** */
 
 
 
@@ -331,25 +380,7 @@
         height:50%;
     }
 
-    .contenido4{
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    height: 60vh;
-    padding: 10px;
-    margin-top: 40px;
-    font-size: 25px;
-    
-    }
 
-    .card_product{
-        width: 100%;
-        height:100%
-    }
 
     #subtitulofinal{
         color: var(--color-main)
