@@ -15,6 +15,7 @@ let uiWelcome = document.querySelector ('#contentEmptyList')
 let contentModelNameUser = document.getElementById('sectionNameUser');
 let flagUiValidate = false
 let linkListUi = document.getElementById('linkViewList')
+let optionsInUiStart = document.querySelector('#options_list')
 //Captura de datos 
 
 let padre = document.getElementById('padre');
@@ -25,6 +26,7 @@ let padre = document.getElementById('padre');
  * It takes a string as an argument and returns a string
  * @param [nameDom] - The name of the user that is passed to the function.
  */
+
 const viewNameInDom = (nameDom='')=>{
 
     const contentModelWelcomeNoName = document.getElementById('sectionWelcome');
@@ -189,12 +191,12 @@ const viewListHTML = (data='') =>{
 
 //******************************* */
 
-//****************** review list with </a> tag ******/ 
+//****************** view list with option tag ******/ 
 /* This is a function that is called when the user clicks on the link to view the list. */
 
 
 JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
-linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
+optionsInUiStart.style.display = 'none':optionsInUiStart.style.display = 'flex'
 
 linkListUi.addEventListener('click',()=>{
     uiList.style.display = 'block'
@@ -296,8 +298,8 @@ saveEditBtn.addEventListener('click', ()=>{
     }
     const dataStorage = JSON.parse(localStorage.getItem('lists'))
 
-    const updateData = dataStorage.forEach(x=>(x.id === data_Id_Btn?{...x,update:3}:x))
-    console.log(dataStorage)
+    // const updateData = dataStorage.forEach(x=>(x.id === data_Id_Btn?{...x,update:3}:x))
+    // console.log(dataStorage)
 
     const newUpdate = dataStorage.findIndex(element=>element.id ===editListProducts.id)
     //update at localStorage and parse JSON to String
@@ -337,3 +339,5 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
     uiList.style.display = 'none'
     location.reload()
 })
+
+//create validations
