@@ -164,7 +164,7 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
 
     //displays
     uiStart.style.display = 'none'
-    uiList.style.display = 'block'
+    uiList.style.display = 'flex'
     uiFinish.style.display = 'none'   
 })
 
@@ -199,7 +199,7 @@ JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.get
 optionsInUiStart.style.display = 'none':optionsInUiStart.style.display = 'flex'
 
 linkListUi.addEventListener('click',()=>{
-    uiList.style.display = 'block'
+    uiList.style.display = 'flex'
     uiStart.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
@@ -207,6 +207,11 @@ linkListUi.addEventListener('click',()=>{
 
 
 //********************************/
+
+
+// btnForwardListUi_to_MainUi.addEventListener('click',()=>{
+
+// })
 
 
 //**************** Delete Element in LocalStorage */
@@ -320,13 +325,23 @@ saveEditBtn.addEventListener('click', ()=>{
 
 const llamadaFinal = document.getElementById('padre').addEventListener('click', (e)=> {
     const buttons = document.getElementById('buttons')
-    
+    let content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi') 
+
+
     document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto')
     document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono')
     document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle')
     uiFinish.style.display = 'flex'
     uiList.style.display = 'none'
     buttons.style.display = 'flex'
+    content_ForwardListUi_to_MainUi.style.display = 'block';
+
+    content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
+    uiFinish.style.display = 'none'
+    uiList.style.display = 'flex'
+
+    })
+
 
     document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
     document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
