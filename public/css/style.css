@@ -189,16 +189,14 @@
         }
 
         .buttons{
-            width: 50%;
+            width: 95%;
             height: 8vh;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: center;
             gap: 30%;
-
-            
+            align-items: center;
         }
-        
-      
+
         
         .section_contenido1, .content1 {
             display:flex;
@@ -255,6 +253,10 @@
         
     }
 
+    .btn_edit, .btn_delete{
+        width: 20%
+    }
+
     .subtitulo{
         order: 1;
         flex: 0 1 auto;
@@ -304,7 +306,7 @@
                 padding: 10px;
             
             }
-        #forwardButton{
+        .forwardButton{
             width:15%;
             height:35%;
         }    
@@ -351,8 +353,14 @@
 
     .content_forwardButtonToListUi{
         display: none;
+        width: 46%;
+        height:40vh;
+
+    }
+
+    #forwardButtonToListUi{
         width: 30%;
-        height:30vh;
+        height:45%;
     }
 
     .contenido4{
@@ -365,9 +373,9 @@
         text-align: center;
         width: 100%;
         height: 52vh;
-        padding: 10px;
-        margin-top: 40px;
-        font-size: 25px;
+        padding: 1%;
+        margin-top: 1%;
+        font-size: 100%;
         
         }
 

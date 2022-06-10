@@ -334,7 +334,7 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     uiFinish.style.display = 'flex'
     uiList.style.display = 'none'
     buttons.style.display = 'flex'
-    content_ForwardListUi_to_MainUi.style.display = 'block';
+    content_ForwardListUi_to_MainUi.style.display = 'flex';
 
     content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
     uiFinish.style.display = 'none'
