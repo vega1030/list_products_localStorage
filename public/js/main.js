@@ -16,6 +16,8 @@ let contentModelNameUser = document.getElementById('sectionNameUser');
 let flagUiValidate = false
 let linkListUi = document.getElementById('linkViewList')
 let optionsInUiStart = document.querySelector('#options_list')
+let div_btn_foward = document.querySelector('#div_btn_foward')
+
 //Captura de datos 
 
 let padre = document.getElementById('padre');
@@ -123,43 +125,71 @@ const saveDataLocalStorage = (data='') => {
         const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
         viewListHTML(dataStorageParce)
 
+
     }
 }
 
 let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
 
-// remember me = create function to save and edit info
+//************* Notifications ********************************************//
 
-const saveInfo = ()=>{
-   //input
-
-        const inputProducto = document.getElementById('inputalimento').value;
-        //seleccion icono
-        const seleccion = document.getElementById('seleccionicono').value;
-        //text area
-        const textArea = document.getElementById('detalle').value;
-        const id =  crypto.randomUUID().slice(4,13)
-        const listProducts= {
-            product:inputProducto,
-            select:seleccion,
-            textArea:textArea,
-            id:id
-        }
+/**
+ * The function creates a notification div with a message and displays it for 3 seconds
+ */
+const notification = (message='',color='')=>{
+    const section_notifications = document.querySelector('#content_notifications')
+    let modelNotificationDOM = 
     
-        listProducts.product && listProducts.select && listProducts.textArea !=='' 
-        ? saveDataLocalStorage(listProducts): console.log('list error')
+    `<div class="content_notification" id="notification_save_data">
+        <p class="save_ok ${color}" id="message_save">
+            ${message}
+        </p>
+    </div>                
+    `    
+    section_notifications.innerHTML=modelNotificationDOM
+    section_notifications.style.display='flex'
 
-       //reset modal
-        document.getElementById('inputalimento').value = "";
-        document.getElementById('seleccionicono').value = "";
-        document.getElementById('detalle').value = "";
-    }
+    const timeDiv = ()=>setTimeout(() => section_notifications.remove(),3000)
+    timeDiv()
+    // flag===true? timeOutNotification():console.log('error');
+}
+    
 
+/*******************---------------------------------***************** */
 
 
 
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
-    
+    const saveInfo = ()=>{
+        //input
+             const messageNotification = 'Save data OK!'
+             const inputProducto = document.getElementById('inputalimento').value;
+             //seleccion icono
+             const seleccion = document.getElementById('seleccionicono').value;
+             //text area
+             const textArea = document.getElementById('detalle').value;
+             const id =  crypto.randomUUID().slice(4,13)
+             const listProducts= {
+                 product:inputProducto,
+                 select:seleccion,
+                 textArea:textArea,
+                 id:id
+             }
+             
+            if (listProducts.product && listProducts.select && listProducts.textArea !==''){
+             saveDataLocalStorage(listProducts)
+             notification(messageNotification,'save_ok')
+            } 
+             else{
+                 console.log('list error')
+             }
+     
+            //reset modal
+             document.getElementById('inputalimento').value = "";
+             document.getElementById('seleccionicono').value = "";
+             document.getElementById('detalle').value = "";
+         }
+     
     saveInfo();    
 
     //displays
@@ -168,19 +198,22 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     uiFinish.style.display = 'none'   
 })
 
+
+    
+
 /**
  * It takes an array of objects as an argument, and returns a string of HTML
  * @param [data] - The data that will be used to create the list.
  */
-const viewListHTML = (data='') =>{
+const viewListHTML = (data='',flag=null) =>{
 
-    if(data!==null){
+    if(data!==null||flag ===true){
 
         let modeloLista = ''
             
         data.forEach((element)=>{
             modeloLista += `
-            <li class="list-group-item" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
+            <li class="list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
             </li>`
             padre.innerHTML = modeloLista
@@ -190,6 +223,8 @@ const viewListHTML = (data='') =>{
     }
 
 //******************************* */
+
+
 
 //****************** view list with option tag ******/ 
 /* This is a function that is called when the user clicks on the link to view the list. */
@@ -201,6 +236,7 @@ optionsInUiStart.style.display = 'none':optionsInUiStart.style.display = 'flex'
 linkListUi.addEventListener('click',()=>{
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
+    div_btn_foward.style.display='flex'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
     })
@@ -219,11 +255,12 @@ linkListUi.addEventListener('click',()=>{
 /* This is a function that is called when the user clicks on the button to delete the list.
 And remove individual item at LocalStorage
 */
-const btnDelete = document.querySelector('#btn_delete')
 
+const btnDelete = document.querySelector('#btn_delete')
 btnDelete.addEventListener('click', ()=>{
 const data_Id_Btn = btnDelete.getAttribute('data-id')
 
+const messageDelete = 'Delete element complete!'
 
 const deleted = (productId='')=>{
     dataStorageParce = dataStorageParce.filter(data=>{
@@ -236,16 +273,25 @@ deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
-uiFinish.style.display ='none'
-uiStart.style.display='block'
-location.reload()
+    //displays
+    uiStart.style.display = 'none'
+    uiList.style.display = 'flex'
+    uiFinish.style.display = 'none'   
+
+notification(messageDelete,'delete_ok')
+// location.reload()
 })
 
 
 //************----------------------------------*************/
 
 
-// Edit element
+
+
+    //listener of btn Edit
+
+const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', ()=>{
+    //******* Call modal edit *********/ 
 
 const editElement = (element)=>{
     const modalEdit = document.querySelector('#modalEdit')
@@ -279,16 +325,13 @@ const editElement = (element)=>{
     modalEdit.innerHTML=modelModalEdit
 
     }
-
-    //listener of btn Edit
-
-const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', ()=>{
+//************----------------------------------*************/
     editElement(JSON.parse(localStorage.getItem('lists')))
 })
 
 const saveEditBtn = document.querySelector('#saveChanges')
 saveEditBtn.addEventListener('click', ()=>{
-    
+    const message_Notification = 'Edit complete'
     const inputProduct = document.getElementById('editInputProduct').value;
     //seleccion icono
     const selectIcon = document.getElementById('editSeletIcon').value;
@@ -311,9 +354,13 @@ saveEditBtn.addEventListener('click', ()=>{
     dataStorage.splice(newUpdate,1,editListProducts)
 
     localStorage.setItem('lists', JSON.stringify(dataStorage))
-
-    location.reload()
-
+    myModal.hide()
+    
+    //displays
+    uiStart.style.display = 'none'
+    uiList.style.display = 'flex'
+    uiFinish.style.display = 'none'  
+    notification(message_Notification,'edit_color_font')
 
     })
 
@@ -324,21 +371,23 @@ saveEditBtn.addEventListener('click', ()=>{
 /* This is a function that is called when the user clicks on the list item. */
 
 const llamadaFinal = document.getElementById('padre').addEventListener('click', (e)=> {
-    const buttons = document.getElementById('buttons')
-    let content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi') 
+    const buttons = document.getElementById('buttons');
+    let content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
 
 
-    document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto')
-    document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono')
-    document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle')
-    uiFinish.style.display = 'flex'
-    uiList.style.display = 'none'
-    buttons.style.display = 'flex'
+    document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
+    document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');
+    document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle');
+    uiFinish.style.display = 'flex';
+    uiList.style.display = 'none';
+    buttons.style.display = 'flex';
     content_ForwardListUi_to_MainUi.style.display = 'flex';
+    div_btn_foward.style.display = 'none';
 
     content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-    uiFinish.style.display = 'none'
-    uiList.style.display = 'flex'
+    div_btn_foward.style.display = 'flex';
+    uiFinish.style.display = 'none';
+    uiList.style.display = 'flex';
 
     })
 
