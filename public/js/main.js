@@ -277,7 +277,9 @@ const deleted = (productId='')=>{
 deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
-  
+
+console.log(filterDataParse)
+
 notification(messageDelete,'delete_ok')
 
 loadDOMList()
@@ -292,11 +294,21 @@ loadDOMList()
 
     //listener of btn Edit
 
-const btn_Edit = document.querySelector('#btn_edit').addEventListener('click', ()=>{
     //******* Call modal edit *********/ 
+const btn_Edit = document.querySelector('#btn_edit')
+btn_Edit.addEventListener('click', ()=>{
 
-const editElement = (element)=>{
     const modalEdit = document.querySelector('#modalEdit')
+    const data_Id_Btn_Edit = btn_Edit.getAttribute('data-id')
+    
+    const id_Filter = (editProductId ='')=>{
+        dataStorageParce = dataStorageParce.filter(data=>{
+            return data.id === editProductId
+        })
+        
+    }
+    id_Filter(data_Id_Btn_Edit)
+    const editElement = (element)=>{
     let modelModalEdit = ''
     element.forEach(item=>{
         modelModalEdit=
@@ -322,14 +334,13 @@ const editElement = (element)=>{
         <textarea class="form-control2" id="editDetail" rows="3" maxlength="20" required="required">${item.textArea}</textarea>
     </div>
     
-        `
-        console.log(element);
+    `
     })
-    modalEdit.innerHTML=modelModalEdit
+    modalEdit.innerHTML=modelModalEdit;
 
     }
 //************----------------------------------*************/
-    editElement(JSON.parse(localStorage.getItem('lists')))
+    editElement(dataStorageParce)
 })
 
 const saveEditBtn = document.querySelector('#saveChanges')
@@ -361,7 +372,7 @@ saveEditBtn.addEventListener('click', ()=>{
     
  
     // notification(message_Notification,'edit_color_font')
-    loadDOMList()
+    window.location.reload()
 })
 
 
@@ -384,15 +395,14 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     content_ForwardListUi_to_MainUi.style.display = 'flex';
     div_btn_foward.style.display = 'none';
 
-    content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-        window.location.reload()
-
-
-    })
-
-
+    
+    
     document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
     document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
+    
+    content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
+        window.location.reload()
+    })
 })
 
 
@@ -407,8 +417,7 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
 //Load DOM and view list
 
 const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
-    //displays
-
+    
     
     const displayListDOMLoad = ()=>
     {
