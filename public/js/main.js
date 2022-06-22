@@ -17,10 +17,12 @@ let flagUiValidate = false
 let linkListUi = document.getElementById('linkViewList')
 let optionsInUiStart = document.querySelector('#options_list')
 let div_btn_foward = document.querySelector('#div_btn_foward')
+const content_btn_add = document.querySelector ('#content_button_add')
+let padre = document.getElementById('padre');
+
 
 //Captura de datos 
 
-let padre = document.getElementById('padre');
 
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
@@ -66,8 +68,9 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
         localStorage.getItem('name');
         
     }
-
+    
     else{
+        content_btn_add.style.display='flex'
         localStorage.setItem('name', userName);
         viewNameInDom(localStorage.getItem('name'));
         uiFormLogin.style.display='none';
@@ -85,7 +88,7 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
     localStorage.removeItem('lists');
     const clearNameUser = document.getElementById('nameUserInput');
     clearNameUser.value = '';
-    window.location.reload();
+    window.location.reload()
 })
 //******************************* */
 
@@ -151,6 +154,7 @@ const notification = (message='',color='')=>{
 
     const timeDiv = ()=>setTimeout(() => section_notifications.remove(),3000)
     timeDiv()
+
     // flag===true? timeOutNotification():console.log('error');
 }
     
@@ -162,40 +166,42 @@ const notification = (message='',color='')=>{
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
     const saveInfo = ()=>{
         //input
-             const messageNotification = 'Save data OK!'
-             const inputProducto = document.getElementById('inputalimento').value;
+            const messageNotification = 'Save data OK!'
+            const inputProducto = document.getElementById('inputalimento').value;
              //seleccion icono
-             const seleccion = document.getElementById('seleccionicono').value;
+            const seleccion = document.getElementById('seleccionicono').value;
              //text area
-             const textArea = document.getElementById('detalle').value;
-             const id =  crypto.randomUUID().slice(4,13)
-             const listProducts= {
-                 product:inputProducto,
-                 select:seleccion,
-                 textArea:textArea,
-                 id:id
-             }
+            const textArea = document.getElementById('detalle').value;
+            const id =  crypto.randomUUID().slice(4,13)
+            const listProducts= {
+                product:inputProducto,
+                select:seleccion,
+                textArea:textArea,
+                id:id
+            }
              
             if (listProducts.product && listProducts.select && listProducts.textArea !==''){
-             saveDataLocalStorage(listProducts)
-             notification(messageNotification,'save_ok')
+                saveDataLocalStorage(listProducts)
+                notification(messageNotification,'save_ok')
             } 
              else{
-                 console.log('list error')
+                console.log('list error')
              }
      
             //reset modal
-             document.getElementById('inputalimento').value = "";
-             document.getElementById('seleccionicono').value = "";
-             document.getElementById('detalle').value = "";
-         }
+            document.getElementById('inputalimento').value = "";
+            document.getElementById('seleccionicono').value = "";
+            document.getElementById('detalle').value = "";
+        }
      
-    saveInfo();    
+    saveInfo();
+    window.location.reload()    
 
     //displays
     uiStart.style.display = 'none'
     uiList.style.display = 'flex'
-    uiFinish.style.display = 'none'   
+    uiFinish.style.display = 'none' 
+    div_btn_foward.style.display='flex'  
 })
 
 
@@ -239,15 +245,14 @@ linkListUi.addEventListener('click',()=>{
     div_btn_foward.style.display='flex'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
+
     })
 
 
 //********************************/
 
 
-// btnForwardListUi_to_MainUi.addEventListener('click',()=>{
 
-// })
 
 
 //**************** Delete Element in LocalStorage */
@@ -272,14 +277,11 @@ const deleted = (productId='')=>{
 deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
-
-    //displays
-    uiStart.style.display = 'none'
-    uiList.style.display = 'flex'
-    uiFinish.style.display = 'none'   
-
+  
 notification(messageDelete,'delete_ok')
-// location.reload()
+
+loadDOMList()
+
 })
 
 
@@ -321,6 +323,7 @@ const editElement = (element)=>{
     </div>
     
         `
+        console.log(element);
     })
     modalEdit.innerHTML=modelModalEdit
 
@@ -356,13 +359,10 @@ saveEditBtn.addEventListener('click', ()=>{
     localStorage.setItem('lists', JSON.stringify(dataStorage))
     myModal.hide()
     
-    //displays
-    uiStart.style.display = 'none'
-    uiList.style.display = 'flex'
-    uiFinish.style.display = 'none'  
-    notification(message_Notification,'edit_color_font')
-
-    })
+ 
+    // notification(message_Notification,'edit_color_font')
+    loadDOMList()
+})
 
 
 
@@ -385,9 +385,8 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     div_btn_foward.style.display = 'none';
 
     content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-    div_btn_foward.style.display = 'flex';
-    uiFinish.style.display = 'none';
-    uiList.style.display = 'flex';
+        window.location.reload()
+
 
     })
 
@@ -400,8 +399,36 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
 /* This is a function that is called when the user clicks on the button to return to the main screen. */
 const forwardButton = document.querySelector('#forwardButton').addEventListener('click', ()=>{
     uiStart.style.display = 'flex'
+    content_btn_add.style.display = 'flex'
     uiList.style.display = 'none'
-    location.reload()
+    div_btn_foward.style.display='none'
 })
 
-//create validations
+//Load DOM and view list
+
+const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
+    //displays
+
+    
+    const displayListDOMLoad = ()=>
+    {
+
+        uiStart.style.display = 'none';
+        uiList.style.display = 'flex'
+        uiFinish.style.display = 'none' 
+        div_btn_foward.style.display='flex'
+        viewListHTML(dataStorageParce)
+    }
+    const displayStartDOMLoad = ()=>{
+        uiStart.style.display = 'flex';
+        content_btn_add.style.display = 'flex'
+    }
+    
+    
+        dataStorageParce===null || dataStorageParce.length ===0? displayStartDOMLoad():displayListDOMLoad();
+    
+    
+
+    
+});
+loadDOMList()
