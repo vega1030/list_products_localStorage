@@ -52,13 +52,45 @@
 
     </header>
     <section class="mainSection">
-        <!--Interfaz 1-->
-    
+
+        <div class="form_ui_desktop">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Agrega los productos</h5>
+            </div>
+            <div class="modal-body">
+                <!--Inputs del modal-->
+                <div class="mb-3">
+                    <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
+                    <input type="text" class="form-control" id="inputalimento"
+                        placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
+                </div>
+                <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
+                <select class="form-select" aria-label="Default select example" id="seleccionicono">
+                    <option selected>Elegi la categoria</option>
+                    <option value="img/comidita.svg">Comidita</option>
+                    <option value="img/electronica.svg">Electronica</option>
+                    <option value="img/ferreteria2.svg">Ferreteria</option>
+                    <option value="img/limpieza.svg">Limpieza</option>
+                    <option value="img/mascota.svg">Mascotas</option>
+                    <option value="img/perfumeria.svg">Perfumeria</option>
+                    <option value="img/varios.svg">Varios</option>
+                </select>
+                <div class="mb-3">
+                    <label for="detalle" class="form-label">Detalles que quieras recordar</label>
+                    <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn2  btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
+                <button type="button" class="btn1  btn-primary" id="btnguardar">Agregar</button>
+            </div>
+        </div>
+
             <!-- *******LOGIN FORM************ -->
 
 
     <section class="form_login" id="formLogin">
-        <div class="content_input" id="content_input">
+        <div class="content_input_style" id="content_input">
             <input name = 'resetform'class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput">
             <button type="button" class="btn1_login btn-primary" id="sendNameUser">ingresar</button>
         </div>
@@ -69,7 +101,12 @@
             
 
             <!-- *********Notifications********** --> 
+            <section class="notifications" id="content_notifications">
+                
+
             
+            </section>
+
 
             <!-- ******************* -->
 
@@ -77,19 +114,19 @@
             
             <!-- *********UI Main********** -->
 
-        <section class="section_contenido1" id="interfaz1">
-            <div id="contentEmptyList" class="content1">
-                <section class="sectionNoNameUser" id="sectionWelcome">
-                    
-                    
-                </section>
+        <section class="section_contenido1" id="interfaz1" >
+            <div id="contentNavigate" class="content1">
                 
-            <!-- ******************* -->
-
-                <!-- *********UI LIST AND USER NAME********** -->
+                <!-- *********USER NAME********** -->
 
                 <section class="sectionNameUser" id="sectionNameUser">   
+                
+                            <!-- Template at main.js -->
+
                 </section>
+                
+                <!-- ***************************** -->
+
                 <div class="options_list" id="options_list">        
                     <p>Your list</p>
                     <div class="btns-options">
@@ -162,11 +199,6 @@
             <ul class="list-group ul_list_products" id="padre">
                 
             </ul>
-            <section class="notifications" id="content_notifications">
-                
-          
-            
-            </section>
         </div>
 
             <!-- *********************** -->

@@ -10,14 +10,14 @@ var myModal = new bootstrap.Modal(
 let uiStart = document.getElementById('interfaz1');
 let uiList = document.getElementById('interfazlistado');
 let uiFinish = document.getElementById('pantallafinal');
-let uiFormLogin = document.querySelector('#formLogin')
-let uiWelcome = document.querySelector ('#contentEmptyList')
+const uiFormLogin = document.querySelector('#formLogin')
+let uiWelcome = document.querySelector ('#contentNavigate')
 let contentModelNameUser = document.getElementById('sectionNameUser');
-let flagUiValidate = false
 let linkListUi = document.getElementById('linkViewList')
 let optionsInUiStart = document.querySelector('#options_list')
 let div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
+const section_notifications = document.querySelector('#content_notifications')
 let padre = document.getElementById('padre');
 
 
@@ -32,28 +32,18 @@ let padre = document.getElementById('padre');
  */
 
 const viewNameInDom = (nameDom='')=>{
-
-    const contentModelWelcomeNoName = document.getElementById('sectionWelcome');
   
     //html with user name
     const modelUserName = 
-
     `            
     <main class="welcomeUser" id="welcomeUser">
         <h1>Welcome</h1>
         <h2>${nameDom}</h2>
     </main>
     `
-    const contentUserNameSend = document.getElementById('content_input');
 
-    if (nameDom!==null){
-        contentModelNameUser.innerHTML=modelUserName;
-        contentModelWelcomeNoName.style.display='none';
-        contentUserNameSend.style.display = 'none';
-        uiWelcome.style.display = 'flex'
-        flagUiValidate = true
-        uiFormLogin.style.display = 'none'
-    }
+    contentModelNameUser.innerHTML=modelUserName;
+
 }
 
 /* This is a function that is called when the user clicks on the button to save the name. */
@@ -61,12 +51,11 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
     const userName = document.getElementById('nameUserInput').value;
     //validation of name and view in HTML5
 
-    if (userName === '' &&localStorage.getItem('name') === null) {
-        alert('Complete with your Name');
-        uiFormLogin.style.display='flex';
-        uiStart.style.display = 'none'
-        localStorage.getItem('name');
-        
+    if (userName === '') {
+
+        notification('Complete with your Name','error_notifications');
+        section_notifications.style.display='flex'
+    
     }
     
     else{
@@ -74,15 +63,16 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
         localStorage.setItem('name', userName);
         viewNameInDom(localStorage.getItem('name'));
         uiFormLogin.style.display='none';
-        uiWelcome.style.display = 'flex';
-        uiStart.style.display = 'flex';
         contentModelNameUser.style.display = 'flex';
+        uiStart.style.display = 'flex'
     }
+
+ 
         
     })
 //************************ */
 
-//************* Delete user at localStorage */
+//************* Delete localStorage */
 const btnclearStorage = document.querySelector('#clearStorage').addEventListener('click',()=>{
     localStorage.removeItem('name');
     localStorage.removeItem('lists');
@@ -97,7 +87,6 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
 
 window.addEventListener('DOMContentLoaded',()=>{
     viewNameInDom(localStorage.getItem('name'))
-    flagUiValidate === false? uiStart.style.display = 'none':uiStart.style.display = 'display'
     
     
 });
@@ -127,7 +116,7 @@ const saveDataLocalStorage = (data='') => {
         localStorage.setItem('lists', JSON.stringify(dataLocalStorage))
         const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
         viewListHTML(dataStorageParce)
-
+        
 
     }
 }
@@ -140,7 +129,6 @@ let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
  * The function creates a notification div with a message and displays it for 3 seconds
  */
 const notification = (message='',color='')=>{
-    const section_notifications = document.querySelector('#content_notifications')
     let modelNotificationDOM = 
     
     `<div class="content_notification" id="notification_save_data">
@@ -150,12 +138,10 @@ const notification = (message='',color='')=>{
     </div>                
     `    
     section_notifications.innerHTML=modelNotificationDOM
-    section_notifications.style.display='flex'
 
     const timeDiv = ()=>setTimeout(() => section_notifications.remove(),3000)
     timeDiv()
 
-    // flag===true? timeOutNotification():console.log('error');
 }
     
 
@@ -201,7 +187,8 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     uiStart.style.display = 'none'
     uiList.style.display = 'flex'
     uiFinish.style.display = 'none' 
-    div_btn_foward.style.display='flex'  
+    div_btn_foward.style.display='flex' 
+    uiFormLogin.style.display = 'none' 
 })
 
 
@@ -421,7 +408,7 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     
     const displayListDOMLoad = ()=>
     {
-
+        uiFormLogin.style.display='none'
         uiStart.style.display = 'none';
         uiList.style.display = 'flex'
         uiFinish.style.display = 'none' 
@@ -429,8 +416,8 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
         viewListHTML(dataStorageParce)
     }
     const displayStartDOMLoad = ()=>{
-        uiStart.style.display = 'flex';
-        content_btn_add.style.display = 'flex'
+        uiStart.style.display = 'none';
+        content_btn_add.style.display = 'none'
     }
     
     
@@ -441,3 +428,6 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     
 });
 loadDOMList()
+
+console.log("Available Height: " + window.screen.availHeight);
+console.log("Available Width: " + window.screen.availWidth);    
