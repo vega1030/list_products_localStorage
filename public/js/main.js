@@ -17,7 +17,6 @@ let linkListUi = document.getElementById('linkViewList')
 let optionsInUiStart = document.querySelector('#options_list')
 let div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
-const section_notifications = document.querySelector('#content_notifications')
 let padre = document.getElementById('padre');
 
 
@@ -116,6 +115,8 @@ const saveDataLocalStorage = (data='') => {
         localStorage.setItem('lists', JSON.stringify(dataLocalStorage))
         const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
         viewListHTML(dataStorageParce)
+        const messageNotification = 'Save data OK!'
+        notification(messageNotification,'save_ok')
         
 
     }
@@ -129,6 +130,7 @@ let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
  * The function creates a notification div with a message and displays it for 3 seconds
  */
 const notification = (message='',color='')=>{
+    const section_notifications = document.querySelector('#content_notifications')
     let modelNotificationDOM = 
     
     `<div class="content_notification" id="notification_save_data">
@@ -138,11 +140,16 @@ const notification = (message='',color='')=>{
     </div>                
     `    
     section_notifications.innerHTML=modelNotificationDOM
+    section_notifications.style.display='flex'
+    const timeDiv = ()=>{
+        setTimeout(() => section_notifications.remove(),5000)
+        // setTimeout(()=>window.location.reload(),6000)
+    }
+        timeDiv()
+    }
+        
 
-    const timeDiv = ()=>setTimeout(() => section_notifications.remove(),3000)
-    timeDiv()
 
-}
     
 
 /*******************---------------------------------***************** */
@@ -152,7 +159,6 @@ const notification = (message='',color='')=>{
 const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
     const saveInfo = ()=>{
         //input
-            const messageNotification = 'Save data OK!'
             const inputProducto = document.getElementById('inputalimento').value;
              //seleccion icono
             const seleccion = document.getElementById('seleccionicono').value;
@@ -168,10 +174,11 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
              
             if (listProducts.product && listProducts.select && listProducts.textArea !==''){
                 saveDataLocalStorage(listProducts)
-                notification(messageNotification,'save_ok')
             } 
              else{
-                console.log('list error')
+                const messageNotification = "Saven't list"
+                notification(messageNotification,'save_ok')
+            
              }
      
             //reset modal
@@ -181,7 +188,6 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
         }
      
     saveInfo();
-    window.location.reload()    
 
     //displays
     uiStart.style.display = 'none'
@@ -265,12 +271,10 @@ deleted(data_Id_Btn)
 const filterDataParse = dataStorageParce
 localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
-console.log(filterDataParse)
 
 notification(messageDelete,'delete_ok')
 
-loadDOMList()
-
+setTimeout(() => window.location.reload(),5000)
 })
 
 
@@ -355,11 +359,11 @@ saveEditBtn.addEventListener('click', ()=>{
     dataStorage.splice(newUpdate,1,editListProducts)
 
     localStorage.setItem('lists', JSON.stringify(dataStorage))
+
+    notification(message_Notification,'edit_ok')
+
+    setTimeout(() => window.location.reload(),5000)
     myModal.hide()
-    
- 
-    // notification(message_Notification,'edit_color_font')
-    window.location.reload()
 })
 
 

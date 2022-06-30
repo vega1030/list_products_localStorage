@@ -7,17 +7,41 @@
     --color-list:rgb(109, 166, 148);
     --color-div-notifications:rgb(222, 235, 225,1);
     --color-font-edit:rgb(109, 166, 148);
-
+    --delete-color-font: rgb(104, 60, 88);
     --font-type:'Fira Sans', sans-serif;
-
 }
+
 body {
-    background-color: var(--color-2)
+    background-color: var(--color-2);
 }
 
 .form_ui_desktop{
     display: none;
 }
+
+
+.save_ok{
+    color: rgb(0, 128, 0, 0.7);
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.delete_ok{
+    color: var(--delete-color-font);
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.edit_ok{
+    color: rgb(3, 80, 111);
+    font-weight: bold;
+    font-size: 100%;
+}
+
+#notification_delete_data{
+    display: none;
+}
+
 /************ Mobile *******/
 
 @media only screen and (max-width: 600px){
@@ -70,7 +94,7 @@ body {
     .content_btn_foward{
         width: 95%;
         display:none;
-        height:13%;
+        height:30%;
     }
 
   
@@ -169,6 +193,7 @@ body {
 
     .ul_list_products{
         margin-top: 5%;
+        position: absolute;
     }
 
     .btn_edit, .btn_delete{
@@ -228,8 +253,8 @@ body {
             }
         #forwardButton{
             width:13%;
-            height:60%;
-            margin: 1% 0 0 1%;
+            height:42%;
+            margin: 11% 0 0 1%;
         }    
 
         
@@ -378,49 +403,26 @@ body {
     }
 
     .notifications{
-        display: none;
+        display: block;
         position: absolute;
-        width:100%;
+        width:60%;
         height:10vh;
         justify-content: center;
         align-items: center;
+        top: 16%;
     }
 
        .content_notification{
-        display:hidden;
+        display:flex;
         background-color: var(--color-div-notifications);
         width: 70%;
         height:100%;
         border-radius:5%;
-        display:flex;
         justify-content: center;
         align-items: center;
         box-shadow: 2px 10px 8px -5px rgba(0,0,0,0.87);
         -webkit-box-shadow: 2px 10px 8px -5px rgba(0,0,0,0.87);
         -moz-box-shadow: 2px 10px 8px -5px rgba(0,0,0,0.87);    }
-
-    .save_ok, .delete_ok{
-        color: rgb(0, 128, 0, 0.7);
-        font-weight: bold;
-        font-size: 100%;
-    }
-
-    .error_notifications{
-        color: red;
-        font-weight:800;
-        font-size: 100%;
-
-    }
-
-    #notification_save_data{
-        display: flex;
-    } 
-    #notification_delete_data{
-        display: none;
-    }
-
-
-
 }
 
 /* ******* */
