@@ -46,7 +46,7 @@
 <body>
     <!--Header-->
     <header class="header">
-        <div class="boxtitle" id="headerTitle">
+        <div class="boxtitle">
             <h1 id="title1" class="title1"><strong> Your list <span id="defaultHeader">shop</span> <span id="nameUserInHeader"></span> </strong></h1>
         </div>
 
@@ -140,13 +140,14 @@
 
             <!-- Modal -->
             <div class="contenedor" id="content_button_add">
+                
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                 id="btncarga1">
                 <strong>ADD</strong>
             </button>
             </div>
 
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            <div class="modal fade" id="staticBackdrop" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -158,16 +159,16 @@
                             <div class="mb-3">
                                 <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
                                 <input type="text" class="form-control" id="inputalimento"
-                                    placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
+                                    placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required="required">
                             </div>
                             <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
                             <select class="form-select" aria-label="Default select example" id="seleccionicono">
                                 <option selected>Elegi la categoria</option>
-                                <option value="img/comidita.svg">Comidita</option>
+                                <option value="img/comidita.svg">Comida</option>
                                 <option value="img/electronica.svg">Electronica</option>
                                 <option value="img/ferreteria2.svg">Ferreteria</option>
                                 <option value="img/limpieza.svg">Limpieza</option>
-                                <option value="img/mascota.svg">Mascotas</option>
+                                <option value="img/mascota.svg">Animales</option>
                                 <option value="img/perfumeria.svg">Perfumeria</option>
                                 <option value="img/varios.svg">Varios</option>
                             </select>
@@ -178,7 +179,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn2  btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
-                            <button type="button" class="btn1  btn-primary" id="btnguardar">Agregar</button>
+                            <button type="button" class="btn1  btn-primary" id="btnguardar" data-bs-dismiss="modal">Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -226,7 +227,8 @@
         <!-- *********************** -->
 
     <!--************Modal Edit*****************-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -238,7 +240,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+              <button type="button" class="btn btn-primary" id="saveChanges" data-bs-dismiss="modal">Save changes</button>
             </div>
           </div>
         </div>

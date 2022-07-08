@@ -1,11 +1,3 @@
-
-//Clase modal
-var myModal = new bootstrap.Modal(
-    document.getElementById('exampleModal'),{
-        backdrop:'static'
-    })
-
-
 //Captura pantallas
 let uiStart = document.getElementById('interfaz1');
 let uiList = document.getElementById('interfazlistado');
@@ -36,13 +28,11 @@ const viewNameInDom = (nameDom='')=>{
     const modelUserName = 
     `            
     <main class="welcomeUser" id="welcomeUser">
-        <h1>Welcome</h1>
-        <h2>${nameDom}</h2>
+        <h1>Hola</h1>
+        <h2>${nameDom}!!</h2>
     </main>
     `
-
     contentModelNameUser.innerHTML=modelUserName;
-
 }
 
 /* This is a function that is called when the user clicks on the button to save the name. */
@@ -143,15 +133,9 @@ const notification = (message='',color='')=>{
     section_notifications.style.display='flex'
     const timeDiv = ()=>{
         setTimeout(() => section_notifications.remove(),5000)
-        // setTimeout(()=>window.location.reload(),6000)
     }
         timeDiv()
     }
-        
-
-
-    
-
 /*******************---------------------------------***************** */
 
 
@@ -171,15 +155,15 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
                 textArea:textArea,
                 id:id
             }
-             
+            
             if (listProducts.product && listProducts.select && listProducts.textArea !==''){
                 saveDataLocalStorage(listProducts)
             } 
-             else{
+            else{
                 const messageNotification = "Saven't list"
                 notification(messageNotification,'save_ok')
             
-             }
+            }
      
             //reset modal
             document.getElementById('inputalimento').value = "";
@@ -195,6 +179,8 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
     uiFinish.style.display = 'none' 
     div_btn_foward.style.display='flex' 
     uiFormLogin.style.display = 'none' 
+    // modal.hide();
+
 })
 
 
@@ -363,7 +349,6 @@ saveEditBtn.addEventListener('click', ()=>{
     notification(message_Notification,'edit_ok')
 
     setTimeout(() => window.location.reload(),5000)
-    myModal.hide()
 })
 
 
@@ -372,7 +357,7 @@ saveEditBtn.addEventListener('click', ()=>{
 
 /* This is a function that is called when the user clicks on the list item. */
 
-const llamadaFinal = document.getElementById('padre').addEventListener('click', (e)=> {
+const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
     const buttons = document.getElementById('buttons');
     let content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
 
@@ -392,7 +377,10 @@ const llamadaFinal = document.getElementById('padre').addEventListener('click', 
     document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
     
     content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-        window.location.reload()
+        uiFinish.style.display = 'none';
+        uiList.style.display = 'flex'
+        div_btn_foward.style.display='flex'
+
     })
 })
 
@@ -403,6 +391,9 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
     content_btn_add.style.display = 'flex'
     uiList.style.display = 'none'
     div_btn_foward.style.display='none'
+    // modal.hide();
+    window.location.reload();
+
 })
 
 //Load DOM and view list
@@ -410,13 +401,15 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
 const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     
     
-    const displayListDOMLoad = ()=>
+    const displayOptionsDOMLoad = ()=>
     {
         uiFormLogin.style.display='none'
-        uiStart.style.display = 'none';
-        uiList.style.display = 'flex'
+        uiStart.style.display = 'flex';
+        uiList.style.display = 'none'
         uiFinish.style.display = 'none' 
-        div_btn_foward.style.display='flex'
+        div_btn_foward.style.display='none'
+        content_btn_add.style.display = 'flex'
+
         viewListHTML(dataStorageParce)
     }
     const displayStartDOMLoad = ()=>{
@@ -425,7 +418,7 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     }
     
     
-        dataStorageParce===null || dataStorageParce.length ===0? displayStartDOMLoad():displayListDOMLoad();
+        dataStorageParce===null || dataStorageParce.length ===0? displayStartDOMLoad():displayOptionsDOMLoad();
     
     
 
@@ -433,5 +426,3 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
 });
 loadDOMList()
 
-console.log("Available Height: " + window.screen.availHeight);
-console.log("Available Width: " + window.screen.availWidth);    
