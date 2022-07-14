@@ -156,29 +156,31 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
                 id:id
             }
             
-            if (listProducts.product && listProducts.select && listProducts.textArea !==''){
+            if (listProducts.product && listProducts.select !==''){
                 saveDataLocalStorage(listProducts)
+                            //reset modal
+                document.getElementById('inputalimento').value = "";
+                document.getElementById('seleccionicono').value = "";
+                document.getElementById('detalle').value = "";
+                notification('save ok')
+                //displays
+                uiStart.style.display = 'none'
+                uiList.style.display = 'flex'
+                uiFinish.style.display = 'none' 
+                div_btn_foward.style.display='flex' 
+                uiFormLogin.style.display = 'none' 
             } 
             else{
                 const messageNotification = "Saven't list"
-                notification(messageNotification,'save_ok')
-            
+                notification(messageNotification,'notsave')
             }
      
-            //reset modal
-            document.getElementById('inputalimento').value = "";
-            document.getElementById('seleccionicono').value = "";
-            document.getElementById('detalle').value = "";
+
         }
      
     saveInfo();
 
-    //displays
-    uiStart.style.display = 'none'
-    uiList.style.display = 'flex'
-    uiFinish.style.display = 'none' 
-    div_btn_foward.style.display='flex' 
-    uiFormLogin.style.display = 'none' 
+
     // modal.hide();
 
 })

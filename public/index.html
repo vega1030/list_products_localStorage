@@ -47,7 +47,7 @@
     <!--Header-->
     <header class="header">
         <div class="boxtitle">
-            <h1 id="title1" class="title1"><strong> Your list <span id="defaultHeader">shop</span> <span id="nameUserInHeader"></span> </strong></h1>
+            <h1 id="title1" class="title1"><strong> Your list shop </strong></h1>
         </div>
 
     </header>
@@ -161,8 +161,9 @@
                                 <input type="text" class="form-control" id="inputalimento"
                                     placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required="required">
                             </div>
+                            <form action="">
                             <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
-                            <select class="form-select" aria-label="Default select example" id="seleccionicono">
+                            <select name = 'seleccionicono'class="form-select" aria-label="Default select example" id="seleccionicono" required>
                                 <option selected>Elegi la categoria</option>
                                 <option value="img/comidita.svg">Comida</option>
                                 <option value="img/electronica.svg">Electronica</option>
@@ -172,15 +173,17 @@
                                 <option value="img/perfumeria.svg">Perfumeria</option>
                                 <option value="img/varios.svg">Varios</option>
                             </select>
+                       
                             <div class="mb-3">
                                 <label for="detalle" class="form-label">Detalles que quieras recordar</label>
                                 <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn2  btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
-                            <button type="button" class="btn1  btn-primary" id="btnguardar" data-bs-dismiss="modal">Agregar</button>
+                            <button type="button" class="btn2  btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button><br>
+                            <button type="button" class="btn1  btn-primary btn-ok-modal" id="btnguardar" data-bs-dismiss="modal" disabled>OK</button>
                         </div>
+                    </form> 
                     </div>
                 </div>
             </div>
@@ -248,8 +251,8 @@
                 
         <!-- *********************** -->
 
-        <footer>
-        </footer>
+        <!-- <footer>
+        </footer> -->
     </section>
  <!--Section Desktop Ui-->
 
