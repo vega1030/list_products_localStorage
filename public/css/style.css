@@ -13,6 +13,12 @@
 
 /* Global styles */
 
+.text_direction_start{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .btn-close-modal{
     background: #9baebc;
     background: linear-gradient(0deg, #9baebc 36%, #fff 100%);        
@@ -196,7 +202,7 @@ body {
     .content_btn_foward{
         width: 95%;
         display:none;
-        height:30%;
+        height:12vh;
     }
 
   
@@ -356,8 +362,8 @@ body {
             }
         #forwardButton{
             width:13%;
-            height:42%;
-            margin: 11% 0 0 1%;
+            height:37%;
+            margin: 5% 0 0 1%;
         }    
 
 
@@ -385,14 +391,16 @@ body {
 
     .content_forwardButtonToListUi{
         display: none;
-        width: 84%;
+        width: 95%;
         height:12vh;
 
     }
 
     #forwardButtonToListUi{
-        width: 13%;
-        height:37%;
+        
+            width:13%;
+            height:37%;
+          
     }
 
     .contenido4{

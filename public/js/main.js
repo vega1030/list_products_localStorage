@@ -36,7 +36,7 @@ const viewNameInDom = (nameDom='')=>{
 }
 
 /* This is a function that is called when the user clicks on the button to save the name. */
-const btnName = document.getElementById('sendNameUser').addEventListener('click', ()=>{
+const btnName = document.querySelector('#form_name').addEventListener('submit', (e)=>{
     const userName = document.getElementById('nameUserInput').value;
     //validation of name and view in HTML5
 
@@ -55,9 +55,7 @@ const btnName = document.getElementById('sendNameUser').addEventListener('click'
         contentModelNameUser.style.display = 'flex';
         uiStart.style.display = 'flex'
     }
-
- 
-        
+    e.preventDefault()
     })
 //************************ */
 
@@ -140,7 +138,14 @@ const notification = (message='',color='')=>{
 
 
 
-const buttonGuardar = document.getElementById('btnguardar').addEventListener('click', ()=> {
+
+
+// const form_Test = document.querySelector('#form_note').addEventListener('submit',(e)=>{
+//     console.log('ok');
+// })
+
+const buttonGuardar = document.querySelector('#form_note').addEventListener('click', (e)=> {
+
     const saveInfo = ()=>{
         //input
             const inputProducto = document.getElementById('inputalimento').value;
@@ -169,24 +174,15 @@ const buttonGuardar = document.getElementById('btnguardar').addEventListener('cl
                 uiFinish.style.display = 'none' 
                 div_btn_foward.style.display='flex' 
                 uiFormLogin.style.display = 'none' 
-            } 
-            else{
-                const messageNotification = "Saven't list"
-                notification(messageNotification,'notsave')
-            }
-     
 
+            } 
         }
-     
+        
     saveInfo();
 
-
-    // modal.hide();
-
+    e.preventDefault()
 })
 
-
-    
 
 /**
  * It takes an array of objects as an argument, and returns a string of HTML
