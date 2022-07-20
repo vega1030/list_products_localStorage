@@ -140,12 +140,11 @@ const notification = (message='',color='')=>{
 
 
 
-// const form_Test = document.querySelector('#form_note').addEventListener('submit',(e)=>{
-//     console.log('ok');
-// })
+const saveInfoForm = document.querySelector('#form_note').addEventListener('click', (e)=> {
 
-const buttonGuardar = document.querySelector('#form_note').addEventListener('click', (e)=> {
-
+/**
+ * It saves the information in the local storage
+ */
     const saveInfo = ()=>{
         //input
             const inputProducto = document.getElementById('inputalimento').value;

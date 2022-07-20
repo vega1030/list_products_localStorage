@@ -305,6 +305,9 @@ body {
     .ul_list_products{
         margin-top: 5%;
         position: absolute;
+        overflow:hidden; 
+        overflow-y:scroll;
+        width: 67%;
     }
 
 
