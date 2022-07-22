@@ -1,15 +1,15 @@
 //Captura pantallas
-let uiStart = document.getElementById('interfaz1');
-let uiList = document.getElementById('interfazlistado');
-let uiFinish = document.getElementById('pantallafinal');
+const uiStart = document.getElementById('interfaz1');
+const uiList = document.getElementById('interfazlistado');
+const uiFinish = document.getElementById('pantallafinal');
 const uiFormLogin = document.querySelector('#formLogin')
-let uiWelcome = document.querySelector ('#contentNavigate')
-let contentModelNameUser = document.getElementById('sectionNameUser');
-let linkListUi = document.getElementById('linkViewList')
-let optionsInUiStart = document.querySelector('#options_list')
-let div_btn_foward = document.querySelector('#div_btn_foward')
+const uiWelcome = document.querySelector ('#contentNavigate')
+const contentModelNameUser = document.getElementById('sectionNameUser');
+const linkListUi = document.getElementById('linkViewList')
+const optionsInUiStart = document.querySelector('#options_list')
+const div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
-let padre = document.getElementById('padre');
+const padre = document.getElementById('padre');
 
 
 //Captura de datos 
@@ -23,7 +23,7 @@ let padre = document.getElementById('padre');
  */
 
 const viewNameInDom = (nameDom='')=>{
-  
+
     //html with user name
     const modelUserName = 
     `            
@@ -136,9 +136,9 @@ const notification = (message='',color='')=>{
     }
 /*******************---------------------------------***************** */
 
-
-
-
+document.querySelector('#btncarga1').addEventListener('click',()=>{
+    document.querySelector('#inputalimento').focus();
+})
 
 const saveInfoForm = document.querySelector('#form_note').addEventListener('click', (e)=> {
 
@@ -161,8 +161,7 @@ const saveInfoForm = document.querySelector('#form_note').addEventListener('clic
             }
             
             if (listProducts.product && listProducts.select !==''){
-                saveDataLocalStorage(listProducts)
-                            //reset modal
+                //reset modal
                 document.getElementById('inputalimento').value = "";
                 document.getElementById('seleccionicono').value = "";
                 document.getElementById('detalle').value = "";
@@ -173,12 +172,11 @@ const saveInfoForm = document.querySelector('#form_note').addEventListener('clic
                 uiFinish.style.display = 'none' 
                 div_btn_foward.style.display='flex' 
                 uiFormLogin.style.display = 'none' 
+                return saveDataLocalStorage(listProducts)
 
             } 
         }
-        
-    saveInfo();
-
+        saveInfo()
     e.preventDefault()
 })
 
@@ -200,7 +198,9 @@ const viewListHTML = (data='',flag=null) =>{
             </li>`
             padre.innerHTML = modeloLista
             })
-
+        const itemsList = document.querySelectorAll(".list_products")
+        const lastItem = itemsList[itemsList.length-1]
+        lastItem.scrollIntoView()
         }
     }
 
@@ -272,7 +272,7 @@ setTimeout(() => window.location.reload(),5000)
 const btn_Edit = document.querySelector('#btn_edit')
 btn_Edit.addEventListener('click', ()=>{
 
-    const modalEdit = document.querySelector('#modalEdit')
+    const contentModalEdit = document.querySelector('#form_note_edit')
     const data_Id_Btn_Edit = btn_Edit.getAttribute('data-id')
     
     const id_Filter = (editProductId ='')=>{
@@ -281,44 +281,64 @@ btn_Edit.addEventListener('click', ()=>{
         })
         
     }
+
+  
+
     id_Filter(data_Id_Btn_Edit)
     const editElement = (element)=>{
     let modelModalEdit = ''
     element.forEach(item=>{
         modelModalEdit=
         `
-        <div class="mb-3" id="inputContent">
-        <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
+        <div class="col-md-4 text_direction_start">
+        <label for="editInputProduct" class="form-label">Name of the product</label>
         <input type="text" class="form-control" id="editInputProduct"
             placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product}>
+        <div class="valid-feedback">
+            Good!
+        </div>
+    <div class="invalid-feedback">
+        Please, enter the product.
     </div>
-    <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
-    <select class="form-select" aria-label="Default select example" id="editSeletIcon">
-        <option selected>Elegi la categoria</option>
-        <option value="img/comidita.svg">Comidita</option>
-        <option value="img/electronica.svg">Electronica</option>
-        <option value="img/ferreteria2.svg">Ferreteria</option>
-        <option value="img/limpieza.svg">Limpieza</option>
-        <option value="img/mascota.svg">Mascotas</option>
-        <option value="img/perfumeria.svg">Perfumeria</option>
-        <option value="img/varios.svg">Varios</option>
-    </select>
-    <div class="mb-3">
-        <label for="detalle" class="form-label">Detalles que quieras recordar</label>
-        <textarea class="form-control2" id="editDetail" rows="3" maxlength="20" required="required">${item.textArea}</textarea>
     </div>
-    
+
+    <div class="col-md-3 text_direction_start">
+        <label for="seleccionicono" class="form-label">Category</label>
+        <select class="form-select" id="editSeletIcon" required>
+            <option selected disabled value="">Choose...</option>
+            <option value="img/comidita.svg">Comidita</option>
+            <option value="img/electronica.svg">Electronica</option>
+            <option value="img/ferreteria2.svg">Ferreteria</option>
+            <option value="img/limpieza.svg">Limpieza</option>
+            <option value="img/mascota.svg">Mascotas</option>
+            <option value="img/perfumeria.svg">Perfumeria</option>
+            <option value="img/varios.svg">Varios</option>
+        </select>
+
+        <div class="invalid-feedback">
+            Please, select one category.
+        </div>
+    </div>
+
+    <div class="mb-3 text_direction_start">
+    <label for="editDetail" class="form-label">Any detail?</label>
+        <textarea class="form-control is-invalid" id="editDetail" rows="3" maxlength="20" required>${item.textArea}</textarea>
+    </div>
+
+</form>
+
+
     `
     })
-    modalEdit.innerHTML=modelModalEdit;
+    contentModalEdit.innerHTML=modelModalEdit;
 
     }
 //************----------------------------------*************/
     editElement(dataStorageParce)
 })
 
-const saveEditBtn = document.querySelector('#saveChanges')
-saveEditBtn.addEventListener('click', ()=>{
+const saveEdit = document.querySelector('#form_note_edit')
+saveEdit.addEventListener('submit', ()=>{
     const message_Notification = 'Edit complete'
     const inputProduct = document.getElementById('editInputProduct').value;
     //seleccion icono
@@ -346,6 +366,7 @@ saveEditBtn.addEventListener('click', ()=>{
     notification(message_Notification,'edit_ok')
 
     setTimeout(() => window.location.reload(),5000)
+
 })
 
 

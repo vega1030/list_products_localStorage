@@ -1,0 +1,23 @@
+{
+  "name": "reto3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./public/js/main.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vega1030/list_products_localStorage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vega1030/list_products_localStorage/issues"
+  },
+  "homepage": "https://github.com/vega1030/list_products_localStorage#readme",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}

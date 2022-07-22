@@ -96,9 +96,9 @@
 
     <section class="form_login" id="formLogin">
         <div class="content_input_style" id="content_input">
-            <form action="" id="form_name">
-                <input name = 'resetform'class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput">
-                <button type="submit" class="btn1_login btn-primary" id="sendNameUser">ingresar</button>
+            <form action="" id="form_name" class="form_login_style row g-3 needs-validation was-validated">
+                <input name = 'resetform'class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput" required>
+                <button type="submit" class="btn1_login btn-primary" id="sendNameUser">Enter</button>
             </form>
         </div>
 
@@ -109,6 +109,7 @@
 
             <!-- *********Notifications********** --> 
  
+            <!-- Template at main.js -->
 
             <!-- ******************* -->
 
@@ -154,7 +155,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Agrega los productos</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add the product</h5>
                 </div>
                     <div class="modal-body">
                     
@@ -172,34 +173,34 @@
                                 
 
                                 <div class="col-md-3 text_direction_start">
-                                  <label for="seleccionicono" class="form-label">Category</label>
-                                  <select class="form-select" id="seleccionicono" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option value="img/comidita.svg">Food</option>
-                                    <option value="img/electronica.svg">Electronic</option>
-                                    <option value="img/ferreteria2.svg">Ferreteria</option>
-                                    <option value="img/limpieza.svg">Limpieza</option>
-                                    <option value="img/mascota.svg">Animales</option>
-                                    <option value="img/perfumeria.svg">Perfumeria</option>
-                                    <option value="img/varios.svg">Varios</option>
-                                      </select>
-                                  <div class="invalid-feedback">
+                                    <label for="seleccionicono" class="form-label">Category</label>
+                                    <select class="form-select" id="seleccionicono" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        <option value="img/comidita.svg">Food</option>
+                                        <option value="img/electronica.svg">Electronic</option>
+                                        <option value="img/ferreteria2.svg">Ferreteria</option>
+                                        <option value="img/limpieza.svg">Limpieza</option>
+                                        <option value="img/mascota.svg">Animales</option>
+                                        <option value="img/perfumeria.svg">Perfumeria</option>
+                                        <option value="img/varios.svg">Varios</option>
+                                    </select>
+                                <div class="invalid-feedback">
                                     Please, select one category.
-                                  </div>
                                 </div>
+                            </div>
 
                                 <div class="mb-3 text_direction_start">
                                     <label for="detalle" class="form-label">Any detail?</label>
                                     <textarea class="form-control is-invalid" id="detalle" placeholder="color black" rows="3" maxlength="20"  required></textarea>
                                     <div class="invalid-feedback">
-                                      Please enter a comment.
+                                        Please enter a comment.
                                     </div>
-                                  </div>
+                                </div>
 
-                                  <div class="col-12">
-                                      <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button>
-                                      <button class="btn1 btn btn-primary btn-ok-modal" type="submit">OK</button>
-                                    </div>
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button>
+                                    <button class="btn1 btn btn-primary btn-ok-modal" type="submit">OK</button>
+                                </div>
                                 </form>                    
                             </div>
                     </div>
@@ -259,11 +260,15 @@
             </div>
             <div class="modal-body" id="modalEdit">
                             <!--Inputs del modal-->
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" id="saveChanges" data-bs-dismiss="modal">Save changes</button>
-            </div>
+                <form class="row g-3 needs-validation was-validated" id="form_note_edit" novalidate>
+
+                    
+                </div>
+                <div class="col-12">                    
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button class="btn1 btn btn-primary btn-ok-modal" type="submit">Save changes</button>
+                </div>
+            </form>
           </div>
         </div>
       </div>
