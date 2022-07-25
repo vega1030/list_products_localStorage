@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+    <html lang="en">
 
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
@@ -58,57 +58,22 @@
                 
         </section>
 
-            <!-- <div class="form_ui_desktop">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Agrega los productos</h5>
-            </div>
-            <div class="modal-body"> -->
-                <!--Inputs del modal-->
-                <!-- <div class="mb-3">
-                    <label for="inputalimento" class="form-label">Ingresa nombre del producto</label>
-                    <input type="text" class="form-control" id="inputalimento"
-                        placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required">
-                </div>
-                <label for="seleccionicono" class="form-label">Ingresa nombre del producto</label>
-                <select class="form-select" aria-label="Default select example" id="seleccionicono">
-                    <option selected>Elegi la categoria</option>
-                    <option value="img/comidita.svg">Comidita</option>
-                    <option value="img/electronica.svg">Electronica</option>
-                    <option value="img/ferreteria2.svg">Ferreteria</option>
-                    <option value="img/limpieza.svg">Limpieza</option>
-                    <option value="img/mascota.svg">Mascotas</option>
-                    <option value="img/perfumeria.svg">Perfumeria</option>
-                    <option value="img/varios.svg">Varios</option>
-                </select>
-                <div class="mb-3">
-                    <label for="detalle" class="form-label">Detalles que quieras recordar</label>
-                    <textarea class="form-control2" id="detalle" rows="3" maxlength="20" required="required"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn2  btn-secondary" data-bs-dismiss="modal">Cerrar</button><br>
-                <button type="button" class="btn1  btn-primary" id="btnguardar">Agregar</button>
-            </div>
-        </div> -->
-
             <!-- *******LOGIN FORM************ -->
-
 
     <section class="form_login" id="formLogin">
         <div class="content_input_style" id="content_input">
             <form action="" id="form_name" class="form_login_style row g-3 needs-validation was-validated">
-                <input name = 'resetform'class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput" required>
+                <input class="form-control" type="text" placeholder="Your name is...??" aria-label="default input example" id="nameUserInput" required>
                 <button type="submit" class="btn1_login btn-primary" id="sendNameUser">Enter</button>
             </form>
         </div>
-
     </section>
 
             <!-- ******************* -->
             
 
             <!-- *********Notifications********** --> 
- 
+
             <!-- Template at main.js -->
 
             <!-- ******************* -->
@@ -118,6 +83,52 @@
             <!-- *********UI Main********** -->
 
         <section class="section_contenido1" id="interfaz1" >
+            <div class="form_desktop">
+                <form class="row g-3 needs-validation was-validated style_form_dektop" id="form_note" novalidate>
+                    <div class="col-md-4 text_direction_start style_form_dektop___content_input">
+                        <label for="inputalimento" class="form-label">Name of the product</label>
+                        <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
+                        <div class="valid-feedback">
+                            Good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please, enter the product.
+                        </div>
+                    </div>
+                        
+    
+                        <div class="col-md-3 text_direction_start style_form_dektop___content_select">
+                            <label for="seleccionicono" class="form-label">Category</label>
+                            <select class="form-select" id="seleccionicono" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option value="img/comidita.svg">Food</option>
+                                <option value="img/electronica.svg">Electronic</option>
+                                <option value="img/ferreteria2.svg">Ferreteria</option>
+                                <option value="img/limpieza.svg">Limpieza</option>
+                                <option value="img/mascota.svg">Animales</option>
+                                <option value="img/perfumeria.svg">Perfumeria</option>
+                                <option value="img/varios.svg">Varios</option>
+                            </select>
+                        <div class="invalid-feedback">
+                            Please, select one category.
+                        </div>
+                    </div>
+    
+                        <div class="mb-3 text_direction_start style_form_dektop___content_text_area">
+                            <label for="detalle" class="form-label">Any detail?</label>
+                            <textarea class="form-control is-invalid" id="detalle" placeholder="color black" rows="3" maxlength="20"  required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter a comment.
+                            </div>
+                        </div>
+    
+                        <div class="col-12 style_form_dektop___content_buttons">
+                            <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button>
+                            <button class="btn1 btn btn-primary btn-ok-modal" type="submit">OK</button>
+                        </div>
+                        </form>
+            </div>
+    
             <div id="contentNavigate" class="content1">
                 
                 <!-- *********USER NAME********** -->
@@ -142,15 +153,14 @@
 
 
             <!-- Modal -->
-            <div class="contenedor" id="content_button_add">
-                
+            <div class="contenedor" id="content_button_add" >                
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                 id="btncarga1">
-                <strong>ADD</strong>
-            </button>
-        </div>
+                    <strong>ADD</strong>
+                </button>
+            </div>
         
-        <div class="modal fade" id="staticBackdrop" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
+        <div class="modal fade modal_mobile" id="staticBackdrop" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

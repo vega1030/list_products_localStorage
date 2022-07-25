@@ -120,7 +120,6 @@ body {
   
 
     .contenedor{
-    display:none;
     width: 200px;
     height:200px;
     position: absolute;
@@ -161,6 +160,10 @@ body {
 
 .content_input_style{
     width: 70%;
+}
+
+.form_desktop{
+    display: none;
 }
 
 /************ Mobile *******/
@@ -643,19 +646,49 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
 
 @media only screen and (min-width: 1200px){
 
-    body{
-        background: var(--color-2);
-        letter-spacing: 1px;
+    *{
+        font-size:1.04em;
+        letter-spacing: 0.1em;
         font-family: var(--font-type);
     }
+
+    .form_desktop{
+        display: flex;
+        height: 100%;
+        width: 80%;
+        padding: 2%;
+    }
+
+    .text_direction_start{
+        width: 95%;
+    }
+
+    .style_form_dektop{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .list_products{
+        display: flex;
+    }
+
+    .eye{
+        display:none;
+    }
+
+  
     .form_login {
         display:flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: flex-end;
         width: 100%;
         height:30vh;
         }
+    #btncarga1{
+        display:none;
+    }    
 
         .contenido4{
             display:none;
@@ -674,7 +707,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         }   
         .mainSection{
             width: 100%;
-            height: 50vh;
+            height: 85vh;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
@@ -707,18 +740,23 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         .modal-footer, .modal-body{
             background-color: var(--color-3);
         }
-        .mb-3{
-            display:grid;
-        }
+
         .section_contenido1{
             display:flex;
-            flex-direction:column;
+            flex-direction:row;
+            width: 100%;
+            height: 100%;
         }
         .form_login .content_input_style{
             display: flex;
             width:50%;
             height:15%;
         }
+
+        .modal_mobile{
+            display: none;
+        }
+        
 
     }
         /*********************** */

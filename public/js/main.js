@@ -11,6 +11,7 @@ const div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
 const padre = document.getElementById('padre');
 
+console.log('width=' ,screen.width, 'height= ',screen.height);
 
 //Captura de datos 
 
@@ -66,6 +67,7 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
     const clearNameUser = document.getElementById('nameUserInput');
     clearNameUser.value = '';
     window.location.reload()
+    notification('Delete complete','save_ok')
 })
 //******************************* */
 
@@ -130,7 +132,7 @@ const notification = (message='',color='')=>{
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
     const timeDiv = ()=>{
-        setTimeout(() => section_notifications.remove(),5000)
+        setTimeout(() => section_notifications.style.display='none',5000)
     }
         timeDiv()
     }
@@ -159,7 +161,8 @@ const saveInfoForm = document.querySelector('#form_note').addEventListener('clic
                 textArea:textArea,
                 id:id
             }
-            
+
+
             if (listProducts.product && listProducts.select !==''){
                 //reset modal
                 document.getElementById('inputalimento').value = "";
@@ -179,6 +182,21 @@ const saveInfoForm = document.querySelector('#form_note').addEventListener('clic
         saveInfo()
     e.preventDefault()
 })
+
+const displayList = (size)=>{
+    if(size >= 1200) {
+        uiStart.style.display = 'flex'
+        uiList.style.display = 'flex'
+        uiFinish.style.display = 'none' 
+        div_btn_foward.style.display='none' 
+        uiFormLogin.style.display = 'none' 
+    }  
+    else {
+
+    };
+}
+displayList(screen.width)
+
 
 
 /**
