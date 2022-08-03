@@ -77,56 +77,17 @@
             <!-- Template at main.js -->
 
             <!-- ******************* -->
-
-            
+    
             
             <!-- *********UI Main********** -->
 
         <section class="section_contenido1" id="interfaz1" >
+
+            
             <div class="form_desktop">
-                <form class="row g-3 needs-validation was-validated style_form_dektop" id="form_note" novalidate>
-                    <div class="col-md-4 text_direction_start style_form_dektop___content_input">
-                        <label for="inputalimento" class="form-label">Name of the product</label>
-                        <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
-                        <div class="valid-feedback">
-                            Good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please, enter the product.
-                        </div>
-                    </div>
+                <form class="row g-3 needs-validation was-validated style_form_dektop form_note" id="form_note" novalidate>
                         
-    
-                        <div class="col-md-3 text_direction_start style_form_dektop___content_select">
-                            <label for="seleccionicono" class="form-label">Category</label>
-                            <select class="form-select" id="seleccionicono" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="img/comidita.svg">Food</option>
-                                <option value="img/electronica.svg">Electronic</option>
-                                <option value="img/ferreteria2.svg">Ferreteria</option>
-                                <option value="img/limpieza.svg">Limpieza</option>
-                                <option value="img/mascota.svg">Animales</option>
-                                <option value="img/perfumeria.svg">Perfumeria</option>
-                                <option value="img/varios.svg">Varios</option>
-                            </select>
-                        <div class="invalid-feedback">
-                            Please, select one category.
-                        </div>
-                    </div>
-    
-                        <div class="mb-3 text_direction_start style_form_dektop___content_text_area">
-                            <label for="detalle" class="form-label">Any detail?</label>
-                            <textarea class="form-control is-invalid" id="detalle" placeholder="color black" rows="3" maxlength="20"  required></textarea>
-                            <div class="invalid-feedback">
-                                Please enter a comment.
-                            </div>
-                        </div>
-    
-                        <div class="col-12 style_form_dektop___content_buttons">
-                            <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button>
-                            <button class="btn1 btn btn-primary btn-ok-modal" type="submit">OK</button>
-                        </div>
-                        </form>
+                </form>
             </div>
     
             <div id="contentNavigate" class="content1">
@@ -138,27 +99,32 @@
                             <!-- Template at main.js -->
 
                 </section>
-                
+            
                 <!-- ***************************** -->
 
                 <div class="options_list" id="options_list">        
-                    <p>Your list</p>
-                    <div class="btns-options">
-                        <a href="#" id="clearStorage"><img src="./img/trash_basket.svg" alt="trash_basket" srcset="" class="basquet_trash"></a>
-                        <a href="#"><img src="./img/eye-svgrepo-com.svg" alt="view list" srcset="" class="eye" id="linkViewList"></a> 
-                    </div>
+                    <p class="title">Your list</p>
+                    <nav class="btns-options" id="icons_options">
+                        <a href="#" id="linkViewList"><img src="./img/eye-svgrepo-com.svg" alt="view list" srcset="" class="eye" ></a>     
+                        <a href="#" id="clearStorage"><img src="./img/trash_basket.svg" alt="trash_basket" srcset="" class="basquet_trash"></a>                         
+                    </nav>
+                    <nav class="log_out_user" >
+                        <a href="#" id="logOutUser" class="content_icon_logOut">
+                            <img src="./img/logout.svg"  alt="logout icon" class="log_out_user___icon">
+                        </a>
+                    </nav>
                 </div>
             </div>
                             <!-- *********UI MODAL AND FORM LIST********** -->
 
 
             <!-- Modal -->
-            <div class="contenedor" id="content_button_add" >                
+            <nav class="contenedor" id="content_button_add" >                
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                 id="btncarga1">
                     <strong>ADD</strong>
                 </button>
-            </div>
+            </nav>
         
         <div class="modal fade modal_mobile" id="staticBackdrop" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -167,54 +133,13 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Add the product</h5>
                 </div>
-                    <div class="modal-body">
+                    <div class="modal-body" id="content_form_mobile">
                     
-                        <form class="row g-3 needs-validation was-validated" id="form_note" novalidate>
-                            <div class="col-md-4 text_direction_start">
-                                <label for="inputalimento" class="form-label">Name of the product</label>
-                                <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
-                                <div class="valid-feedback">
-                                    Good!
-                                </div>
-                                <div class="invalid-feedback">
-                                    Please, enter the product.
-                                </div>
-                            </div>
-                                
-
-                                <div class="col-md-3 text_direction_start">
-                                    <label for="seleccionicono" class="form-label">Category</label>
-                                    <select class="form-select" id="seleccionicono" required>
-                                        <option selected disabled value="">Choose...</option>
-                                        <option value="img/comidita.svg">Food</option>
-                                        <option value="img/electronica.svg">Electronic</option>
-                                        <option value="img/ferreteria2.svg">Ferreteria</option>
-                                        <option value="img/limpieza.svg">Limpieza</option>
-                                        <option value="img/mascota.svg">Animales</option>
-                                        <option value="img/perfumeria.svg">Perfumeria</option>
-                                        <option value="img/varios.svg">Varios</option>
-                                    </select>
-                                <div class="invalid-feedback">
-                                    Please, select one category.
-                                </div>
-                            </div>
-
-                                <div class="mb-3 text_direction_start">
-                                    <label for="detalle" class="form-label">Any detail?</label>
-                                    <textarea class="form-control is-invalid" id="detalle" placeholder="color black" rows="3" maxlength="20"  required></textarea>
-                                    <div class="invalid-feedback">
-                                        Please enter a comment.
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-secondary btn-close-modal" data-bs-dismiss="modal">X</button>
-                                    <button class="btn1 btn btn-primary btn-ok-modal" type="submit">OK</button>
-                                </div>
-                                </form>                    
-                            </div>
+                        <!-- Dynamic Form -->
+                        
                     </div>
-                </div>
+            </div>
+        </div>
         </section>
 
             <!-- *********************** -->

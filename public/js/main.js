@@ -11,7 +11,6 @@ const div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
 const padre = document.getElementById('padre');
 
-console.log('width=' ,screen.width, 'height= ',screen.height);
 
 //Captura de datos 
 
@@ -29,12 +28,21 @@ const viewNameInDom = (nameDom='')=>{
     const modelUserName = 
     `            
     <main class="welcomeUser" id="welcomeUser">
-        <h1>Hola</h1>
-        <h2>${nameDom}!!</h2>
+        <h2>Hola</h2>
+        
+        <h2 class="name_user">  ${nameDom}!!</h2>
     </main>
     `
     contentModelNameUser.innerHTML=modelUserName;
 }
+
+
+///
+
+
+
+///
+
 
 /* This is a function that is called when the user clicks on the button to save the name. */
 const btnName = document.querySelector('#form_name').addEventListener('submit', (e)=>{
@@ -55,6 +63,7 @@ const btnName = document.querySelector('#form_name').addEventListener('submit', 
         uiFormLogin.style.display='none';
         contentModelNameUser.style.display = 'flex';
         uiStart.style.display = 'flex'
+        loadDOMList()
     }
     e.preventDefault()
     })
@@ -62,15 +71,25 @@ const btnName = document.querySelector('#form_name').addEventListener('submit', 
 
 //************* Delete localStorage */
 const btnclearStorage = document.querySelector('#clearStorage').addEventListener('click',()=>{
-    localStorage.removeItem('name');
+    const $iconsNav = document.querySelector('#icons_options')
     localStorage.removeItem('lists');
-    const clearNameUser = document.getElementById('nameUserInput');
-    clearNameUser.value = '';
+    $iconsNav.style.display='none';
+    notification('Delete complete lists','save_ok')
     window.location.reload()
-    notification('Delete complete','save_ok')
 })
 //******************************* */
 
+//************ Delete User *****************/
+
+const logOutUserStorage = document.querySelector('#logOutUser')
+.addEventListener('click',()=>{
+    localStorage.removeItem('name');
+    const clearNameUser = document.getElementById('nameUserInput');
+    clearNameUser.value = '';
+    window.location.reload()
+})
+
+//******************************* */
 
 //************ Load user name when refresh page*/
 
@@ -138,22 +157,21 @@ const notification = (message='',color='')=>{
     }
 /*******************---------------------------------***************** */
 
-document.querySelector('#btncarga1').addEventListener('click',()=>{
-    document.querySelector('#inputalimento').focus();
-})
 
-const saveInfoForm = document.querySelector('#form_note').addEventListener('click', (e)=> {
 
+const saveInfoForm = document.querySelector('#form_note')
+saveInfoForm.addEventListener('submit', (e)=> {
+console.log('salknslksa');
 /**
  * It saves the information in the local storage
  */
     const saveInfo = ()=>{
         //input
-            const inputProducto = document.getElementById('inputalimento').value;
+            const inputProducto = document.querySelector('#inputalimento').value;
              //seleccion icono
-            const seleccion = document.getElementById('seleccionicono').value;
+            const seleccion = document.querySelector('#seleccionicono').value;
              //text area
-            const textArea = document.getElementById('detalle').value;
+            const textArea = document.querySelector('#detalle').value;
             const id =  crypto.randomUUID().slice(4,13)
             const listProducts= {
                 product:inputProducto,
@@ -182,20 +200,6 @@ const saveInfoForm = document.querySelector('#form_note').addEventListener('clic
         saveInfo()
     e.preventDefault()
 })
-
-const displayList = (size)=>{
-    if(size >= 1200) {
-        uiStart.style.display = 'flex'
-        uiList.style.display = 'flex'
-        uiFinish.style.display = 'none' 
-        div_btn_foward.style.display='none' 
-        uiFormLogin.style.display = 'none' 
-    }  
-    else {
-
-    };
-}
-displayList(screen.width)
 
 
 
@@ -427,7 +431,6 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
     content_btn_add.style.display = 'flex'
     uiList.style.display = 'none'
     div_btn_foward.style.display='none'
-    // modal.hide();
     window.location.reload();
 
 })
@@ -435,30 +438,119 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
 //Load DOM and view list
 
 const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
-    
+    let viewportWidth = window.innerWidth;
+    let nameInStorage = localStorage.getItem('name')
+    let logOutIcon = document.querySelector('#logOutUser')
+    console.log(nameInStorage);
+
+    const displayList = (size)=>{
+        if(size >= 1200) {
+
+            formDynamicModel(size)
+            uiStart.style.display = 'flex'
+            uiFinish.style.display = 'none' 
+            div_btn_foward.style.display='none' 
+            uiFormLogin.style.display = 'none' 
+            uiList.style.display = 'flex'
+        }  
+        else {
+            formDynamicModel(size)
+            uiList.style.display = 'none'
+            uiStart.style.display = 'flex'
+            uiFinish.style.display = 'none' 
+            div_btn_foward.style.display='none' 
+            uiFormLogin.style.display = 'none' 
+        };
+    }
     
     const displayOptionsDOMLoad = ()=>
+    
     {
+        logOutIcon.style.display = 'flex'
         uiFormLogin.style.display='none'
         uiStart.style.display = 'flex';
-        uiList.style.display = 'none'
+        displayList(viewportWidth)
         uiFinish.style.display = 'none' 
         div_btn_foward.style.display='none'
-        content_btn_add.style.display = 'flex'
-
         viewListHTML(dataStorageParce)
     }
-    const displayStartDOMLoad = ()=>{
+    const displayDOMForm = ()=>{
         uiStart.style.display = 'none';
-        content_btn_add.style.display = 'none'
+        uiFormLogin.style.display = 'flex' 
+
     }
     
     
-        dataStorageParce===null || dataStorageParce.length ===0? displayStartDOMLoad():displayOptionsDOMLoad();
+        nameInStorage===null? displayDOMForm():displayOptionsDOMLoad();
     
     
 
     
 });
+const formDynamicModel=(sizeDevice = '')=>{
+    const $form = document.querySelector('#form_note') //<form></form>
+    const modelForm_Inputs = 
+    `
+    <div class="col-md-4 text_direction_start style_form_dektop___content_input">
+    <label for="inputalimento" class="form-label">Name of the product</label>
+    <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
+    <div class="valid-feedback">
+        Good!
+    </div>
+    <div class="invalid-feedback">
+        Please, enter the product.
+    </div>
+</div>
+    
+
+    <div class="col-md-3 text_direction_start style_form_dektop___content_select">
+        <label for="seleccionicono" class="form-label">Category</label>
+        <select class="form-select" id="seleccionicono" required>
+            <option selected disabled value="">Choose...</option>
+            <option value="img/comidita.svg">Food</option>
+            <option value="img/electronica.svg">Electronic</option>
+            <option value="img/ferreteria2.svg">Ferreteria</option>
+            <option value="img/limpieza.svg">Limpieza</option>
+            <option value="img/mascota.svg">Animales</option>
+            <option value="img/perfumeria.svg">Perfumeria</option>
+            <option value="img/varios.svg">Varios</option>
+        </select>
+    <div class="invalid-feedback">
+        Please, select one category.
+    </div>
+</div>
+
+    <div class="mb-3 text_direction_start style_form_dektop___content_text_area">
+        <label for="detalle" class="form-label">Any detail?</label>
+        <textarea class="form-control is-invalid" id="detalle" placeholder="color black" rows="3" maxlength="20"  required></textarea>
+        <div class="invalid-feedback">
+            Please enter a comment.
+        </div>
+    </div>
+
+    <div class="col-12 style_form_dektop___content_buttons">
+        <button type="button" class="btn btn-secondary btn-close-modal style_btns" data-bs-dismiss="modal" >X</button>
+        <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit">OK</button>
+    </div>
+
+
+    `
+    let finalForm= ''
+
+    if(sizeDevice>=1200){
+        finalForm=$form.innerHTML =modelForm_Inputs
+        return finalForm
+    }
+    else{
+        const contentFormMobile = document.querySelector('#content_form_mobile')
+        $form.innerHTML=modelForm_Inputs
+        finalForm=contentFormMobile.appendChild($form)
+        console.log(finalForm);
+        return finalForm
+    }
+
+}
+
+formDynamicModel(screen.width)
 loadDOMList()
 
