@@ -437,6 +437,11 @@ const forwardButton = document.querySelector('#forwardButton').addEventListener(
 
 //Load DOM and view list
 
+/**
+ * The function loadDOMList() is called when the DOM is loaded. It checks if the user is logged in or
+ * not. If the user is logged in, it displays the list of items. If the user is not logged in, it
+ * displays the login form
+ */
 const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     let viewportWidth = window.innerWidth;
     let nameInStorage = localStorage.getItem('name')
@@ -479,13 +484,16 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
 
     }
     
-    
         nameInStorage===null? displayDOMForm():displayOptionsDOMLoad();
-    
-    
 
-    
 });
+
+
+/**
+ * A function that creates a form with the inputs and selects that are necessary to create a note.
+ * @param [sizeDevice] - The size of the device.
+ * @returns the form with the inputs and the buttons.
+ */
 const formDynamicModel=(sizeDevice = '')=>{
     const $form = document.querySelector('#form_note') //<form></form>
     const modelForm_Inputs = 
