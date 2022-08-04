@@ -441,7 +441,6 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     let viewportWidth = window.innerWidth;
     let nameInStorage = localStorage.getItem('name')
     let logOutIcon = document.querySelector('#logOutUser')
-    console.log(nameInStorage);
 
     const displayList = (size)=>{
         if(size >= 1200) {
@@ -545,7 +544,6 @@ const formDynamicModel=(sizeDevice = '')=>{
         const contentFormMobile = document.querySelector('#content_form_mobile')
         $form.innerHTML=modelForm_Inputs
         finalForm=contentFormMobile.appendChild($form)
-        console.log(finalForm);
         return finalForm
     }
 

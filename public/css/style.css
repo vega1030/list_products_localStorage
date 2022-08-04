@@ -45,6 +45,26 @@ body {
     width: 67%;
 }
 
+.content_basket{
+    display:flex;
+    width: 25%;
+    height: 12%;
+    align-items: flex-start;
+    justify-content: center;
+    position: absolute;
+    bottom: -21%;
+
+}
+
+.mainSection{
+    width: 100%;
+    height: 85vh;
+}
+
+.basquet_trash{
+    width: 81%;
+}
+
 .contenido3{
     display:none;
     position: relative;
@@ -152,6 +172,13 @@ body {
     }
 
   
+    .content_btns_foward_style{
+        width: 50%;
+        display: none;
+        height: 12vh;
+        position: sticky;
+        right: 45%;
+    }
 
     .contenedor{
     width: 200px;
@@ -200,6 +227,48 @@ p{
     font-size:1.5em;
 }
 
+.log_out_user___icon{
+    height:5.9vh;
+}
+
+            
+.contenido3{
+    display:none;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    padding: 2%;   
+}
+
+
+/************ Modal styles  ****/
+.modal-body, .modal-header {
+    background: rgb(55, 143, 131,0.5);
+    color: var(--color-main)}
+    
+/*******************************/
+
+
+    .btns-options{
+        display:flex;
+        width:80%;
+        height:99%;
+        justify-content:space-around;
+        align-items: center;
+        margin-top:7%;
+    }
+
+
+    .sectionNameUser, .link_list{        
+        width:25%;
+        text-align: center;
+        height: 20%;
+    }
 
 /************ Mobile *******/
 
@@ -229,8 +298,6 @@ p{
     }
 
     .mainSection{
-        width: 100%;
-        height: 70vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -251,25 +318,11 @@ p{
         text-decoration: none;
         color: var(--color-link);
     }
-    
-    .sectionNameUser, .link_list{        
-        width:80%;
-        text-align: center;
-        justify-content: center;
-                color: var(--color-font) !important;
 
-    }
     .link_list{
         margin: 10% 0 0 0;
         font-size: 140%;
     }
-    .content_btn_foward{
-        width: 95%;
-        display:none;
-        height:12vh;
-    }
-
-  
 
      .btn_options {
         width: 60%;
@@ -288,7 +341,12 @@ p{
     }
 
     .welcomeUser{
-        color: var(--color-main)
+        color: var(--color-main);
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
 
@@ -351,7 +409,6 @@ p{
         background-color: var(--color-list);
         color: var(--color-font);
         filter: drop-shadow(6px 5px 7px #000); 
-        border-radius: 3%;
         margin: 0 0 7.5% 0;       
 }
 
@@ -371,7 +428,8 @@ p{
         position: absolute;
         overflow:hidden; 
         overflow-y:scroll;
-        width: 67%;
+        width: 70%;
+        height: 100%;
     }
 
 
@@ -413,24 +471,12 @@ p{
         bottom:0;
         box-shadow:     12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
             -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;}
-            
-    .contenido3{
-        display:none;
-        position: relative;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: flex-start;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        padding: 2%;
-            
-            }
-        #forwardButton{
-            width:13%;
-            height:37%;
-            margin: 5% 0 0 1%;
+
+        
+    #forwardButton{
+        width:13%;
+        height:40%;
+        margin: 3% 0 0 0;
         }    
 
 
@@ -458,15 +504,12 @@ p{
 
     .content_forwardButtonToListUi{
         display: none;
-        width: 95%;
-        height:12vh;
 
     }
 
     #forwardButtonToListUi{
-        
-            width:13%;
-            height:37%;
+        width:13%;
+        height:40%;
           
     }
 
@@ -479,25 +522,16 @@ p{
         align-items: center;
         text-align: center;
         width: 100%;
-        height: 70vh;
-        padding: 1%;
-        margin-top: 1%;
+        height: 100%;
+        padding: 0;
+        margin-top: 0;
         font-size: 100%;
         
         }
 
-        .btns-options{
-            display:flex;
-            width:40%;
-            height:40%;
-            justify-content:space-around;
-
-        }
-
-
        
     .card_product{
-        width: 100%;
+        width: 60%;
         height:83%
     }
 
@@ -519,8 +553,8 @@ p{
 
 .section_contenido1{
     display:none;
-    width: 60%;
-    height: 56vh;
+    width: 100%;
+    height: 67vh;
     flex-direction:column;
     justify-content: center;
     align-items: flex-start;
@@ -616,6 +650,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        overflow-y: auto;
     }
     
     .forwardButton, .buttons{
@@ -640,10 +675,14 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         flex-direction: column
     }
     .sectionNameUser{
-        width: 55%;
+        width: 75%;
         display: flex;
         justify-content: center;
+        height: 24%;
+        align-items: flex-start;
+        
     }
+
     .welcomeUser{
         width: 67%;
         display:flex;
@@ -730,6 +769,12 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         width: 7%;
     }
 
+    .style_btns{
+        width: 20%;
+        height: 85%;
+        border-radius: 10%;
+    }
+    
 }
 
 /************** TABLET  */
@@ -784,7 +829,6 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     .style_btns{
         width: 20%;
         height: 70%;
-        border-radius: 0 25% 0 25%;
 
     }
 
