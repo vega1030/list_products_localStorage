@@ -215,7 +215,7 @@ const viewListHTML = (data='',flag=null) =>{
             
         data.forEach((element)=>{
             modeloLista += `
-            <li class="list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
+            <li class=" shadow p-3 mb-5 list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
             </li>`
             padre.innerHTML = modeloLista
@@ -455,11 +455,9 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
             uiFinish.style.display = 'none' 
             div_btn_foward.style.display='none' 
             uiFormLogin.style.display = 'none' 
-            uiList.style.display = 'flex'
         }  
         else {
             formDynamicModel(size)
-            uiList.style.display = 'none'
             uiStart.style.display = 'flex'
             uiFinish.style.display = 'none' 
             div_btn_foward.style.display='none' 

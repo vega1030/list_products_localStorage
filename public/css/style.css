@@ -32,6 +32,14 @@
     align-items: flex-start;
 }
 
+.style_form_dektop___content_buttons{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .options_list{
     display:flex;
     flex-direction: column;
@@ -41,6 +49,26 @@
     align-items: center;
     justify-content: space-around;
     
+}
+
+.welcomeUser{
+    width: 80%;
+    display: flex;
+    height: 35%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 3%;
+}
+
+.header{
+    height: 15vh;
+}
+
+.style_btns{
+
+    width: 20%;
+    height: 85%;
+    border-radius: 2%;
 }
 
 body {
@@ -124,27 +152,13 @@ body {
     background: linear-gradient(0deg, #9baebc 36%, #fff 100%);        
     box-shadow: 0 8px 6px -6px #9baebc;
     color: black;
-    border-radius: 50%;
-    width: 9%;
-    height: 4vh;
-    margin: 0 4% 0 0
 
 }
 
 .eye, .basquet_trash{
-    width:50%;
+    height:8vh;
 }
 
-.btn-ok-modal{
-    background: rgb(10,4,60);
-    background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);        
-    box-shadow: 0 8px 6px -6px black;
-    border-radius: 50%;
-    width: 9%;
-    height: 4vh;
-    margin: 0 4% 0 0
-
-}
 
 
 .form_ui_desktop{
@@ -197,7 +211,7 @@ body {
 }
     .content1 {
         width: 100%;
-        height: 100%;
+        height: 70%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -298,23 +312,25 @@ p{
 
 
     .sectionNameUser, .link_list{
-            width: 81%;
+            width: 80%;
             display: flex;
             justify-content: center;
-            height: 24%;
+            height: 50%;
             align-items: flex-start;
     }
 
 /************ Mobile *******/
 
-@media only screen and (max-width: 599px){
+@media only screen and (max-width: 576px){
 
+    .section_contenido1{
+        justify-content: center;
+        height:76%;
+    }
 
-    .btn-close-modal,.btn-ok-modal{
-        width: 11%;
-        height: 5vh;
-        border-radius: 50%;
-        margin: 0 4% 0 0;
+    .options_list{
+        width: 100%;
+        padding: 0;
     }
 
     .btn-close-modal{
@@ -328,13 +344,12 @@ p{
         background: rgb(10,4,60);
         background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);        
         box-shadow: 0 8px 6px -6px black;
-        border-radius: 50%;
     
     }
 
     .mainSection{
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         overflow-y: auto;
@@ -411,7 +426,6 @@ p{
         background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);    
         color: var(--color-font);
         width: 100%;
-        height: 15vh;
     }   
 
     .boxtitle{
@@ -433,7 +447,9 @@ p{
         background-color: var(--color-list);
         color: var(--color-font);
         filter: drop-shadow(6px 5px 7px #000); 
-        margin: 0 0 7.5% 0;       
+        margin: 0 0 7.5% 0;      
+        height: 25%;
+        width: 70%;
 }
 
 
@@ -444,6 +460,8 @@ p{
         overflow-y:scroll;
         width: 70%;
         height: 100%;
+        display: flex;
+        align-items: center;
     }
 
 
@@ -524,7 +542,7 @@ p{
     #forwardButtonToListUi{
         width:13%;
         height:40%;
-          
+
     }
 
     .contenido4{
@@ -539,17 +557,15 @@ p{
         height: 100%;
         padding: 0;
         margin-top: 0;
-        font-size: 100%;
-        
+        font-size: 100%;        
         }
 
-       
+
     .card_product{
-        width: 60%;
-        height:83%
+        width: 90%;
+        height:80%
     }
 
- 
 
 
 
@@ -572,8 +588,9 @@ p{
     }
 
     .contenido3__icono{
-    width: 70px;
-    margin-right: 20px;
+    width: 30%;
+    margin-right: 8%;
+    max-width:26%;
     
     }
 
@@ -634,7 +651,19 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
 }
 
 /* ******* */
-@media (min-width:600px) and (max-width: 1200px){
+@media only screen and  (min-width:577px){
+    .form_note{
+        width: 100%;
+    }
+
+    .style_form_dektop___content_input,.style_form_dektop___content_select{
+        width: 100%;
+    }
+
+    .form_desktop{
+        height: 100%;
+    }
+
     .header{
         display: flex;
         flex-direction: row;
@@ -644,11 +673,10 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);    
         color: var(--color-font);
         width: 100%;
-        height: 15vh;
     }  
     .mainSection{
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         overflow-y: auto;
@@ -766,17 +794,11 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     }
     
 }
-
-/************** TABLET  */
-    
-
-
-
-
     
     /***** Large Screen ****/
 
-@media only screen and (min-width: 1200px){
+@media only screen and (min-width: 992px){
+
 
     *{
         font-size:1.04em;
@@ -784,8 +806,19 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         font-family: var(--font-type);
     }
     img{
-        width: 22%;
-        padding: 2%;
+        width: 13%;
+    }
+
+    .log_out_user___icon{
+        width:90%;
+    }
+
+    .sectionNameUser{
+        align-items: flex-end;
+    }
+
+    .basquet_trash{
+        width: 80%;
     }
 
     .list_products {
@@ -795,31 +828,36 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         border-radius: 3%;
         margin: 0 0 7.5% 0;
         display: flex;
-        justify-content: flex-start;
+        justify-content:space-between;
         align-items: center;
         height: 15%;
         width: 90%;
     }
-    .form_desktop{
-        height: 100%;
-        width: 80%;
-        padding: 1%;
-        border-right: 0.1em solid rgb(0, 0, 0,0.4);
 
+    .contenido3__icono{
+        width: 20%;
+        max-width: 11%;
+        min-width: 16%;
     }
 
-    .style_form_dektop___content_buttons{
-        width: 100%;
-        height: 8%;
+    .form_desktop{
+        height: 100%;
+        width: 90%;
+        padding: 2%;
+        border-right: 0.1em solid rgb(0, 0, 0,0.4);
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
-    .style_btns{
-        width: 20%;
-        height: 70%;
 
+
+    .style_btns{
+        width: 27%;
+        height: 70%;
+        border-radius: 14%;
+    
     }
 
     .text_direction_start{
@@ -830,6 +868,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         display: flex;
         flex-direction: column;
         width: 100%;
+        color: var(--color-main);
     }
 
  
@@ -864,7 +903,6 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
             background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);    
             color: var(--color-font);
             width: 100%;
-            height: 15vh;
         }   
         .mainSection{
             width: 100%;
@@ -874,6 +912,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
             justify-content: flex-start;
             align-items: center;
             color: var(--color-font);
+            max-height: 78vh;
         }
 
 
@@ -903,6 +942,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
 
         .options_list{
             flex-direction: column;
+            align-items: baseline;
         }
 
         .form_ui_desktop{
@@ -919,7 +959,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         .section_contenido1{
             display:flex;
             flex-direction:row;
-            width: 68%;
+            width: 67%;
             height: 100%;
         }
         .form_login .content_input_style{
