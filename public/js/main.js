@@ -161,7 +161,6 @@ const notification = (message='',color='')=>{
 
 const saveInfoForm = document.querySelector('#form_note')
 saveInfoForm.addEventListener('submit', (e)=> {
-console.log('salknslksa');
 /**
  * It saves the information in the local storage
  */
@@ -198,6 +197,8 @@ console.log('salknslksa');
             } 
         }
         saveInfo()
+        const modalBack = document.querySelector('.modal-backdrop')
+        modalBack.remove()  
     e.preventDefault()
 })
 
@@ -240,7 +241,6 @@ optionsInUiStart.style.display = 'none':optionsInUiStart.style.display = 'flex'
 linkListUi.addEventListener('click',()=>{
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
-    div_btn_foward.style.display='flex'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
 
@@ -399,7 +399,7 @@ saveEdit.addEventListener('submit', ()=>{
 
 const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
     const buttons = document.getElementById('buttons');
-    let content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
+    const content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
 
 
     document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
@@ -409,7 +409,6 @@ const llamadaFinal = document.querySelector('#padre').addEventListener('click', 
     uiList.style.display = 'none';
     buttons.style.display = 'flex';
     content_ForwardListUi_to_MainUi.style.display = 'flex';
-    div_btn_foward.style.display = 'none';
 
     
     
@@ -419,21 +418,12 @@ const llamadaFinal = document.querySelector('#padre').addEventListener('click', 
     content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
         uiFinish.style.display = 'none';
         uiList.style.display = 'flex'
-        div_btn_foward.style.display='flex'
 
     })
 })
 
 
-/* This is a function that is called when the user clicks on the button to return to the main screen. */
-const forwardButton = document.querySelector('#forwardButton').addEventListener('click', ()=>{
-    uiStart.style.display = 'flex'
-    content_btn_add.style.display = 'flex'
-    uiList.style.display = 'none'
-    div_btn_foward.style.display='none'
-    window.location.reload();
 
-})
 
 //Load DOM and view list
 
@@ -448,20 +438,22 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     let logOutIcon = document.querySelector('#logOutUser')
 
     const displayList = (size)=>{
-        if(size >= 1200) {
 
+        if(size >= 991) {
+            const formInputs = document.querySelector('#form_note')
             formDynamicModel(size)
             uiStart.style.display = 'flex'
             uiFinish.style.display = 'none' 
-            div_btn_foward.style.display='none' 
             uiFormLogin.style.display = 'none' 
+            formInputs.style.display = 'flex'
         }  
+        
         else {
             formDynamicModel(size)
             uiStart.style.display = 'flex'
             uiFinish.style.display = 'none' 
-            div_btn_foward.style.display='none' 
             uiFormLogin.style.display = 'none' 
+        
         };
     }
     
@@ -473,7 +465,6 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
         uiStart.style.display = 'flex';
         displayList(viewportWidth)
         uiFinish.style.display = 'none' 
-        div_btn_foward.style.display='none'
         viewListHTML(dataStorageParce)
     }
     const displayDOMForm = ()=>{
@@ -486,12 +477,22 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
 
 });
 
+//Button foward from UI list to Ui main
+
+const btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain').addEventListener('click',()=>{
+    uiList.style.display = 'none'
+    uiStart.style.display = 'flex'
+})
+
+//************
+
 
 /**
  * A function that creates a form with the inputs and selects that are necessary to create a note.
  * @param [sizeDevice] - The size of the device.
  * @returns the form with the inputs and the buttons.
  */
+
 const formDynamicModel=(sizeDevice = '')=>{
     const $form = document.querySelector('#form_note') //<form></form>
     const modelForm_Inputs = 
@@ -535,26 +536,37 @@ const formDynamicModel=(sizeDevice = '')=>{
 
     <div class="col-12 style_form_dektop___content_buttons">
         <button type="button" class="btn btn-secondary btn-close-modal style_btns" data-bs-dismiss="modal" >X</button>
-        <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit">OK</button>
+        <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit" data-backdrop="false">OK</button>
     </div>
 
 
     `
-    let finalForm= ''
+    
 
-    if(sizeDevice>=1200){
-        finalForm=$form.innerHTML =modelForm_Inputs
-        return finalForm
+    if(sizeDevice>990){
+        return $form.innerHTML =modelForm_Inputs
     }
     else{
         const contentFormMobile = document.querySelector('#content_form_mobile')
         $form.innerHTML=modelForm_Inputs
-        finalForm=contentFormMobile.appendChild($form)
-        return finalForm
+        
+        return contentFormMobile.appendChild($form)
     }
 
 }
 
-formDynamicModel(screen.width)
-loadDOMList()
 
+const formResize = ()=> {
+window.addEventListener('resize',()=>{
+        const timeResizeRefresh = ()=>{
+            return setTimeout(() => window.location.reload(),1000)
+        }
+        if (window.innerWidth>991) {        
+        formDynamicModel(window.innerWidth)
+        timeResizeRefresh()
+    }
+},true)};
+
+
+loadDOMList()
+formResize()
