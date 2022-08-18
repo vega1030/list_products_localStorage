@@ -10,10 +10,7 @@ const optionsInUiStart = document.querySelector('#options_list')
 const div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
 const padre = document.getElementById('padre');
-
-
-//Captura de datos 
-
+let viewportWidth = window.innerWidth;
 
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
@@ -36,14 +33,6 @@ const viewNameInDom = (nameDom='')=>{
     contentModelNameUser.innerHTML=modelUserName;
 }
 
-
-///
-
-
-
-///
-
-
 /* This is a function that is called when the user clicks on the button to save the name. */
 const btnName = document.querySelector('#form_name').addEventListener('submit', (e)=>{
     const userName = document.getElementById('nameUserInput').value;
@@ -57,15 +46,21 @@ const btnName = document.querySelector('#form_name').addEventListener('submit', 
     }
     
     else{
-        content_btn_add.style.display='flex'
+        const logOutUser = document.querySelector('#logOutUser')
+        optionsInUiStart.style.display = 'flex'
+        content_btn_add.style.display='flex';
         localStorage.setItem('name', userName);
         viewNameInDom(localStorage.getItem('name'));
         uiFormLogin.style.display='none';
         contentModelNameUser.style.display = 'flex';
-        uiStart.style.display = 'flex'
-        loadDOMList()
+        uiStart.style.display = 'flex';
+        formDynamicModel(viewportWidth);
+        uiList.style.display='flex';   
+        optionsInUiStart.style.display='flex';  
+        logOutUser.style.display='flex';   
+        loadDOMList();
     }
-    e.preventDefault()
+    e.preventDefault();
     })
 //************************ */
 
@@ -84,6 +79,7 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
 const logOutUserStorage = document.querySelector('#logOutUser')
 .addEventListener('click',()=>{
     localStorage.removeItem('name');
+    localStorage.removeItem('lists')
     const clearNameUser = document.getElementById('nameUserInput');
     clearNameUser.value = '';
     window.location.reload()
@@ -95,8 +91,6 @@ const logOutUserStorage = document.querySelector('#logOutUser')
 
 window.addEventListener('DOMContentLoaded',()=>{
     viewNameInDom(localStorage.getItem('name'))
-    
-    
 });
 
 //******************************* */
@@ -190,13 +184,13 @@ saveInfoForm.addEventListener('submit', (e)=> {
                 uiStart.style.display = 'none'
                 uiList.style.display = 'flex'
                 uiFinish.style.display = 'none' 
-                div_btn_foward.style.display='flex' 
                 uiFormLogin.style.display = 'none' 
                 return saveDataLocalStorage(listProducts)
 
             } 
         }
         saveInfo()
+        
         const modalBack = document.querySelector('.modal-backdrop')
         modalBack.remove()  
     e.preventDefault()
@@ -236,13 +230,15 @@ const viewListHTML = (data='',flag=null) =>{
 
 
 JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
-optionsInUiStart.style.display = 'none':optionsInUiStart.style.display = 'flex'
+linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
 
 linkListUi.addEventListener('click',()=>{
+
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
+    btn_foward_uiList_to_uiMain.style.display = 'flex'    
 
     })
 
@@ -433,7 +429,6 @@ const llamadaFinal = document.querySelector('#padre').addEventListener('click', 
  * displays the login form
  */
 const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
-    let viewportWidth = window.innerWidth;
     let nameInStorage = localStorage.getItem('name')
     let logOutIcon = document.querySelector('#logOutUser')
 
@@ -469,7 +464,9 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     }
     const displayDOMForm = ()=>{
         uiStart.style.display = 'none';
-        uiFormLogin.style.display = 'flex' 
+        uiFormLogin.style.display = 'flex'
+        uiList.style.display = 'none'
+        uiFinish.style.display = 'none'
 
     }
     

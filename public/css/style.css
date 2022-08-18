@@ -19,15 +19,24 @@
     box-sizing: border-box;
 }
 
+.style_form_edit{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+}
+
 .foward_UIlist_to_UImain{
-    display: block;
-    width:90%;
-    height:6%;
+    display: flex;
+    width:100%;
+    height:8%;
 }
 .foward_uiList_to_uiMain___btn{
     border-radius: 50%;
-    width: 10%;
+    width: 5%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-body, .modal-header, .modal-footer{
@@ -61,7 +70,6 @@
 }
 
 .options_list{
-    display:flex;
     flex-direction: column;
     padding:10%;
     width:80%;
@@ -165,6 +173,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
 }
 
 .btn-close-modal{
@@ -236,14 +245,6 @@ body {
         align-items: center;
     }
 
-  
-    .content_btns_foward_style{
-        width: 50%;
-        display: none;
-        height: 12vh;
-        position: sticky;
-        right: 45%;
-    }
 
     .contenedor{
     width: 200px;
@@ -656,8 +657,20 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     }
 
 }
+/************ Mobile orientation landscape*******/
 
-/* ******* */
+@media only screen and (max-width:576px) and (orientation: landscape) {
+
+.forwardButton{
+    height: 92%;
+}
+.content_forwardButtonToListUi{
+    height: 15%;
+}
+
+}
+
+/******** Tablet */
 @media only screen and  (min-width:577px){
 
     .form_note{
@@ -668,10 +681,6 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         width: 100%;
     }
 
-    /* .form_desktop{
-        display:flex;
-        height: 100%;
-    } */
 
     .header{
         display: flex;
@@ -722,7 +731,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
 
 
     .contenido3{
-        width: 44%;
+        width: 70%;
     }
 
     .content_basket{
@@ -730,7 +739,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     }
 
     .ul_list_products{
-        width: 100%;
+        width: 60%;
         display: flex;
         align-items: center;
     }
@@ -752,9 +761,10 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
 
     .buttons{
         display: flex;
-        width:55%;
+        width:46%;
         justify-content:space-evenly;
         padding: 1%;
+        align-items: center;
     }
 
     .buttons-size {
@@ -764,47 +774,55 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     }
 
     .contenido4{
-        width:90%;
-        height: 50%;
+        width: 69%;
+        height: 75%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 
     .content_forwardButtonToListUi{
-        width: 11%;
-        height:11%;
-    }
-
-    .forwardButton{
-        width: 100%;
-        height:100%;
+        width: 90%;
+        height: 12%;
+        padding: 2%;
+        justify-content: flex-start;
+        align-items: center;
     }
 
     .card_product{
-        width: 100%;
+        width: 92%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 54%;
+        height: 90%;
+        justify-content: center;
     }
     .contenido4__icono{
-        width:30%;
+        width: 51%;
+        height: 40%;
     }
 
-    .forwardButton, .content_forwardButtonToListU{
-        display: flex;
-    }
 
     .content_btn_foward{
         width: 90%;
         margin-top: 2%;
     }
     .forwardButton{
-        width: 7%;
+        width: 5%;
+        height: 66%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
     }
 
     .style_btns{
         width: 20%;
         height: 85%;
         border-radius: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
 }
@@ -898,8 +916,8 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
     .form_login {
         display:flex;
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height:30vh;
         }
@@ -929,7 +947,7 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
             justify-content: flex-start;
             align-items: center;
             color: var(--color-font);
-            max-height: 78vh;
+            max-height: 85vh;
         }
 
 
@@ -991,18 +1009,21 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         .contenido4{
             flex-direction: column;
             width: 32%;
-            height: 50%;
-            justify-content: flex-start;
+            height: 100%;
+            justify-content: center;
             align-items: center;
+            border-left: 0.1em solid rgb(0, 0, 0,0.9);
         }
         .card_product{
             width: 80%;
-            height: 100%;
+            height: 58%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             background: darkcyan;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+            margin: 12.3% 0 0 0;
         }
         .contenedor{
             display: none;
@@ -1010,5 +1031,22 @@ transform:  rotateX(1deg) translateX(0px) translateY(45px);
         .foward_UIlist_to_UImain{
             display: none;
         }
+        .forwardButton{
+            width: 6%;
+            height: 55%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content_forwardButtonToListUi {
+            width: 100%;
+            height: 10%;
+            align-items:flex-start;
 
     }
+    .contenido4__icono{
+        width: 51%;
+        height:36%
+    }
+}
