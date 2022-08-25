@@ -74,6 +74,8 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
 })
 //******************************* */
 
+ 
+
 //************ Delete User *****************/
 
 const logOutUserStorage = document.querySelector('#logOutUser')
@@ -180,19 +182,24 @@ saveInfoForm.addEventListener('submit', (e)=> {
                 document.getElementById('seleccionicono').value = "";
                 document.getElementById('detalle').value = "";
                 notification('save ok')
-                //displays
-                uiStart.style.display = 'none'
-                uiList.style.display = 'flex'
-                uiFinish.style.display = 'none' 
-                uiFormLogin.style.display = 'none' 
+                if(viewportWidth<990){
+                    uiStart.style.display = 'none'
+                    uiList.style.display = 'flex'
+                    uiFinish.style.display = 'none' 
+                    uiFormLogin.style.display = 'none' 
+                }
+                else{
+                    //displays
+                    uiStart.style.display = 'flex'
+                    uiList.style.display = 'flex'
+                    uiFinish.style.display = 'none' 
+                    uiFormLogin.style.display = 'none' 
+                }
                 return saveDataLocalStorage(listProducts)
-
             } 
-        }
-        saveInfo()
         
-        const modalBack = document.querySelector('.modal-backdrop')
-        modalBack.remove()  
+        }
+        saveInfo()     
     e.preventDefault()
 })
 
@@ -215,6 +222,8 @@ const viewListHTML = (data='',flag=null) =>{
             </li>`
             padre.innerHTML = modeloLista
             })
+        
+        
         const itemsList = document.querySelectorAll(".list_products")
         const lastItem = itemsList[itemsList.length-1]
         lastItem.scrollIntoView()
@@ -225,23 +234,34 @@ const viewListHTML = (data='',flag=null) =>{
 
 
 
-//****************** view list with option tag ******/ 
-/* This is a function that is called when the user clicks on the link to view the list. */
+let btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain')
+btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
+    uiList.style.display = 'none'
+    uiStart.style.display = 'flex'
+})
 
+//****************** view list with option tag and select with querySelectorAll the li elements******/ 
 
+const li_Elements=document.querySelectorAll('.list_products')
+console.log(li_Elements);
 JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
 linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
 
 linkListUi.addEventListener('click',()=>{
-
+    const view_Li_Elements = ()=>{
+        const li_Elements=document.querySelectorAll('.list_products')
+        console.log(li_Elements);
+        li_Event(li_Elements)
+        
+    } 
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
     const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
     viewListHTML(dataStorageParce)
     btn_foward_uiList_to_uiMain.style.display = 'flex'    
 
+    view_Li_Elements()
     })
-
 
 //********************************/
 
@@ -393,30 +413,46 @@ saveEdit.addEventListener('submit', ()=>{
 
 /* This is a function that is called when the user clicks on the list item. */
 
-const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
-    const buttons = document.getElementById('buttons');
-    const content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
 
 
-    document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
-    document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');
-    document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle');
-    uiFinish.style.display = 'flex';
-    uiList.style.display = 'none';
-    buttons.style.display = 'flex';
-    content_ForwardListUi_to_MainUi.style.display = 'flex';
+const li_Event = (array_Li)=>{
 
-    
-    
-    document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
-    document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
-    
-    content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-        uiFinish.style.display = 'none';
-        uiList.style.display = 'flex'
-
+    array_Li.forEach(elements=>{
+        elements.addEventListener('click',(e)=>{
+            const buttons = document.getElementById('buttons');
+            const content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
+        
+        
+            document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
+            document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');
+            document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle');
+            uiFinish.style.display = 'flex';
+            uiList.style.display = 'none';
+            buttons.style.display = 'flex';
+            content_ForwardListUi_to_MainUi.style.display = 'flex';
+        
+            
+            
+            document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
+            document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
+            
+            content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
+                uiFinish.style.display = 'none';
+                uiList.style.display = 'flex'
+        
+            })
+            console.log(e);
+        })
     })
-})
+}
+
+
+
+// const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
+
+// })
+
+
 
 
 
@@ -428,7 +464,8 @@ const llamadaFinal = document.querySelector('#padre').addEventListener('click', 
  * not. If the user is logged in, it displays the list of items. If the user is not logged in, it
  * displays the login form
  */
-const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
+const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
+
     let nameInStorage = localStorage.getItem('name')
     let logOutIcon = document.querySelector('#logOutUser')
 
@@ -471,15 +508,13 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', () => {
     }
     
         nameInStorage===null? displayDOMForm():displayOptionsDOMLoad();
+        e.preventDefault
 
 });
 
 //Button foward from UI list to Ui main
 
-const btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain').addEventListener('click',()=>{
-    uiList.style.display = 'none'
-    uiStart.style.display = 'flex'
-})
+
 
 //************
 
@@ -554,7 +589,7 @@ const formDynamicModel=(sizeDevice = '')=>{
 
 
 const formResize = ()=> {
-window.addEventListener('resize',()=>{
+window.addEventListener('resize',(e)=>{
         const timeResizeRefresh = ()=>{
             return setTimeout(() => window.location.reload(),1000)
         }
@@ -562,8 +597,13 @@ window.addEventListener('resize',()=>{
         formDynamicModel(window.innerWidth)
         timeResizeRefresh()
     }
+    e.preventDefault
 },true)};
 
 
 loadDOMList()
 formResize()
+
+const testLi = document.querySelector('li')
+console.log(testLi);
+
