@@ -138,7 +138,7 @@ const notification = (message='',color='')=>{
     const section_notifications = document.querySelector('#content_notifications')
     let modelNotificationDOM = 
     
-    `<div class="content_notification" id="notification_save_data">
+    `<div class="content_notification fadeOut" id="notification_save_data">
         <p class="save_ok ${color}" id="message_save">
             ${message}
         </p>
@@ -251,7 +251,6 @@ linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
 linkListUi.addEventListener('click',()=>{
     const view_Li_Elements = ()=>{
         const li_Elements=document.querySelectorAll('.list_products')
-        console.log(li_Elements);
         li_Event(li_Elements)
         
     } 
@@ -369,7 +368,7 @@ btn_Edit.addEventListener('click', ()=>{
 
     `
     })
-    contentModalEdit.innerHTML=modelModalEdit;
+    contentModalEdit.innerHTML+=modelModalEdit;
 
     }
 //************----------------------------------*************/
