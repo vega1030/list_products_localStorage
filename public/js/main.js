@@ -241,9 +241,10 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
 })
 
 //****************** view list with option tag and select with querySelectorAll the li elements******/ 
+/* The above code is creating a function that will display the list of products that the user has
+created. */
 
 const li_Elements=document.querySelectorAll('.list_products')
-console.log(li_Elements);
 JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
 linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
 
@@ -416,7 +417,6 @@ saveEdit.addEventListener('submit', ()=>{
 
 
 const li_Event = (array_Li)=>{
-
     array_Li.forEach(elements=>{
         elements.addEventListener('click',(e)=>{
             const buttons = document.getElementById('buttons');
@@ -441,7 +441,6 @@ const li_Event = (array_Li)=>{
                 uiList.style.display = 'flex'
         
             })
-            console.log(e);
         })
     })
 }
@@ -470,10 +469,28 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
     let logOutIcon = document.querySelector('#logOutUser')
 
     const displayList = (size)=>{
-
+        const capture_Li_In_DOM = ()=>{
+    
+            document.querySelector('#padre').addEventListener('mouseover',(e)=>{
+                const li_Elements_Send = e.target.querySelectorAll('.list_products');
+                for (let i = 0; i < li_Elements_Send.length; i++) {
+                        const element = li_Elements_Send[i];
+                        if (element.length!=0) {
+                            li_Event(li_Elements_Send)
+                            document.querySelector('#padre').removeEventListener('mouseover',(e)=>{
+                                console.log(e);
+                        })
+                        }
+                        else {
+                            console.log('end');
+                        }               
+                    }
+                })
+        }
         if(size >= 991) {
             const formInputs = document.querySelector('#form_note')
             formDynamicModel(size)
+            capture_Li_In_DOM()
             uiStart.style.display = 'flex'
             uiFinish.style.display = 'none' 
             uiFormLogin.style.display = 'none' 
@@ -507,10 +524,13 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
 
     }
     
-        nameInStorage===null? displayDOMForm():displayOptionsDOMLoad();
-        e.preventDefault
+    nameInStorage===null? displayDOMForm():displayOptionsDOMLoad();
 
+    
 });
+
+
+
 
 //Button foward from UI list to Ui main
 
@@ -588,14 +608,22 @@ const formDynamicModel=(sizeDevice = '')=>{
 }
 
 
+
+//************
+
+//control the scope where call of the arrow function
+
+
+
+
+
 const formResize = ()=> {
 window.addEventListener('resize',(e)=>{
-        const timeResizeRefresh = ()=>{
-            return setTimeout(() => window.location.reload(),1000)
-        }
-        if (window.innerWidth>991) {        
+    
+    if (window.innerWidth>991) {   
+        window.location.reload()
         formDynamicModel(window.innerWidth)
-        timeResizeRefresh()
+        // timeResizeRefresh()
     }
     e.preventDefault
 },true)};
@@ -604,6 +632,4 @@ window.addEventListener('resize',(e)=>{
 loadDOMList()
 formResize()
 
-const testLi = document.querySelector('li')
-console.log(testLi);
 
