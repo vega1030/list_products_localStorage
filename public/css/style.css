@@ -32,8 +32,8 @@
 
 .foward_UIlist_to_UImain{
     display: flex;
-    width:100%;
-    height:8%;
+    width:80%;
+    height:2%;
 }
 .foward_uiList_to_uiMain___btn{
     border-radius: 50%;
@@ -77,10 +77,11 @@
 .options_list{
     flex-direction: column;
     padding:10%;
-    width:80%;
+    width:27rem;
     height:30%;
     align-items: center;
     justify-content: space-around;
+    display: flex;
     
 }
 
@@ -123,7 +124,7 @@
 
 /*******************-------- ************/
 .welcomeUser{
-    width: 80%;
+    width: 13rem;
     display: flex;
     height: 35%;
     justify-content: space-evenly;
@@ -261,8 +262,8 @@ body {
     width: 50%;
     height: 40vh;
     flex-direction:column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-end;
+    align-items: center;
 }
     .content1 {
         width: 100%;
@@ -370,10 +371,6 @@ p{
 
 @media only screen and (max-width: 576px){
 
-    .section_contenido1{
-        justify-content: center;
-        height:60%;
-    }
 
     .options_list{
         width: 100%;
@@ -506,7 +503,7 @@ p{
         overflow:hidden; 
         overflow-y:scroll;
         width: 70%;
-        height: 88%;
+        height: 87%;
         display: flex;
         align-items: center;
     }
@@ -686,6 +683,10 @@ p{
         transform:  rotateX(1deg) translateX(0px) translateY(45px);
     }
 
+    .content_basket{
+        bottom: 0%
+    }
+
 
 }
 /************ Mobile orientation landscape*******/
@@ -769,7 +770,6 @@ p{
 
 
     .welcomeUser{
-        width: 67%;
         display:flex;
         justify-content: space-evenly;
         align-items: center;
