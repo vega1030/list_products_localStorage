@@ -228,7 +228,7 @@ const viewListHTML = (data='',flag=null) =>{
             
         data.forEach((element)=>{
             modeloLista += `
-            <li class=" shadow p-3 mb-5 list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
+            <li class=" p-3 mb-5 list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
             </li>`
             padre.innerHTML = modeloLista

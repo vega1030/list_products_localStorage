@@ -9,6 +9,7 @@
     --color-font-edit:rgb(109, 166, 148);
     --delete-color-font: rgb(104, 60, 88);
     --font-type:'Fira Sans', sans-serif;
+    --border_: 1px solid rgba(0,0,0,.125);
 }
 
 /* Global styles */
@@ -22,6 +23,16 @@
     pointer-events: none;
 }
 
+.modal-backdrop{
+    display: none;
+}
+
+.modal-content{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 
 
@@ -345,7 +356,9 @@ p{
 /************ Modal styles  ****/
 .modal-body, .modal-header {
     background: rgb(55, 143, 131,0.5);
-    color: var(--color-main)}
+    color: var(--color-main);
+    width: 100%;
+}
     
 /*******************************/
 
@@ -1013,7 +1026,6 @@ p{
             width: 91%;
             height: 79%;
             margin: 0%;
-            padding: 1%;
             justify-content: flex-start;
             align-items: center;
         }
