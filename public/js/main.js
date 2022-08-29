@@ -19,6 +19,11 @@ let viewportWidth = window.innerWidth;
  * @param [nameDom] - The name of the user that is passed to the function.
  */
 
+document.querySelector('#btncarga1').addEventListener('click',()=>{
+    document.querySelector('.modal_mobile').style.display='block'
+})
+
+
 const viewNameInDom = (nameDom='')=>{
 
     //html with user name
@@ -155,11 +160,12 @@ const notification = (message='',color='')=>{
 
 
 
-const saveInfoForm = document.querySelector('#form_note')
-saveInfoForm.addEventListener('submit', (e)=> {
 /**
  * It saves the information in the local storage
- */
+ */            
+const saveInfoForm = document.querySelector('#form_note')
+saveInfoForm.addEventListener('submit', (e)=> {
+
     const saveInfo = ()=>{
         //input
             const inputProducto = document.querySelector('#inputalimento').value;
@@ -181,12 +187,15 @@ saveInfoForm.addEventListener('submit', (e)=> {
                 document.getElementById('inputalimento').value = "";
                 document.getElementById('seleccionicono').value = "";
                 document.getElementById('detalle').value = "";
+                const basket = document.querySelector('.basquet_trash')
+                basket.style.display = 'flex'
                 notification('save ok')
                 if(viewportWidth<990){
                     uiStart.style.display = 'none'
                     uiList.style.display = 'flex'
                     uiFinish.style.display = 'none' 
                     uiFormLogin.style.display = 'none' 
+
                 }
                 else{
                     //displays
@@ -200,8 +209,10 @@ saveInfoForm.addEventListener('submit', (e)=> {
         
         }
         saveInfo()     
-    e.preventDefault()
-})
+        e.preventDefault()
+
+
+    })
 
 
 
@@ -236,8 +247,10 @@ const viewListHTML = (data='',flag=null) =>{
 
 let btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain')
 btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
+    document.querySelector('.modal_mobile').style.display='none'
     uiList.style.display = 'none'
     uiStart.style.display = 'flex'
+
 })
 
 //****************** view list with option tag and select with querySelectorAll the li elements******/ 
@@ -245,8 +258,18 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
 created. */
 
 const li_Elements=document.querySelectorAll('.list_products')
-JSON.parse(localStorage.getItem('lists'))=== null || JSON.parse(localStorage.getItem('lists')).length===0?
-linkListUi.style.display = 'none':linkListUi.style.display = 'flex'
+const trash = document.querySelector('.basquet_trash')
+if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
+
+trash.style.display = 'none'
+linkListUi.style.display = 'none'
+}
+else{
+    linkListUi.style.display = 'flex'
+    trash.style.display = 'flx'
+
+}
+
 
 linkListUi.addEventListener('click',()=>{
     const view_Li_Elements = ()=>{
@@ -279,7 +302,7 @@ const btnDelete = document.querySelector('#btn_delete')
 btnDelete.addEventListener('click', ()=>{
 const data_Id_Btn = btnDelete.getAttribute('data-id')
 
-const messageDelete = 'Delete element complete!'
+const messageDelete = 'Delete complete!'
 
 const deleted = (productId='')=>{
     dataStorageParce = dataStorageParce.filter(data=>{
@@ -529,15 +552,6 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
 });
 
 
-
-
-//Button foward from UI list to Ui main
-
-
-
-//************
-
-
 /**
  * A function that creates a form with the inputs and selects that are necessary to create a note.
  * @param [sizeDevice] - The size of the device.
@@ -547,7 +561,10 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
 const formDynamicModel=(sizeDevice = '')=>{
     const $form = document.querySelector('#form_note') //<form></form>
     const modelForm_Inputs = 
-    `
+    `               
+    <div class="modal-body" >
+                    
+
     <div class="col-md-4 text_direction_start style_form_dektop___content_input">
     <label for="inputalimento" class="form-label">Name of the product</label>
     <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
@@ -586,8 +603,9 @@ const formDynamicModel=(sizeDevice = '')=>{
     </div>
 
     <div class="col-12 style_form_dektop___content_buttons">
-        <button type="button" class="btn btn-secondary btn-close-modal style_btns" data-bs-dismiss="modal" >X</button>
-        <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit" data-backdrop="false">OK</button>
+            <button type="button" class="btn btn-secondary btn-close-modal style_btns" data-bs-dismiss="modal" >X</button>
+            <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit">OK</button>
+    </div>
     </div>
 
 
@@ -595,7 +613,7 @@ const formDynamicModel=(sizeDevice = '')=>{
     
 
     if(sizeDevice>990){
-        return $form.innerHTML =modelForm_Inputs
+        return $form.innerHTML = modelForm_Inputs
     }
     else{
         const contentFormMobile = document.querySelector('#content_form_mobile')
@@ -620,8 +638,8 @@ const formResize = ()=> {
 window.addEventListener('resize',(e)=>{
     
     if (window.innerWidth>991) {   
-        window.location.reload()
         formDynamicModel(window.innerWidth)
+        window.location.reload()
         // timeResizeRefresh()
     }
     e.preventDefault
