@@ -75,7 +75,8 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
     localStorage.removeItem('lists');
     $iconsNav.style.display='none';
     notification('Delete complete lists','save_ok')
-    window.location.reload()
+    setTimeout(()=>window.location.reload(),9000);
+    
 })
 //******************************* */
 
@@ -103,8 +104,45 @@ window.addEventListener('DOMContentLoaded',()=>{
 //******************************* */
 
 
-    //View list at HTML
+//*********** Funtion for detecting className changes at the body *************
 
+
+/**
+ * It takes a state_body as an argument and returns a blur filter to the main section of the page if
+ * the state_body is not empty
+ * @param state_body - This is the state of the body. If it's empty, the blur filter is removed. If
+ * it's not empty, the blur filter is applied.
+ * @returns the mainSection.style.filter property.
+ */
+
+const blur_filter = (state_body)=>{
+    const mainSection = document.querySelector('.mainSection');
+    if(state_body!=''){
+        return mainSection.style.filter = 'blur(0.6rem)'
+    }
+    else {
+        return mainSection.style.filter = 'blur(0px)'
+    }
+}
+
+/**
+ * It listens for changes in the body element, and when it detects a change in the class attribute, it
+ * calls the blur_filter function
+ */
+
+const listen_Changes_In_Body = ()=>{
+    const view_Body = document.querySelector('body')  
+
+   const observer_Body = new MutationObserver((listMutation)=>{
+    listMutation.forEach(mutation => {
+        if(mutation.attributeName==='class'){
+            blur_filter(view_Body.className)
+        }
+    })
+   })
+   observer_Body.observe(view_Body,{attributes:true})
+}
+listen_Changes_In_Body();
 
 //******************* Save list in localStorage and view in html *******/
 /**
@@ -152,7 +190,7 @@ const notification = (message='',color='')=>{
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
     const timeDiv = ()=>{
-        setTimeout(() => section_notifications.style.display='none',5000)
+        setTimeout(() => section_notifications.style.display='none',7000)
     }
         timeDiv()
     }
@@ -318,7 +356,7 @@ localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
 notification(messageDelete,'delete_ok')
 
-setTimeout(() => window.location.reload(),5000)
+setTimeout(() => window.location.reload(),9000)
 })
 
 
@@ -346,15 +384,18 @@ btn_Edit.addEventListener('click', ()=>{
   
 
     id_Filter(data_Id_Btn_Edit)
+
     const editElement = (element)=>{
     let modelModalEdit = ''
     element.forEach(item=>{
         modelModalEdit=
         `
+        <div class="modal-body modal-edit-style" id="modalEdit">
+
         <div class="col-md-4 text_direction_start">
         <label for="editInputProduct" class="form-label">Name of the product</label>
         <input type="text" class="form-control" id="editInputProduct"
-            placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product}>
+            placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product} autofocus>
         <div class="valid-feedback">
             Good!
         </div>
@@ -385,13 +426,18 @@ btn_Edit.addEventListener('click', ()=>{
     <label for="editDetail" class="form-label">Any detail?</label>
         <textarea class="form-control is-invalid" id="editDetail" rows="3" maxlength="20" required>${item.textArea}</textarea>
     </div>
-
-</form>
-
+</div>
+<div class="modal-footer col-12 style_form_dektop___content_buttons">                    
+<button class="btn-ok-modal" type="submit">Save changes</button>
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='close-btn-modal'>Close</button>
+</div>
 
     `
-    })
-    contentModalEdit.innerHTML+=modelModalEdit;
+    contentModalEdit.innerHTML=modelModalEdit;
+})
+
+
+
 
     }
 //************----------------------------------*************/
@@ -426,7 +472,7 @@ saveEdit.addEventListener('submit', ()=>{
 
     notification(message_Notification,'edit_ok')
 
-    setTimeout(() => window.location.reload(),5000)
+    setTimeout(() => window.location.reload(),9000)
 
 })
 
@@ -442,9 +488,8 @@ const li_Event = (array_Li)=>{
     array_Li.forEach(elements=>{
         elements.addEventListener('click',(e)=>{
             const buttons = document.getElementById('buttons');
-            const content_ForwardListUi_to_MainUi= document.querySelector('#content_forwardButtonToListUi');
-        
-        
+            
+            
             document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
             document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');
             document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle');
@@ -452,22 +497,24 @@ const li_Event = (array_Li)=>{
             uiList.style.display = 'none';
             buttons.style.display = 'flex';
             content_ForwardListUi_to_MainUi.style.display = 'flex';
-        
+            
             
             
             document.getElementById('btn_delete').setAttribute('data-id',e.target.getAttribute('data-id'))
             document.getElementById('btn_edit').setAttribute('data-id',e.target.getAttribute('data-id'))
             
-            content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-                uiFinish.style.display = 'none';
-                uiList.style.display = 'flex'
-        
-            })
+            
         })
     })
+
 }
 
-
+const content_ForwardListUi_to_MainUi= document.querySelector('#forwardButtonToListUi');
+content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
+    uiFinish.style.display = 'none';
+    uiList.style.display = 'flex'
+    console.log('aca');
+})
 
 // const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
 
@@ -562,9 +609,8 @@ const formDynamicModel=(sizeDevice = '')=>{
     const $form = document.querySelector('#form_note') //<form></form>
     const modelForm_Inputs = 
     `               
-    <div class="modal-body" >
+    <div class="modal-body modal-body-style" >
                     
-
     <div class="col-md-4 text_direction_start style_form_dektop___content_input">
     <label for="inputalimento" class="form-label">Name of the product</label>
     <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
@@ -603,8 +649,8 @@ const formDynamicModel=(sizeDevice = '')=>{
     </div>
 
     <div class="col-12 style_form_dektop___content_buttons">
-            <button type="button" class="btn btn-secondary btn-close-modal style_btns" data-bs-dismiss="modal" >X</button>
-            <button class="btn1 btn btn-primary btn-ok-modal style_btns" type="submit">OK</button>
+            <button class="btn1 btn  btn-ok-modal style_btns" type="submit">OK</button>
+            <button type="button" class="btn btn-close-modal style_btns" data-bs-dismiss="modal" >Cancel</button>
     </div>
     </div>
 

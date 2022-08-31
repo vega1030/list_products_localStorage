@@ -47,7 +47,7 @@
     <!--Header-->
     <header class="header">
         <div class="boxtitle">
-            <h1 id="title1" class="title1"><strong> Your list shop </strong></h1>
+            <h1 id="title1" class="title1"> Your list shop </h1>
         </div>
 
     </header>
@@ -166,15 +166,15 @@
 
         <section class="contenido4" id="pantallafinal">
             <div class="content_forwardButtonToListUi content_btns_foward_style" id="content_forwardButtonToListUi">
-                <button type="button" class="btn1 btn-close btn_options forwardButton" aria-label="Close" id="forwardButtonToListUi"></button>
+                <button type="button" class="btn1 btn-close" aria-label="Close" id="forwardButtonToListUi"></button>
             </div>
             <div class="card_product" id="cardProduct">
                 <h2 id="subtitulofinal"></h2>
                 <img class="contenido4__icono" id="iconocontenido4" alt="icon">
                 <p id="detallefinal"></p>
                 <div class="buttons" id="buttons">
-                    <button type="button" class="btn1 btn_options btn-primary buttons-size btn_edit" id="btn_edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
-                    <button type="button" class="btn1 btn_options btn-primary buttons-size btn_delete" id="btn_delete">Delete</button>
+                    <button type="button" class="btn1  btn_edit" id="btn_edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+                    <button type="button" class="btn1  btn_delete" id="btn_delete">Delete</button>
                 </div>
             </div>
         </section>
@@ -186,21 +186,16 @@
     <div class="modal fade" id="exampleModal" data-bs-keyboard="true" data-bs-backdrop="static" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
+          <div class="modal-content modal-content-edit">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" id="modalEdit">
-                            <!--Inputs del modal-->
-                <form class="row g-3 needs-validation was-validated style_form_edit" id="form_note_edit" novalidate>
+            <!--Inputs del modal-->
+            <form class="row g-3 needs-validation was-validated style_form_edit" id="form_note_edit" novalidate>
 
-                    
                 </div>
-                <div class="modal-footer col-12 style_form_dektop___content_buttons">                    
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button class="btn1 btn btn-primary btn-ok-modal" type="submit">Save changes</button>
-                </div>
+
             </form>
           </div>
         </div>
