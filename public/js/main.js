@@ -11,7 +11,12 @@ const div_btn_foward = document.querySelector('#div_btn_foward')
 const content_btn_add = document.querySelector ('#content_button_add')
 const padre = document.getElementById('padre');
 let viewportWidth = window.innerWidth;
+const myModal = document.querySelector('#staticBackdrop')
+const myModalEdit = document.querySelector('#exampleModal')
+const instanceMyModal =  new bootstrap.Modal(myModal)
+const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
 
+console.log(instanceMyModal);
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
 /**
@@ -75,7 +80,7 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
     localStorage.removeItem('lists');
     $iconsNav.style.display='none';
     notification('Delete complete lists','save_ok')
-    setTimeout(()=>window.location.reload(),9000);
+    setTimeout(()=>window.location.reload(),7000);
     
 })
 //******************************* */
@@ -133,14 +138,14 @@ const blur_filter = (state_body)=>{
 const listen_Changes_In_Body = ()=>{
     const view_Body = document.querySelector('body')  
 
-   const observer_Body = new MutationObserver((listMutation)=>{
+    const observer_Body = new MutationObserver((listMutation)=>{
     listMutation.forEach(mutation => {
         if(mutation.attributeName==='class'){
             blur_filter(view_Body.className)
         }
     })
-   })
-   observer_Body.observe(view_Body,{attributes:true})
+    })
+    observer_Body.observe(view_Body,{attributes:true})
 }
 listen_Changes_In_Body();
 
@@ -228,11 +233,13 @@ saveInfoForm.addEventListener('submit', (e)=> {
                 const basket = document.querySelector('.basquet_trash')
                 basket.style.display = 'flex'
                 notification('save ok')
+                blur_filter('')
+                instanceMyModal.hide()
+
                 if(viewportWidth<990){
                     uiStart.style.display = 'none'
                     uiList.style.display = 'flex'
                     uiFinish.style.display = 'none' 
-                    uiFormLogin.style.display = 'none' 
 
                 }
                 else{
@@ -356,7 +363,7 @@ localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
 notification(messageDelete,'delete_ok')
 
-setTimeout(() => window.location.reload(),9000)
+setTimeout(() => window.location.reload(),7000)
 })
 
 
@@ -428,8 +435,8 @@ btn_Edit.addEventListener('click', ()=>{
     </div>
 </div>
 <div class="modal-footer col-12 style_form_dektop___content_buttons">                    
-<button class="btn-ok-modal" type="submit">Save changes</button>
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id='close-btn-modal'>Close</button>
+<button class="btn btn-ok-modal edit_btn_dimensions" type="submit">Save</button>
+<button type="button" class="btn btn-close-modal edit_btn_dimensions" data-bs-dismiss="modal" id='close-btn-modal'>Close</button>
 </div>
 
     `
@@ -469,10 +476,11 @@ saveEdit.addEventListener('submit', ()=>{
     dataStorage.splice(newUpdate,1,editListProducts)
 
     localStorage.setItem('lists', JSON.stringify(dataStorage))
-
+    instanceMyModalEdit.hide()
     notification(message_Notification,'edit_ok')
 
-    setTimeout(() => window.location.reload(),9000)
+
+    setTimeout(() => window.location.reload(),5000)
 
 })
 
