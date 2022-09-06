@@ -16,7 +16,6 @@ const myModalEdit = document.querySelector('#exampleModal')
 const instanceMyModal =  new bootstrap.Modal(myModal)
 const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
 
-console.log(instanceMyModal);
 //*************SAVE NAME USER IN LOCALSTORAGE******************* */
 
 /**
@@ -51,7 +50,6 @@ const btnName = document.querySelector('#form_name').addEventListener('submit', 
     if (userName === '') {
 
         notification('Complete with your Name','error_notifications');
-        section_notifications.style.display='flex'
     
     }
     
@@ -80,7 +78,7 @@ const btnclearStorage = document.querySelector('#clearStorage').addEventListener
     localStorage.removeItem('lists');
     $iconsNav.style.display='none';
     notification('Delete complete lists','save_ok')
-    setTimeout(()=>window.location.reload(),7000);
+    setTimeout(()=>window.location.reload(),6000);
     
 })
 //******************************* */
@@ -184,6 +182,7 @@ let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
  */
 const notification = (message='',color='')=>{
     const section_notifications = document.querySelector('#content_notifications')
+
     let modelNotificationDOM = 
     
     `<div class="content_notification fadeOut" id="notification_save_data">
@@ -194,10 +193,10 @@ const notification = (message='',color='')=>{
     `    
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
-    const timeDiv = ()=>{
-        setTimeout(() => section_notifications.style.display='none',7000)
-    }
-        timeDiv()
+    // const timeDiv = ()=>{
+    //     setTimeout(() => section_notifications.style.display='none',7000)
+    // }
+    //     timeDiv()
     }
 /*******************---------------------------------***************** */
 
@@ -363,7 +362,7 @@ localStorage.setItem('lists',JSON.stringify(filterDataParse))
 
 notification(messageDelete,'delete_ok')
 
-setTimeout(() => window.location.reload(),7000)
+setTimeout(() => window.location.reload(),4000)
 })
 
 
@@ -452,7 +451,7 @@ btn_Edit.addEventListener('click', ()=>{
 })
 
 const saveEdit = document.querySelector('#form_note_edit')
-saveEdit.addEventListener('submit', ()=>{
+saveEdit.addEventListener('submit', (e)=>{
     const message_Notification = 'Edit complete'
     const inputProduct = document.getElementById('editInputProduct').value;
     //seleccion icono
@@ -479,7 +478,7 @@ saveEdit.addEventListener('submit', ()=>{
     instanceMyModalEdit.hide()
     notification(message_Notification,'edit_ok')
 
-
+    e.preventDefault()
     setTimeout(() => window.location.reload(),5000)
 
 })
