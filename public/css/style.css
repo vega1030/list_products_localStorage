@@ -46,6 +46,12 @@
     color:#f9fafa
 }
 
+#clearStorage{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .boxtitle{
     color: var(--color-font-confirm);
     font-weight: 700;
@@ -83,6 +89,9 @@
 .buttons{
     width:60%;
     height:10%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .modal-content{
@@ -123,6 +132,14 @@
         box-shadow: 0 8px 6px -6px #9baebc;
     }
 
+    .btn_edit, .btn_delete{
+        justify-content: center;
+        align-items: center;
+    }
+    .buttons{
+        width: 100%;
+
+    }
     /*****----****/
 
 
@@ -137,15 +154,15 @@
 .foward_UIlist_to_UImain{
     display: flex;
     width:92%;
-    height:1%;
+    height:20%;
 }
 .foward_uiList_to_uiMain___btn{
-    border-radius: 50%;
     width: 5%;
-    height: 100%;
+    height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none
 }
 
 .modal-body{
@@ -351,8 +368,8 @@ body {
 
 
     .contenedor{
-    width: 200px;
-    height:200px;
+    width: 30%;
+    height:35%;
     position: absolute;
     order: 3;
     flex: 0 1 auto;
@@ -370,11 +387,13 @@ body {
     font-size: 35px;
     position: absolute;
     border: none;
-    right:0;
-    bottom:0;
-    box-shadow:     12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
-    -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;}
-
+    right: 0;
+    bottom: 0;
+    box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .form_login_style {
     display: flex;
     width:100%;
@@ -454,6 +473,9 @@ p{
         padding: 0;
     }
     
+    .buttons{
+        height: 13%;
+    }
 
     .mainSection{
         display: flex;
@@ -504,12 +526,12 @@ p{
         }
 
         .buttons{
-            width: 95%;
+            width: 100%;
             height: 16vh;
             flex-direction: row;
             justify-content: center;
-            gap: 30%;
-            align-items: flex-end;
+            gap: 37%;
+            align-items: center;
         }
         .btn_edit, .btn_delete{
             width: 35%;
@@ -567,7 +589,7 @@ p{
         overflow:hidden; 
         overflow-y:scroll;
         width: 70%;
-        height: 87%;
+        height: 83%;
         display: flex;
         align-items: center;
         top:6%
@@ -657,24 +679,28 @@ p{
     }
 
     .contenido4{
-        display:flex;
         flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
         align-content: center;
         align-items: center;
         text-align: center;
-        width: 100%;
-        height: 100%;
+        width: 81%;
+        height: 81%;
         padding: 0;
         margin-top: 0;
-        font-size: 100%;        
+        font-size: 100%;       
         }
 
 
     .card_product{
-        width: 90%;
-        height:80%
+        width: 53%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      
     }
 
     .form_desktop{
@@ -763,31 +789,8 @@ p{
 
     /************ Mobile orientation landscape*******/
 
-    @media only screen and (max-width:391px) and (orientation: landscape) {
 
-        .forwardButton{
-            height: 92%;
-        }
-        .content_forwardButtonToListUi{
-            height: 15%;
-        }
-        
-        header{
-            width: 100% !important;
-            height: 16vh !important;
-            background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);
-            color: var(--color-font);
-            display: flex;
-            justify-content: center;
-            align-items: center;   
 
-        }
-        .mainSection{
-            width: 100%;
-            height:84vh; 
-
-        }
-        }
 
 /******** Tablet */
 @media only screen and  (min-width:577px) and (orientation: portrait){
@@ -827,6 +830,9 @@ p{
         color: var(--color-font);
         width: 100%;
     }  
+
+    
+
     .mainSection{
         display: flex;
         justify-content: flex-start;
@@ -969,14 +975,144 @@ p{
     }
     
 }
+@media only screen and (max-width:990px) and (orientation: landscape) {
+
+    .forwardButton{
+        height: 92%;
+    }
+    .content_forwardButtonToListUi{
+        height: 15%;
+        width: 65%;
+        
+    }
+
+    .btn_delete, 
+    .btn_edit{
+        width: 52%;
+    }
     
+    header{
+        width: 100% !important;
+        height: 22vh !important;
+        background: linear-gradient(0deg, rgba(10,4,60,1) 36%, rgba(3,80,111,1) 100%);
+        color: var(--color-font);
+        display: flex;
+        justify-content: center;
+        align-items: center;   
+
+    }
+    .mainSection{
+        width: 100%;
+        height: 78vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+    }
+
+    .log_out_user___icon{
+        height: 10.9vh
+    }
+
+    .eye,
+    .basquet_trash{
+        height: 13vh  
+    }
+
+    .options_list{
+        padding: 0%;
+        height: 30%;
+        width: 26rem;
+    }
+
+    #btncarga1{
+        width: 5.9rem;
+        height: 5.9rem;
+    }
+
+    .contenido3{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: 100%;
+        height: 88%;
+
+    }
+
+    .ul_list_products{
+        height: 50%;
+        width: 46%;
+
+    }
+
+    .list_products{
+        width: 100%;
+        height: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem !important;
+    
+    }
+
+    .contenido3__icono{
+        width: 23%;
+        height: 100%;
+    }
+
+    .foward_UIlist_to_UImain{
+        width: 55%;
+        align-items: center;
+        justify-content:flex-start;
+        height: 20%;
+        position:absolute;
+        top:3%; 
+    }
+
+    .content_basket{
+        width: 6%;
+        height: 17%;
+        top: 90%;
+    }
+
+    .contenido4{
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+        padding: 1%;
+    }
+
+    .card_product{
+        width: 41%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-card-product);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+        height: 100%;
+        padding: 1%;
+    }
+
+    .contenido4__icono{
+        width: 80%;
+    }
+
+    }
+
+
     /***** Large Screen ****/
 
-@media only screen and (min-width: 991px){
+@media only screen and (min-width: 991px)  { 
 
     .buttons{
         width: 80%;
         height: 13%;
+        justify-content: space-around;
+        align-items: center;
     }
     
     #form_note{

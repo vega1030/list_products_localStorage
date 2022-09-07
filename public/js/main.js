@@ -310,7 +310,7 @@ linkListUi.style.display = 'none'
 }
 else{
     linkListUi.style.display = 'flex'
-    trash.style.display = 'flx'
+    trash.style.display = 'flex'
 
 }
 
