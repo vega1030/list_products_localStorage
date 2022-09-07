@@ -239,6 +239,7 @@ saveInfoForm.addEventListener('submit', (e)=> {
                     uiStart.style.display = 'none'
                     uiList.style.display = 'flex'
                     uiFinish.style.display = 'none' 
+                    btn_foward_uiList_to_uiMain.style.display = 'flex'
 
                 }
                 else{
@@ -294,6 +295,7 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
     document.querySelector('.modal_mobile').style.display='none'
     uiList.style.display = 'none'
     uiStart.style.display = 'flex'
+    window.location.reload();
 
 })
 
