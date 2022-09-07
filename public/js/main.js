@@ -403,7 +403,7 @@ btn_Edit.addEventListener('click', ()=>{
         <div class="col-md-4 text_direction_start">
         <label for="editInputProduct" class="form-label">Name of the product</label>
         <input type="text" class="form-control" id="editInputProduct"
-            placeholder="Verdura/bebidas/comida para mi gato" maxlength="10" required="required" value=${item.product} autofocus>
+            placeholder="vegetable/pen drive/pets articles" maxlength="15" required="required" value=${item.product} autofocus>
         <div class="valid-feedback">
             Good!
         </div>
@@ -416,13 +416,13 @@ btn_Edit.addEventListener('click', ()=>{
         <label for="seleccionicono" class="form-label">Category</label>
         <select class="form-select" id="editSeletIcon" required>
             <option selected disabled value="">Choose...</option>
-            <option value="img/comidita.svg">Comidita</option>
-            <option value="img/electronica.svg">Electronica</option>
-            <option value="img/ferreteria2.svg">Ferreteria</option>
-            <option value="img/limpieza.svg">Limpieza</option>
-            <option value="img/mascota.svg">Mascotas</option>
-            <option value="img/perfumeria.svg">Perfumeria</option>
-            <option value="img/varios.svg">Varios</option>
+            <option value="img/comidita.svg">Food</option>
+            <option value="img/electronica.svg">Electronic</option>
+            <option value="img/ferreteria2.svg">Hardware Store</option>
+            <option value="img/limpieza.svg">Cleaning Articles</option>
+            <option value="img/mascota.svg">Pets</option>
+            <option value="img/perfumeria.svg">Perfumery</option>
+            <option value="img/varios.svg">Others</option>
         </select>
 
         <div class="invalid-feedback">
@@ -622,7 +622,8 @@ const formDynamicModel=(sizeDevice = '')=>{
                     
     <div class="col-md-4 text_direction_start style_form_dektop___content_input">
     <label for="inputalimento" class="form-label">Name of the product</label>
-    <input type="text" class="form-control" id="inputalimento"placeholder="Verdura/bebidas/comida para mi gato" maxlength="15" required>
+    <input type="text" class="form-control" id="inputalimento"
+    placeholder="vegetable/pen drive/pets articles" maxlength="15" required>
     <div class="valid-feedback">
         Good!
     </div>
@@ -638,11 +639,11 @@ const formDynamicModel=(sizeDevice = '')=>{
             <option selected disabled value="">Choose...</option>
             <option value="img/comidita.svg">Food</option>
             <option value="img/electronica.svg">Electronic</option>
-            <option value="img/ferreteria2.svg">Ferreteria</option>
-            <option value="img/limpieza.svg">Limpieza</option>
-            <option value="img/mascota.svg">Animales</option>
-            <option value="img/perfumeria.svg">Perfumeria</option>
-            <option value="img/varios.svg">Varios</option>
+            <option value="img/ferreteria2.svg">Hardware Store</option>
+            <option value="img/limpieza.svg">Cleaning Articles</option>
+            <option value="img/mascota.svg">Pets</option>
+            <option value="img/perfumeria.svg">Perfumery</option>
+            <option value="img/varios.svg">Others</option>
         </select>
     <div class="invalid-feedback">
         Please, select one category.
