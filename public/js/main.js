@@ -1,4 +1,9 @@
-//Captura pantallas
+import { add_Name_At_LocalStorage, 
+        delete_All_Elements_At_LocalStorage,
+        saveInfo,saveDataLocalStorage,deleted } 
+        from "./bussiness_side.js";
+
+//Capture screens
 const uiStart = document.getElementById('interfaz1');
 const uiList = document.getElementById('interfazlistado');
 const uiFinish = document.getElementById('pantallafinal');
@@ -13,101 +18,111 @@ const padre = document.getElementById('padre');
 let viewportWidth = window.innerWidth;
 const myModal = document.querySelector('#staticBackdrop')
 const myModalEdit = document.querySelector('#exampleModal')
+
 const instanceMyModal =  new bootstrap.Modal(myModal)
 const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
 
-//*************SAVE NAME USER IN LOCALSTORAGE******************* */
+document.querySelector('#btncarga1').addEventListener('click',()=>{
+    document.querySelector('.modal_mobile').style.display='block'
+})
 
 /**
  * It takes a string as an argument and returns a string
  * @param [nameDom] - The name of the user that is passed to the function.
  */
 
-document.querySelector('#btncarga1').addEventListener('click',()=>{
-    document.querySelector('.modal_mobile').style.display='block'
-})
 
-
-const viewNameInDom = (nameDom='')=>{
-
-    //html with user name
-    const modelUserName = 
-    `            
-    <main class="welcomeUser" id="welcomeUser">
-        <h2>Hola</h2>
+const createMainUi = (nameDom='')=>{
+    if(nameDom === false){
+        return notification('Complete with your Name','error_notifications')    
+    }
+    else{
+        const modelUserName = 
+        `            
+        <main class="welcomeUser" id="welcomeUser">
+            <h2>Hola</h2>
+            
+            <h2 class="name_user">  ${nameDom}!!</h2>
+        </main>
+        `
+/**
+ * It hides the login form and displays the start page and the options in the start page
+ */
+        const display_At_Ui_Main=()=>{
+            uiFormLogin.style.display='none';
+            uiStart.style.display = 'flex';
+            optionsInUiStart.style.display='flex';  
+        }
         
-        <h2 class="name_user">  ${nameDom}!!</h2>
-    </main>
-    `
-    contentModelNameUser.innerHTML=modelUserName;
+        display_At_Ui_Main()
+
+        return contentModelNameUser.innerHTML=modelUserName;
+    }
+
 }
 
-/* This is a function that is called when the user clicks on the button to save the name. */
-const btnName = document.querySelector('#form_name').addEventListener('submit', (e)=>{
+//*************************************************/
+
+/* The above code is creating a listener for the DOMContentLoaded event. When the event is fired, the
+createMainUi function is called with the value of the name key in localStorage. */
+
+window.addEventListener('DOMContentLoaded',()=>{
+    createMainUi(localStorage.getItem('name'))
+});
+
+//*************************************************/
+
+/* The above code is adding an event listener to the form element with the id of form_name. The event
+listener is listening for a submit event. When the submit event is triggered, the function is
+called. The function is getting the value of the input element with the id of nameUserInput. The
+function is then calling the add_Name_At_LocalStorage function and passing the userName variable as
+an argument. The function is then calling the createMainUi function and passing the
+localStorage.getItem('name') as an argument. The function is then calling the formDynamicModel */
+
+document.querySelector('#form_name').addEventListener('submit', (e)=>{
     const userName = document.getElementById('nameUserInput').value;
-    //validation of name and view in HTML5
-
-    if (userName === '') {
-
-        notification('Complete with your Name','error_notifications');
     
-    }
+    add_Name_At_LocalStorage(userName)
+
+    createMainUi(localStorage.getItem('name'))
     
-    else{
-        const logOutUser = document.querySelector('#logOutUser')
-        optionsInUiStart.style.display = 'flex'
-        content_btn_add.style.display='flex';
-        localStorage.setItem('name', userName);
-        viewNameInDom(localStorage.getItem('name'));
-        uiFormLogin.style.display='none';
-        contentModelNameUser.style.display = 'flex';
-        uiStart.style.display = 'flex';
-        formDynamicModel(viewportWidth);
-        uiList.style.display='flex';   
-        optionsInUiStart.style.display='flex';  
-        logOutUser.style.display='flex';   
-        loadDOMList();
-    }
+    formDynamicModel(viewportWidth)
+    
     e.preventDefault();
     })
-//************************ */
 
-//************* Delete localStorage */
-const btnclearStorage = document.querySelector('#clearStorage').addEventListener('click',()=>{
-    const $iconsNav = document.querySelector('#icons_options')
-    localStorage.removeItem('lists');
+
+//*************************************************/
+
+/* The above code is deleting all the lists from the local storage. */
+
+document.querySelector('#clearStorage').addEventListener('click',()=>{
+    const $iconsNav = document.querySelector('#options_list')
+
+    delete_All_Elements_At_LocalStorage('lists')
     $iconsNav.style.display='none';
+    
     notification('Delete complete lists','save_ok')
+    
     setTimeout(()=>window.location.reload(),6000);
     
 })
 //******************************* */
 
- 
 
-//************ Delete User *****************/
 
-const logOutUserStorage = document.querySelector('#logOutUser')
+/* The above code is deleting the name of the user from the local storage and reloading the page. */
+
+document.querySelector('#logOutUser')
 .addEventListener('click',()=>{
-    localStorage.removeItem('name');
-    localStorage.removeItem('lists')
+    delete_All_Elements_At_LocalStorage('name');
     const clearNameUser = document.getElementById('nameUserInput');
     clearNameUser.value = '';
     window.location.reload()
 })
 
-//******************************* */
-
-//************ Load user name when refresh page*/
-
-window.addEventListener('DOMContentLoaded',()=>{
-    viewNameInDom(localStorage.getItem('name'))
-});
 
 //******************************* */
-
-
-//*********** Funtion for detecting className changes at the body *************
 
 
 /**
@@ -128,6 +143,8 @@ const blur_filter = (state_body)=>{
     }
 }
 
+//*************************************************/
+
 /**
  * It listens for changes in the body element, and when it detects a change in the class attribute, it
  * calls the blur_filter function
@@ -147,42 +164,13 @@ const listen_Changes_In_Body = ()=>{
 }
 listen_Changes_In_Body();
 
-//******************* Save list in localStorage and view in html *******/
-/**
- * 
- * @param [data] - The data to be saved in localStorage.
- */
-const saveDataLocalStorage = (data='') => {
-
-    if(data==='' || null ){
-    uiList.style.display = 'none'
-    return console.log('error')
-
-    }
-    else {
-        let dataLocalStorage = [];
-        dataLocalStorage = JSON.parse(localStorage.getItem('lists')) || [];
-        dataLocalStorage.push(data)
-        localStorage.setItem('lists', JSON.stringify(dataLocalStorage))
-        const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
-        viewListHTML(dataStorageParce)
-        const messageNotification = 'Save data OK!'
-        notification(messageNotification,'save_ok')
-        
-
-    }
-}
-
-let dataStorageParce = JSON.parse(localStorage.getItem('lists'))
-
-//************* Notifications ********************************************//
+//*************************************************/
 
 /**
  * The function creates a notification div with a message and displays it for 3 seconds
  */
 const notification = (message='',color='')=>{
     const section_notifications = document.querySelector('#content_notifications')
-
     let modelNotificationDOM = 
     
     `<div class="content_notification fadeOut" id="notification_save_data">
@@ -193,84 +181,70 @@ const notification = (message='',color='')=>{
     `    
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
-    // const timeDiv = ()=>{
-    //     setTimeout(() => section_notifications.style.display='none',7000)
-    // }
-    //     timeDiv()
+    const timeDiv = ()=>{
+        setTimeout(() => section_notifications.style.display='none',7000)
     }
-/*******************---------------------------------***************** */
+        timeDiv()
+    }
 
+//*************************************************/
 
 
 /**
- * It saves the information in the local storage
+ * It saves the information at the local storage
  */            
-const saveInfoForm = document.querySelector('#form_note')
-saveInfoForm.addEventListener('submit', (e)=> {
+const eventForm = document.querySelector('#form_note')
+eventForm.addEventListener('submit', (e)=> {
 
-    const saveInfo = ()=>{
-        //input
-            const inputProducto = document.querySelector('#inputalimento').value;
-             //seleccion icono
-            const seleccion = document.querySelector('#seleccionicono').value;
-             //text area
-            const textArea = document.querySelector('#detalle').value;
-            const id =  crypto.randomUUID().slice(4,13)
-            const listProducts= {
-                product:inputProducto,
-                select:seleccion,
-                textArea:textArea,
-                id:id
-            }
+    const inputProducto = document.querySelector('#inputalimento').value;
+    const seleccion = document.querySelector('#seleccionicono').value;
+    const textArea = document.querySelector('#detalle').value;
+    const id =  crypto.randomUUID().slice(4,13)
 
+    saveDataLocalStorage(saveInfo(inputProducto, seleccion, textArea, id))
 
-            if (listProducts.product && listProducts.select !==''){
-                //reset modal
-                document.getElementById('inputalimento').value = "";
-                document.getElementById('seleccionicono').value = "";
-                document.getElementById('detalle').value = "";
-                const basket = document.querySelector('.basquet_trash')
-                basket.style.display = 'flex'
-                notification('save ok')
-                blur_filter('')
-                instanceMyModal.hide()
-
-                if(viewportWidth<990){
-                    uiStart.style.display = 'none'
-                    uiList.style.display = 'flex'
-                    uiFinish.style.display = 'none' 
-                    btn_foward_uiList_to_uiMain.style.display = 'flex'
-
-                }
-                else{
-                    //displays
-                    uiStart.style.display = 'flex'
-                    uiList.style.display = 'flex'
-                    uiFinish.style.display = 'none' 
-                    uiFormLogin.style.display = 'none' 
-                }
-                return saveDataLocalStorage(listProducts)
-            } 
-        
+    document.getElementById('inputalimento').value = "";
+    document.getElementById('seleccionicono').value = "";
+    document.getElementById('detalle').value = "";
+            
+    notification('save ok')
+            
+    blur_filter('')
+    instanceMyModal.hide()
+            
+    const basket = document.querySelector('.basquet_trash')
+    if(viewportWidth<990){
+        uiStart.style.display = 'none'
+        uiList.style.display = 'flex'
+        uiFinish.style.display = 'none' 
+        btn_foward_uiList_to_uiMain.style.display = 'flex'
+        basket.style.display = 'flex'
         }
-        saveInfo()     
-        e.preventDefault()
-
-
+    else{
+        uiStart.style.display = 'flex'
+        uiList.style.display = 'flex'
+        uiFinish.style.display = 'none' 
+        uiFormLogin.style.display = 'none' 
+        basket.style.display = 'flex'
+        }  
+                
+    viewListHTML(JSON.parse(localStorage.getItem('lists')))
+    e.preventDefault()
     })
 
+//*************************************************/
 
 
 /**
  * It takes an array of objects as an argument, and returns a string of HTML
  * @param [data] - The data that will be used to create the list.
  */
+
 const viewListHTML = (data='',flag=null) =>{
 
-    if(data!==null||flag ===true){
+    if(data!==null||flag === true){
 
-        let modeloLista = ''
-            
+        let modeloLista = ''    
         data.forEach((element)=>{
             modeloLista += `
             <li class=" p-3 mb-5 list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
@@ -278,17 +252,16 @@ const viewListHTML = (data='',flag=null) =>{
             </li>`
             padre.innerHTML = modeloLista
             })
-        
-        
         const itemsList = document.querySelectorAll(".list_products")
         const lastItem = itemsList[itemsList.length-1]
         lastItem.scrollIntoView()
-        }
+    }
     }
 
-//******************************* */
+//*************************************************/
 
 
+/* The above code is a button that is used to go back to the main page. */
 
 let btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain')
 btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
@@ -296,43 +269,45 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
     uiList.style.display = 'none'
     uiStart.style.display = 'flex'
     window.location.reload();
-
 })
 
-//****************** view list with option tag and select with querySelectorAll the li elements******/ 
+//*************************************************/
+
+
 /* The above code is creating a function that will display the list of products that the user has
 created. */
 
-const li_Elements=document.querySelectorAll('.list_products')
 const trash = document.querySelector('.basquet_trash')
 if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
-
 trash.style.display = 'none'
 linkListUi.style.display = 'none'
 }
 else{
     linkListUi.style.display = 'flex'
     trash.style.display = 'flex'
-
 }
 
+//******************-----------**********************/
+/* The above code is adding an event listener to the linkListUi element. When the linkListUi element is
+clicked, the view_Li_Elements function is called. The view_Li_Elements function is a function that
+calls the li_Event function. The li_Event function is a function that adds an event listener to all
+the li elements. The li elements are the elements that are created when the user creates a list. The
+li elements are created in the viewListHTML function. The viewListHTML function is called in the
+above code. The viewListHTML function */
 
 linkListUi.addEventListener('click',()=>{
     const view_Li_Elements = ()=>{
         const li_Elements=document.querySelectorAll('.list_products')
         li_Event(li_Elements)
-        
     } 
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
-    const dataStorageParce = JSON.parse(localStorage.getItem('lists'))
-    viewListHTML(dataStorageParce)
+    viewListHTML(JSON.parse(localStorage.getItem('lists')))
     btn_foward_uiList_to_uiMain.style.display = 'flex'    
-
     view_Li_Elements()
     })
 
-//********************************/
+//*************************************************/
 
 
 
@@ -340,40 +315,21 @@ linkListUi.addEventListener('click',()=>{
 
 //**************** Delete Element in LocalStorage */
 
-/* This is a function that is called when the user clicks on the button to delete the list.
-And remove individual item at LocalStorage
-*/
+/*  */
 
 const btnDelete = document.querySelector('#btn_delete')
 btnDelete.addEventListener('click', ()=>{
-const data_Id_Btn = btnDelete.getAttribute('data-id')
+    const data_Id_Btn = btnDelete.getAttribute('data-id')
 
-const messageDelete = 'Delete complete!'
+    const messageDelete = 'Delete complete!'
+    deleted(data_Id_Btn)
+    notification(messageDelete,'delete_ok')
 
-const deleted = (productId='')=>{
-    dataStorageParce = dataStorageParce.filter(data=>{
-        return data.id != productId;       
-    })
+    setTimeout(() => window.location.reload(),4000)
 
-}
-
-deleted(data_Id_Btn)
-const filterDataParse = dataStorageParce
-localStorage.setItem('lists',JSON.stringify(filterDataParse))
-
-
-notification(messageDelete,'delete_ok')
-
-setTimeout(() => window.location.reload(),4000)
 })
-
-
 //************----------------------------------*************/
 
-
-
-
-    //listener of btn Edit
 
     //******* Call modal edit *********/ 
 const btn_Edit = document.querySelector('#btn_edit')
@@ -525,9 +481,6 @@ content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
     console.log('aca');
 })
 
-// const llamadaFinal = document.querySelector('#padre').addEventListener('click', (e)=> {
-
-// })
 
 
 
@@ -592,7 +545,7 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
         uiStart.style.display = 'flex';
         displayList(viewportWidth)
         uiFinish.style.display = 'none' 
-        viewListHTML(dataStorageParce)
+        viewListHTML(JSON.parse(localStorage.getItem('lists')))
     }
     const displayDOMForm = ()=>{
         uiStart.style.display = 'none';
@@ -704,5 +657,3 @@ window.addEventListener('resize',(e)=>{
 
 loadDOMList()
 formResize()
-
-
