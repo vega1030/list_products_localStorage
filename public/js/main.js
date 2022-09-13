@@ -1,6 +1,6 @@
 import { add_Name_At_LocalStorage, 
         delete_All_Elements_At_LocalStorage,
-        saveInfo,saveDataLocalStorage,deleted } 
+        saveInfo,saveDataLocalStorage,deleted,id_Filter,upDateProduct } 
         from "./bussiness_side.js";
 
 //Capture screens
@@ -21,6 +21,8 @@ const myModalEdit = document.querySelector('#exampleModal')
 
 const instanceMyModal =  new bootstrap.Modal(myModal)
 const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
+
+let data_At_Storage =''
 
 document.querySelector('#btncarga1').addEventListener('click',()=>{
     document.querySelector('.modal_mobile').style.display='block'
@@ -201,7 +203,9 @@ eventForm.addEventListener('submit', (e)=> {
     const textArea = document.querySelector('#detalle').value;
     const id =  crypto.randomUUID().slice(4,13)
 
-    saveDataLocalStorage(saveInfo(inputProducto, seleccion, textArea, id))
+    data_At_Storage = saveDataLocalStorage(saveInfo(inputProducto, seleccion, textArea, id))
+
+    
 
     document.getElementById('inputalimento').value = "";
     document.getElementById('seleccionicono').value = "";
@@ -213,6 +217,8 @@ eventForm.addEventListener('submit', (e)=> {
     instanceMyModal.hide()
             
     const basket = document.querySelector('.basquet_trash')
+ 
+    
     if(viewportWidth<990){
         uiStart.style.display = 'none'
         uiList.style.display = 'flex'
@@ -228,7 +234,8 @@ eventForm.addEventListener('submit', (e)=> {
         basket.style.display = 'flex'
         }  
                 
-    viewListHTML(JSON.parse(localStorage.getItem('lists')))
+    viewListHTML(data_At_Storage)
+
     e.preventDefault()
     })
 
@@ -278,7 +285,7 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
 created. */
 
 const trash = document.querySelector('.basquet_trash')
-if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
+if(data_At_Storage === null || data_At_Storage.length===0){
 trash.style.display = 'none'
 linkListUi.style.display = 'none'
 }
@@ -302,7 +309,7 @@ linkListUi.addEventListener('click',()=>{
     } 
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
-    viewListHTML(JSON.parse(localStorage.getItem('lists')))
+    viewListHTML(data_At_Storage)
     btn_foward_uiList_to_uiMain.style.display = 'flex'    
     view_Li_Elements()
     })
@@ -310,12 +317,8 @@ linkListUi.addEventListener('click',()=>{
 //*************************************************/
 
 
-
-
-
 //**************** Delete Element in LocalStorage */
 
-/*  */
 
 const btnDelete = document.querySelector('#btn_delete')
 btnDelete.addEventListener('click', ()=>{
@@ -332,85 +335,71 @@ btnDelete.addEventListener('click', ()=>{
 
 
     //******* Call modal edit *********/ 
-const btn_Edit = document.querySelector('#btn_edit')
-btn_Edit.addEventListener('click', ()=>{
+/* The above code is creating a function that will be executed when the user clicks on the edit button. */
 
-    const contentModalEdit = document.querySelector('#form_note_edit')
-    const data_Id_Btn_Edit = btn_Edit.getAttribute('data-id')
+    const btn_Edit = document.querySelector('#btn_edit')
+    btn_Edit.addEventListener('click', ()=>{
     
-    const id_Filter = (editProductId ='')=>{
-        dataStorageParce = dataStorageParce.filter(data=>{
-            return data.id === editProductId
-        })
-        
-    }
-
-  
-
-    id_Filter(data_Id_Btn_Edit)
-
-    const editElement = (element)=>{
-    let modelModalEdit = ''
-    element.forEach(item=>{
-        modelModalEdit=
-        `
-        <div class="modal-body modal-edit-style" id="modalEdit">
-
-        <div class="col-md-4 text_direction_start">
-        <label for="editInputProduct" class="form-label">Name of the product</label>
-        <input type="text" class="form-control" id="editInputProduct"
-            placeholder="vegetable/pen drive/pets articles" maxlength="15" required="required" value=${item.product} autofocus>
-        <div class="valid-feedback">
-            Good!
-        </div>
-    <div class="invalid-feedback">
-        Please, enter the product.
-    </div>
-    </div>
-
-    <div class="col-md-3 text_direction_start">
-        <label for="seleccionicono" class="form-label">Category</label>
-        <select class="form-select" id="editSeletIcon" required>
-            <option selected disabled value="">Choose...</option>
-            <option value="img/comidita.svg">Food</option>
-            <option value="img/electronica.svg">Electronic</option>
-            <option value="img/ferreteria2.svg">Hardware Store</option>
-            <option value="img/limpieza.svg">Cleaning Articles</option>
-            <option value="img/mascota.svg">Pets</option>
-            <option value="img/perfumeria.svg">Perfumery</option>
-            <option value="img/varios.svg">Others</option>
-        </select>
-
+        const contentModalEdit = document.querySelector('#form_note_edit')
+        const data_Id_Btn_Edit = btn_Edit.getAttribute('data-id')
+    
+        const editElement = (element)=>{
+        let modelModalEdit = ''
+        element.forEach(item=>{
+            modelModalEdit=
+            `
+            <div class="modal-body modal-edit-style" id="modalEdit">
+            <div class="col-md-4 text_direction_start">
+            <label for="editInputProduct" class="form-label">Name of the product</label>
+            <input type="text" class="form-control" id="editInputProduct"
+                placeholder="vegetable/pen drive/pets articles" maxlength="15" required="required" value=${item.product} autofocus>
+            <div class="valid-feedback">
+                Good!
+            </div>
         <div class="invalid-feedback">
-            Please, select one category.
+            Please, enter the product.
+        </div>
+        </div>
+        <div class="col-md-3 text_direction_start">
+            <label for="seleccionicono" class="form-label">Category</label>
+            <select class="form-select" id="editSeletIcon" required>
+                <option selected disabled value="">Choose...</option>
+                <option value="img/comidita.svg">Food</option>
+                <option value="img/electronica.svg">Electronic</option>
+                <option value="img/ferreteria2.svg">Hardware Store</option>
+                <option value="img/limpieza.svg">Cleaning Articles</option>
+                <option value="img/mascota.svg">Pets</option>
+                <option value="img/perfumeria.svg">Perfumery</option>
+                <option value="img/varios.svg">Others</option>
+            </select>
+            <div class="invalid-feedback">
+                Please, select one category.
+            </div>
+        </div>
+        <div class="mb-3 text_direction_start">
+        <label for="editDetail" class="form-label">Any detail?</label>
+            <textarea class="form-control is-invalid" id="editDetail" rows="3" maxlength="20" required>${item.textArea}</textarea>
         </div>
     </div>
-
-    <div class="mb-3 text_direction_start">
-    <label for="editDetail" class="form-label">Any detail?</label>
-        <textarea class="form-control is-invalid" id="editDetail" rows="3" maxlength="20" required>${item.textArea}</textarea>
+    <div class="modal-footer col-12 style_form_dektop___content_buttons">                    
+    <button class="btn btn-ok-modal edit_btn_dimensions" type="submit">Save</button>
+    <button type="button" class="btn btn-close-modal edit_btn_dimensions" data-bs-dismiss="modal" id='close-btn-modal'>Close</button>
     </div>
-</div>
-<div class="modal-footer col-12 style_form_dektop___content_buttons">                    
-<button class="btn btn-ok-modal edit_btn_dimensions" type="submit">Save</button>
-<button type="button" class="btn btn-close-modal edit_btn_dimensions" data-bs-dismiss="modal" id='close-btn-modal'>Close</button>
-</div>
-
-    `
-    contentModalEdit.innerHTML=modelModalEdit;
+        `
+        contentModalEdit.innerHTML=modelModalEdit;
+    })
+        }
+        editElement(id_Filter(data_Id_Btn_Edit));
 })
+/* The above code is the event listener of the form of the edit modal, it is taking the values of the
+inputs and the text area and sending them to the function upDateProduct, which is in charge of
+updating the data in the database. */
 
+document.querySelector('#form_note_edit')
+.addEventListener('submit', (e)=>{
 
-
-
-    }
-//************----------------------------------*************/
-    editElement(dataStorageParce)
-})
-
-const saveEdit = document.querySelector('#form_note_edit')
-saveEdit.addEventListener('submit', (e)=>{
     const message_Notification = 'Edit complete'
+
     const inputProduct = document.getElementById('editInputProduct').value;
     //seleccion icono
     const selectIcon = document.getElementById('editSeletIcon').value;
@@ -423,20 +412,15 @@ saveEdit.addEventListener('submit', (e)=>{
         textArea:textAreaEdited,
         id:data_Id_Btn
     }
-    const dataStorage = JSON.parse(localStorage.getItem('lists'))
 
-    // const updateData = dataStorage.forEach(x=>(x.id === data_Id_Btn?{...x,update:3}:x))
-    // console.log(dataStorage)
-
-    const newUpdate = dataStorage.findIndex(element=>element.id ===editListProducts.id)
-    //update at localStorage and parse JSON to String
-    dataStorage.splice(newUpdate,1,editListProducts)
-
-    localStorage.setItem('lists', JSON.stringify(dataStorage))
+    upDateProduct(editListProducts)
+ 
     instanceMyModalEdit.hide()
+    
     notification(message_Notification,'edit_ok')
 
     e.preventDefault()
+
     setTimeout(() => window.location.reload(),5000)
 
 })
@@ -478,7 +462,6 @@ const content_ForwardListUi_to_MainUi= document.querySelector('#forwardButtonToL
 content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
     uiFinish.style.display = 'none';
     uiList.style.display = 'flex'
-    console.log('aca');
 })
 
 
