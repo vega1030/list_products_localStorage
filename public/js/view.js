@@ -1,7 +1,7 @@
 import { add_Name_At_LocalStorage, 
         delete_All_Elements_At_LocalStorage,
         saveInfo,saveDataLocalStorage,deleted,id_Filter,upDateProduct } 
-        from "./bussiness_side.js";
+        from "./controller.js";
 
 //Capture screens
 const uiStart = document.getElementById('interfaz1');
@@ -168,6 +168,30 @@ listen_Changes_In_Body();
 
 //*************************************************/
 
+// const listen_Changes_At_Ul = ()=>{
+
+//     const ulView = document.querySelector('#padre')
+    
+//     ulView.addEventListener('click',(e)=>{
+//         console.log("🚀 ~ file: main.js ~ line 178 ~ ulView.addEventListener ~ e", e);
+//     })
+
+//     const observer_Ul = new MutationObserver((listMutation)=>{
+//         listMutation.forEach(mutation =>{
+//             mutation.addedNodes.forEach(added_node => {
+//                 console.log(added_node);
+//                 if(added_node.attributeName ==='class'){
+//                     console.log('add node')
+//                     observer_Ul.disconnect()
+//                 }
+//             })
+//         })
+//     }
+//     )
+//     observer_Ul.observe(ulView,{subtree:true,chidList:true})
+// }
+// listen_Changes_At_Ul()
+
 /**
  * The function creates a notification div with a message and displays it for 3 seconds
  */
@@ -234,7 +258,7 @@ eventForm.addEventListener('submit', (e)=> {
         basket.style.display = 'flex'
         }  
                 
-    viewListHTML(data_At_Storage)
+    viewListHTML(JSON.parse(localStorage.getItem('lists')))
 
     e.preventDefault()
     })
@@ -285,7 +309,7 @@ btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
 created. */
 
 const trash = document.querySelector('.basquet_trash')
-if(data_At_Storage === null || data_At_Storage.length===0){
+if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
 trash.style.display = 'none'
 linkListUi.style.display = 'none'
 }
@@ -309,7 +333,7 @@ linkListUi.addEventListener('click',()=>{
     } 
     uiList.style.display = 'flex'
     uiStart.style.display = 'none'
-    viewListHTML(data_At_Storage)
+    viewListHTML(JSON.parse(localStorage.getItem('lists')))
     btn_foward_uiList_to_uiMain.style.display = 'flex'    
     view_Li_Elements()
     })
@@ -391,6 +415,10 @@ btnDelete.addEventListener('click', ()=>{
         }
         editElement(id_Filter(data_Id_Btn_Edit));
 })
+
+//************----------------------------------*************/
+
+
 /* The above code is the event listener of the form of the edit modal, it is taking the values of the
 inputs and the text area and sending them to the function upDateProduct, which is in charge of
 updating the data in the database. */
@@ -425,9 +453,9 @@ document.querySelector('#form_note_edit')
 
 })
 
-
-
 //************---------------------------------------------------------------- */
+
+
 
 /* This is a function that is called when the user clicks on the list item. */
 
@@ -437,7 +465,6 @@ const li_Event = (array_Li)=>{
     array_Li.forEach(elements=>{
         elements.addEventListener('click',(e)=>{
             const buttons = document.getElementById('buttons');
-            
             
             document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
             document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');

@@ -4,7 +4,7 @@ import {
     delete_Elements_At_LocalStorage,
     data_At_Storage_JSON ,
     data_At_Storage_String
-} from './localStorage_Data.js'
+} from './model.js'
 
 
 const name_Of_Key_Note_Storage = 'lists'
