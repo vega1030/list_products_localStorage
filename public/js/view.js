@@ -124,14 +124,14 @@ document.querySelector('#logOutUser')
 /**
  * It takes a state_body as an argument and returns a blur filter to the main section of the page if
  * the state_body is not empty
- * @param state_body - This is the state of the body. If it's empty, the blur filter is removed. If
+ * @param state_ - This is the state of the body. If it's empty, the blur filter is removed. If
  * it's not empty, the blur filter is applied.
  * @returns the mainSection.style.filter property.
  */
 
-const blur_filter = (state_body)=>{
+const blur_filter = (state_)=>{
     const mainSection = document.querySelector('.mainSection');
-    if(state_body!=''){
+    if(state_!=''){
         return mainSection.style.filter = 'blur(0.6rem)'
     }
     else {
@@ -179,10 +179,8 @@ const notification = (message='',color='')=>{
     `    
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
-    // const timeDiv = ()=>{
-    //     setTimeout(() => section_notifications.style.display='none',7000)
-    // }
-    //     timeDiv()
+    
+    setTimeout(() => section_notifications.style.display='none',7000)
     }
 
 //*************************************************/
@@ -214,7 +212,7 @@ eventForm.addEventListener('submit', (e)=> {
             
     notification('Saved')
             
-    const basket = document.querySelector('.basquet_trash')
+    
 
     document.querySelector('#formLogin').style.display='none';
     document.querySelector('#interfaz1').style.display='flex';
@@ -225,14 +223,14 @@ eventForm.addEventListener('submit', (e)=> {
     if(viewportWidth<990){
         document.querySelector('#interfaz1').style.display = 'none'
         document.querySelector('#interfazlistado').style.display = 'flex'
-        basket.style.display = 'flex'
+        document.querySelector('.basquet_trash').style.display = 'flex'
         }
     else{
-        uiStart.style.display = 'flex'
-        uiList.style.display = 'flex'
-        uiFinish.style.display = 'none' 
+        document.querySelector('#interfaz1').style.display  = 'flex'
+        document.querySelector('#interfazlistado').style.display  = 'flex'
+        document.querySelector('#UiCardProduct').style.display = 'none' 
         document.querySelector('#formLogin').style.display = 'none' 
-        basket.style.display = 'flex'
+        document.querySelector('.basquet_trash').style.display = 'flex'
         }  
                 
     viewListHTML(JSON.parse(localStorage.getItem('lists')))
