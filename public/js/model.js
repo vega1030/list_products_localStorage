@@ -8,16 +8,17 @@ const get_Elements_At_LocalStorage = (view_Data) =>  localStorage.getItem(view_D
 
 const delete_Elements_At_LocalStorage = (delete_Data) => localStorage.removeItem(delete_Data)
 
-const name_Of_Key_Note_Storage = 'lists'
+const KEY_NOTES_STORAGE = 'lists'
 
-let data_At_Storage_JSON = JSON.parse(localStorage.getItem(name_Of_Key_Note_Storage)) 
+let data_At_Storage_JSON = JSON.parse(localStorage.getItem(KEY_NOTES_STORAGE)) 
 
-let data_At_Storage_String = localStorage.getItem(name_Of_Key_Note_Storage)
+let data_At_Storage_String = localStorage.getItem(KEY_NOTES_STORAGE)
 
 export{
     set_Element_At_LocalStorage,
     get_Elements_At_LocalStorage,
     delete_Elements_At_LocalStorage,
     data_At_Storage_JSON,
-    data_At_Storage_String
+    data_At_Storage_String,
+    KEY_NOTES_STORAGE
 }

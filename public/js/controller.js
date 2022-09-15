@@ -3,7 +3,8 @@ import {
     get_Elements_At_LocalStorage,
     delete_Elements_At_LocalStorage,
     data_At_Storage_JSON ,
-    data_At_Storage_String
+    data_At_Storage_String,
+    KEY_NOTES_STORAGE
 } from './model.js'
 
 
@@ -137,16 +138,23 @@ const id_Filter = (editProductId ='')=>{
     return data_Filter;
 }
 
+/**
+ * It takes a new data object, finds the index of the old data object in the array, and replaces it
+ * with the new data object
+ * @param newData - The new data to be updated
+ */
 const upDateProduct = (newData)=>{
     let data_List = data_At_Storage_JSON
     const upDate = data_List.findIndex(e=>e.id === newData.id)
     data_List.splice(upDate,1,newData)
-    console.log(data_List);
     set_Element_At_LocalStorage('lists', JSON.stringify(data_List))
 
 }
 
 
+
+/* Checking if the local storage is empty or not. */
+const validate_Storage_empty = data_At_Storage_JSON === null || data_At_Storage_JSON.length===0? true:false;
 
 
 export{
@@ -154,5 +162,6 @@ export{
     delete_All_Elements_At_LocalStorage,
     saveDataLocalStorage, 
     saveInfo,saveDataLocalStorage,
-    deleted,id_Filter,upDateProduct
+    deleted,id_Filter,upDateProduct,
+    validate_Storage_empty
 }

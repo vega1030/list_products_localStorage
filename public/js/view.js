@@ -3,7 +3,7 @@ import { add_Name_At_LocalStorage,
         saveInfo,
         saveDataLocalStorage,
         deleted,id_Filter,
-        upDateProduct } from "./controller.js";
+        upDateProduct,validate_Storage_empty } from "./controller.js";
 
 let viewportWidth = window.innerWidth;
 
@@ -286,15 +286,22 @@ document.querySelector('#foward_UIlist_to_UImain').addEventListener('click',()=>
 /* The above code is creating a function that will display the list of products that the user has
 created. */
 
+
+
+const switching_Display_Icons_Option=(flag) => {
+  
 const trash = document.querySelector('.basquet_trash')
-if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
-trash.style.display = 'none'
-document.getElementById('linkViewList').style.display = 'none'
+    if(flag===true) {
+        document.querySelector('#linkViewList').style.display = 'flex'
+        trash.style.display = 'flex'
+    }
+    else{
+        trash.style.display = 'none'
+        document.querySelector('#linkViewList').style.display = 'flex'
+    }
 }
-else{
-    document.getElementById('linkViewList').style.display = 'flex'
-    trash.style.display = 'flex'
-}
+
+switching_Display_Icons_Option(validate_Storage_empty)
 
 //******************-----------**********************/
 /* The above code is adding an event listener to the linkListUi element. When the linkListUi element is
