@@ -1,28 +1,12 @@
 import { add_Name_At_LocalStorage, 
         delete_All_Elements_At_LocalStorage,
-        saveInfo,saveDataLocalStorage,deleted,id_Filter,upDateProduct } 
-        from "./controller.js";
+        saveInfo,
+        saveDataLocalStorage,
+        deleted,id_Filter,
+        upDateProduct } from "./controller.js";
 
-//Capture screens
-const uiStart = document.getElementById('interfaz1');
-const uiList = document.getElementById('interfazlistado');
-const uiFinish = document.getElementById('pantallafinal');
-const uiFormLogin = document.querySelector('#formLogin')
-const uiWelcome = document.querySelector ('#contentNavigate')
-const contentModelNameUser = document.getElementById('sectionNameUser');
-const linkListUi = document.getElementById('linkViewList')
-const optionsInUiStart = document.querySelector('#options_list')
-const div_btn_foward = document.querySelector('#div_btn_foward')
-const content_btn_add = document.querySelector ('#content_button_add')
-const padre = document.getElementById('padre');
 let viewportWidth = window.innerWidth;
-const myModal = document.querySelector('#staticBackdrop')
-const myModalEdit = document.querySelector('#exampleModal')
 
-const instanceMyModal =  new bootstrap.Modal(myModal)
-const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
-
-let data_At_Storage =''
 
 document.querySelector('#btncarga1').addEventListener('click',()=>{
     document.querySelector('.modal_mobile').style.display='block'
@@ -51,13 +35,13 @@ const createMainUi = (nameDom='')=>{
  * It hides the login form and displays the start page and the options in the start page
  */
         const display_At_Ui_Main=()=>{
-            uiFormLogin.style.display='none';
-            uiStart.style.display = 'flex';
-            optionsInUiStart.style.display='flex';  
+            document.querySelector('#formLogin').style.display='none';
+            document.querySelector('#interfaz1').style.display='flex';
+            document.querySelector('#options_list').style.display='flex';  
         }
         
         display_At_Ui_Main()
-
+        const contentModelNameUser = document.getElementById('sectionNameUser');
         return contentModelNameUser.innerHTML=modelUserName;
     }
 
@@ -72,6 +56,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     createMainUi(localStorage.getItem('name'))
 });
 
+const ui_Start_View = ()=>{
+    document.querySelector('#interfaz1').style.display='flex';
+    document.querySelector ('#contentNavigate').style.display='flex';
+    document.querySelector ('#sectionNameUser').style.display='flex';
+    document.querySelector('#formLogin').style.display='none'
+
+}
+
 //*************************************************/
 
 /* The above code is adding an event listener to the form element with the id of form_name. The event
@@ -83,12 +75,14 @@ localStorage.getItem('name') as an argument. The function is then calling the fo
 
 document.querySelector('#form_name').addEventListener('submit', (e)=>{
     const userName = document.getElementById('nameUserInput').value;
-    
+
     add_Name_At_LocalStorage(userName)
 
     createMainUi(localStorage.getItem('name'))
     
     formDynamicModel(viewportWidth)
+    
+    ui_Start_View()
     
     e.preventDefault();
     })
@@ -168,29 +162,7 @@ listen_Changes_In_Body();
 
 //*************************************************/
 
-// const listen_Changes_At_Ul = ()=>{
 
-//     const ulView = document.querySelector('#padre')
-    
-//     ulView.addEventListener('click',(e)=>{
-//         console.log("🚀 ~ file: main.js ~ line 178 ~ ulView.addEventListener ~ e", e);
-//     })
-
-//     const observer_Ul = new MutationObserver((listMutation)=>{
-//         listMutation.forEach(mutation =>{
-//             mutation.addedNodes.forEach(added_node => {
-//                 console.log(added_node);
-//                 if(added_node.attributeName ==='class'){
-//                     console.log('add node')
-//                     observer_Ul.disconnect()
-//                 }
-//             })
-//         })
-//     }
-//     )
-//     observer_Ul.observe(ulView,{subtree:true,chidList:true})
-// }
-// listen_Changes_At_Ul()
 
 /**
  * The function creates a notification div with a message and displays it for 3 seconds
@@ -207,10 +179,10 @@ const notification = (message='',color='')=>{
     `    
     section_notifications.innerHTML=modelNotificationDOM
     section_notifications.style.display='flex'
-    const timeDiv = ()=>{
-        setTimeout(() => section_notifications.style.display='none',7000)
-    }
-        timeDiv()
+    // const timeDiv = ()=>{
+    //     setTimeout(() => section_notifications.style.display='none',7000)
+    // }
+    //     timeDiv()
     }
 
 //*************************************************/
@@ -219,6 +191,9 @@ const notification = (message='',color='')=>{
 /**
  * It saves the information at the local storage
  */            
+const myModal = document.querySelector('#staticBackdrop')
+const instanceMyModal =  new bootstrap.Modal(myModal)
+
 const eventForm = document.querySelector('#form_note')
 eventForm.addEventListener('submit', (e)=> {
 
@@ -227,7 +202,9 @@ eventForm.addEventListener('submit', (e)=> {
     const textArea = document.querySelector('#detalle').value;
     const id =  crypto.randomUUID().slice(4,13)
 
-    data_At_Storage = saveDataLocalStorage(saveInfo(inputProducto, seleccion, textArea, id))
+    let data_At_Storage = '';
+
+    data_At_Storage = saveDataLocalStorage(saveInfo(inputProducto, seleccion, textArea, id));
 
     
 
@@ -235,33 +212,37 @@ eventForm.addEventListener('submit', (e)=> {
     document.getElementById('seleccionicono').value = "";
     document.getElementById('detalle').value = "";
             
-    notification('save ok')
-            
-    blur_filter('')
-    instanceMyModal.hide()
+    notification('Saved')
             
     const basket = document.querySelector('.basquet_trash')
- 
+
+    document.querySelector('#formLogin').style.display='none';
+    document.querySelector('#interfaz1').style.display='flex';
+    document.querySelector('#options_list').style.display='flex'; 
+
+    
     
     if(viewportWidth<990){
-        uiStart.style.display = 'none'
-        uiList.style.display = 'flex'
-        uiFinish.style.display = 'none' 
-        btn_foward_uiList_to_uiMain.style.display = 'flex'
+        document.querySelector('#interfaz1').style.display = 'none'
+        document.querySelector('#interfazlistado').style.display = 'flex'
         basket.style.display = 'flex'
         }
     else{
         uiStart.style.display = 'flex'
         uiList.style.display = 'flex'
         uiFinish.style.display = 'none' 
-        uiFormLogin.style.display = 'none' 
+        document.querySelector('#formLogin').style.display = 'none' 
         basket.style.display = 'flex'
         }  
                 
     viewListHTML(JSON.parse(localStorage.getItem('lists')))
-
+    
+    document.getElementById('interfazlistado').style.display = 'flex';
+    
+    instanceMyModal.hide()
+    
     e.preventDefault()
-    })
+})
 
 //*************************************************/
 
@@ -274,16 +255,17 @@ eventForm.addEventListener('submit', (e)=> {
 const viewListHTML = (data='',flag=null) =>{
 
     if(data!==null||flag === true){
-
+        const ul_Main = document.querySelector('#ul_content_list') 
         let modeloLista = ''    
         data.forEach((element)=>{
             modeloLista += `
             <li class=" p-3 mb-5 list-group-item list_products" data-producto="${element.product}" data-icono="${element.select}" data-detalle="${element.textArea}" data-id="${element.id}"><img src="${element.select}" alt="${element.product}" class="contenido3__icono">
             ${element.product}
             </li>`
-            padre.innerHTML = modeloLista
+            ul_Main.innerHTML = modeloLista
             })
         const itemsList = document.querySelectorAll(".list_products")
+        li_Event(itemsList)
         const lastItem = itemsList[itemsList.length-1]
         lastItem.scrollIntoView()
     }
@@ -294,11 +276,9 @@ const viewListHTML = (data='',flag=null) =>{
 
 /* The above code is a button that is used to go back to the main page. */
 
-let btn_foward_uiList_to_uiMain = document.querySelector('#foward_UIlist_to_UImain')
-btn_foward_uiList_to_uiMain.addEventListener('click',()=>{
+document.querySelector('#foward_UIlist_to_UImain').addEventListener('click',()=>{
     document.querySelector('.modal_mobile').style.display='none'
-    uiList.style.display = 'none'
-    uiStart.style.display = 'flex'
+    document.querySelector('#interfazlistado').style.display = 'none'
     window.location.reload();
 })
 
@@ -311,10 +291,10 @@ created. */
 const trash = document.querySelector('.basquet_trash')
 if(JSON.parse(localStorage.getItem('lists')) === null || JSON.parse(localStorage.getItem('lists')).length===0){
 trash.style.display = 'none'
-linkListUi.style.display = 'none'
+document.getElementById('linkViewList').style.display = 'none'
 }
 else{
-    linkListUi.style.display = 'flex'
+    document.getElementById('linkViewList').style.display = 'flex'
     trash.style.display = 'flex'
 }
 
@@ -326,15 +306,15 @@ the li elements. The li elements are the elements that are created when the user
 li elements are created in the viewListHTML function. The viewListHTML function is called in the
 above code. The viewListHTML function */
 
-linkListUi.addEventListener('click',()=>{
+document.getElementById('linkViewList').addEventListener('click',()=>{
     const view_Li_Elements = ()=>{
         const li_Elements=document.querySelectorAll('.list_products')
         li_Event(li_Elements)
     } 
-    uiList.style.display = 'flex'
-    uiStart.style.display = 'none'
+    document.querySelector('#interfazlistado').style.display = 'flex'
+    document.querySelector('#interfaz1').style.display = 'none'
     viewListHTML(JSON.parse(localStorage.getItem('lists')))
-    btn_foward_uiList_to_uiMain.style.display = 'flex'    
+    document.querySelector('#foward_UIlist_to_UImain').style.display = 'flex'    
     view_Li_Elements()
     })
 
@@ -351,8 +331,7 @@ btnDelete.addEventListener('click', ()=>{
     const messageDelete = 'Delete complete!'
     deleted(data_Id_Btn)
     notification(messageDelete,'delete_ok')
-
-    setTimeout(() => window.location.reload(),4000)
+    setTimeout(() => window.location.reload(),8000)
 
 })
 //************----------------------------------*************/
@@ -423,6 +402,10 @@ btnDelete.addEventListener('click', ()=>{
 inputs and the text area and sending them to the function upDateProduct, which is in charge of
 updating the data in the database. */
 
+const myModalEdit = document.querySelector('#exampleModal')
+
+const instanceMyModalEdit = new bootstrap.Modal(myModalEdit)
+
 document.querySelector('#form_note_edit')
 .addEventListener('submit', (e)=>{
 
@@ -442,7 +425,7 @@ document.querySelector('#form_note_edit')
     }
 
     upDateProduct(editListProducts)
- 
+
     instanceMyModalEdit.hide()
     
     notification(message_Notification,'edit_ok')
@@ -469,10 +452,10 @@ const li_Event = (array_Li)=>{
             document.getElementById('subtitulofinal').innerHTML = e.target.getAttribute('data-producto');
             document.getElementById('iconocontenido4').src = e.target.getAttribute('data-icono');
             document.getElementById('detallefinal').innerHTML = e.target.getAttribute('data-detalle');
-            uiFinish.style.display = 'flex';
-            uiList.style.display = 'none';
+            document.querySelector('#UiCardProduct').style.display = 'flex';
+            document.querySelector('#interfazlistado').style.display = 'none'
             buttons.style.display = 'flex';
-            content_ForwardListUi_to_MainUi.style.display = 'flex';
+            document.querySelector('#foward_UIlist_to_UImain').style.display = 'flex';
             
             
             
@@ -485,10 +468,10 @@ const li_Event = (array_Li)=>{
 
 }
 
-const content_ForwardListUi_to_MainUi= document.querySelector('#forwardButtonToListUi');
-content_ForwardListUi_to_MainUi.addEventListener('click',()=>{
-    uiFinish.style.display = 'none';
-    uiList.style.display = 'flex'
+document.querySelector('#forwardButtonToListUi')
+.addEventListener('click',()=>{
+    document.querySelector('#UiCardProduct').style.display = 'none';
+    document.querySelector('#interfazlistado').style.display = 'flex'
 })
 
 
@@ -510,39 +493,21 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
     let logOutIcon = document.querySelector('#logOutUser')
 
     const displayList = (size)=>{
-        const capture_Li_In_DOM = ()=>{
-    
-            document.querySelector('#padre').addEventListener('mouseover',(e)=>{
-                const li_Elements_Send = e.target.querySelectorAll('.list_products');
-                for (let i = 0; i < li_Elements_Send.length; i++) {
-                        const element = li_Elements_Send[i];
-                        if (element.length!=0) {
-                            li_Event(li_Elements_Send)
-                            document.querySelector('#padre').removeEventListener('mouseover',(e)=>{
-                                console.log(e);
-                        })
-                        }
-                        else {
-                            console.log('end');
-                        }               
-                    }
-                })
-        }
+
         if(size >= 991) {
             const formInputs = document.querySelector('#form_note')
             formDynamicModel(size)
-            capture_Li_In_DOM()
             uiStart.style.display = 'flex'
             uiFinish.style.display = 'none' 
-            uiFormLogin.style.display = 'none' 
+            document.querySelector('#formLogin').style.display = 'none' 
             formInputs.style.display = 'flex'
         }  
         
         else {
             formDynamicModel(size)
-            uiStart.style.display = 'flex'
-            uiFinish.style.display = 'none' 
-            uiFormLogin.style.display = 'none' 
+            document.querySelector('#interfaz1').style.display = 'flex'
+            document.querySelector('#UiCardProduct').style.display = 'none';
+            document.querySelector('#formLogin').style.display = 'none' 
         
         };
     }
@@ -550,16 +515,18 @@ const loadDOMList = ()=>window.addEventListener('DOMContentLoaded', (e) => {
     const displayOptionsDOMLoad = ()=>
     
     {
+        const uiStart = document.getElementById('interfaz1');
+
         logOutIcon.style.display = 'flex'
-        uiFormLogin.style.display='none'
+        document.querySelector('#formLogin').style.display='none'
         uiStart.style.display = 'flex';
         displayList(viewportWidth)
-        uiFinish.style.display = 'none' 
+        document.querySelector('#UiCardProduct').style.display = 'none';
         viewListHTML(JSON.parse(localStorage.getItem('lists')))
     }
     const displayDOMForm = ()=>{
         uiStart.style.display = 'none';
-        uiFormLogin.style.display = 'flex'
+        document.querySelector('#formLogin').style.display = 'flex'
         uiList.style.display = 'none'
         uiFinish.style.display = 'none'
 
